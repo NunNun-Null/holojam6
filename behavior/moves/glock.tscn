@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b60ov6i4rf5qm"]
+
+[ext_resource type="Script" uid="uid://do4iw1vqn0jcf" path="res://script/glock.gd" id="1_8u507"]
+
+[node name="Glock" type="Node"]
+script = ExtResource("1_8u507")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdb1sbtmq802"]
+
+[ext_resource type="Script" uid="uid://bw8e813mne440" path="res://script/teleport_location.gd" id="1_nfuaf"]
+
+[node name="Teleport Location" type="Node3D"]
+script = ExtResource("1_nfuaf")

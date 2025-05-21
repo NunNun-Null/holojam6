@@ -1,0 +1,10 @@
+{
+	"base": {
+		"raw_damage": 0.0,
+		"accuracy": 0.0
+	},
+	"poison": {
+		"damage": 0.0,
+		"turns": 0.0
+	}
+}

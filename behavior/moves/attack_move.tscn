@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7odml6r4hqg0"]
+
+[ext_resource type="Script" uid="uid://d3v2ptdy1gxhm" path="res://script/attack_move.gd" id="1_6xepy"]
+
+[node name="Attack Move" type="Node"]
+script = ExtResource("1_6xepy")
