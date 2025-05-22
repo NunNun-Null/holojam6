@@ -12,8 +12,6 @@ func _ready() -> void:
 
 func reset_team() -> void:
 	var players: Array[PlayerFighter] = UtilitiesManager.convert_to_players(squad)
-	await get_tree().create_timer(2).timeout
-	print("Player Team Established")
 	BattleManager.create_players(players)
 
 func _physics_process(delta: float) -> void:

@@ -2,7 +2,15 @@ extends PlayerFighter
 
 var valid_moves: Array[Move]
 
+@export var speed: int = 0
+@export var health: int = 1
+@export var defense: int = 0
+
+
 func _ready() -> void:
+	set_health(health)
+	set_speed(speed)
+	set_defense(defense)
 	visible = false
 	for move in moves.get_children():
 		if (move is Move):

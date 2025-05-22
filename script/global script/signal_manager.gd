@@ -5,3 +5,5 @@ signal on_room_change(origin: Room, destination: Room, location: Node3D) #Signal
 signal on_battle_won() #Signal when player wins a battle
 
 signal on_move_completed()
+
+signal on_enemy_defeated()

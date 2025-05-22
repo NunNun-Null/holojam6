@@ -44,18 +44,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.61317)
 
 [node name="3" type="Node3D" parent="Enemy Positions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.41436)
-
-[node name="Player Positions" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05249, 0, -1.40373)
-
-[node name="0" type="Node3D" parent="Player Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151839, 0, 0)
-
-[node name="1" type="Node3D" parent="Player Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151839, 0, -0.669069)
-
-[node name="2" type="Node3D" parent="Player Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151839, 0, -1.61317)
-
-[node name="3" type="Node3D" parent="Player Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151839, 0, -2.41436)

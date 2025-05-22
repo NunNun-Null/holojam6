@@ -16,7 +16,6 @@ func convert_to_players(list: Array[PackedScene]) -> Array[PlayerFighter]:
 		array.append(node)
 	return array
 
-#TODO: Bad Sort
 func sort(list: Array[Fighter]) -> Array[Fighter]:
 	var array: Array[Fighter] = list
 	var swapped
@@ -36,7 +35,6 @@ func sort(list: Array[Fighter]) -> Array[Fighter]:
 # -1: figher1 < fighter2
 # 0: fighter1 == fighter2
 func compare_fighters(fighter1: Fighter, fighter2: Fighter) -> int:
-	print("comparing " + fighter1.name + " and " + fighter2.name)
 	if (fighter1.get_speed() > fighter2.get_speed()):
 		return 1
 	elif (fighter1.get_speed() < fighter2.get_speed()):

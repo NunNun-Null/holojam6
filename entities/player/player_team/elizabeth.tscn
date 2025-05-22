@@ -7,7 +7,7 @@
 
 [node name="Elizabeth" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_qsoi3")
-speed = 5
+speed = 10
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
