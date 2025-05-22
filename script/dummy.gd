@@ -5,9 +5,11 @@ var valid_moves: Array[Move]
 
 @export var speed: int = 0
 @export var health: int = 1
+@export var max_health: int = 1
 @export var defense: int = 0
 
 func _ready() -> void:
+	set_max_health(max_health)
 	set_health(health)
 	set_speed(speed)
 	set_defense(defense)
@@ -21,3 +23,7 @@ func start_turn() -> void:
 	await get_tree().create_timer(2).timeout
 	print(name + " used " + str(attack.name))
 	SignalManager.on_move_completed.emit()
+
+func dead() -> void:
+	BattleManager.remove_enemy_fighter(self)
+	queue_free()

@@ -7,6 +7,8 @@
 
 [node name="Dummy" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_dubhn")
+health = 20
+max_health = 20
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
@@ -15,6 +17,7 @@ effects = NodePath("Current Effects")
 [node name="Moves" type="Node" parent="."]
 
 [node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("2_dubhn")]
+damage = 5
 _strategies = [NodePath("../../Strategy/Lowest Health")]
 
 [node name="Strategy" type="Node" parent="."]

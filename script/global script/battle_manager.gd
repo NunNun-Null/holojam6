@@ -18,16 +18,19 @@ func get_battle_map() -> Node3D:
 	return _battle
 
 func create_enemies(list: Array[EnemyFighter]) -> void:
+	_enemies.clear()
 	_enemies.append_array(list)
 
 func create_players(list: Array[PlayerFighter]) -> void:
 	_players.append_array(list)
 
 func switch_to_battle() -> void:
+	SignalManager.on_switch_to_battle.emit()
 	get_tree().change_scene_to_file("res://area/battle.tscn")
 
 func switch_to_map() -> void:
 	get_tree().change_scene_to_file("res://area/map.tscn")
+	SignalManager.on_switch_to_map.emit()
 
 func establish_order() -> void:
 	_round.append_array(_players)
@@ -51,6 +54,7 @@ func get_players_size() -> int:
 
 func start_battle() -> void:
 	print("Starting Battle")
+	_round.clear()
 	establish_order()
 	start_turn()
 
@@ -62,14 +66,29 @@ func pop_fighter() -> void:
 	if (_round.is_empty()):
 		establish_order()
 
+func remove_enemy_fighter(fighter: EnemyFighter):
+	var index: int
+	index = _enemies.find(fighter)
+	_enemies.remove_at(index)
+
+	index = _round.find(fighter)
+	_round.remove_at(index)
+
+
+
 func start_turn() -> void:
 	if (_players.is_empty()):
 		print("LOSE")
+		_round.clear()
 		call_deferred("switch_to_map")
+		
+		return
 
 	if (_enemies.is_empty()):
 		print("WIN")
+		_round.clear()
 		call_deferred("switch_to_map")
+		return
 	
 	var fighter: Fighter = get_top_fighter()
 	print("current turn: " + fighter.name)

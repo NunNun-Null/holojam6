@@ -7,7 +7,10 @@
 
 [node name="Elizabeth" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_qsoi3")
-speed = 10
+speed = 1
+health = 40
+max_health = 40
+defense = 3
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
@@ -16,6 +19,7 @@ effects = NodePath("Current Effects")
 [node name="Moves" type="Node" parent="."]
 
 [node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_onll2")]
+damage = 10
 _strategies = [NodePath("../../Strategy/Lowest Health")]
 
 [node name="Strategy" type="Node" parent="."]

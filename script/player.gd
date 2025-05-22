@@ -6,13 +6,8 @@ class_name Player
 var _speed: int = 150
 var _jump_power: int = 100
 
-func _ready() -> void:
+func _init() -> void:
 	GlobalManager.set_player(self)
-	reset_team()
-
-func reset_team() -> void:
-	var players: Array[PlayerFighter] = UtilitiesManager.convert_to_players(squad)
-	BattleManager.create_players(players)
 
 func _physics_process(delta: float) -> void:
 	var input_direction: Vector2 = input()

@@ -1,16 +1,19 @@
 res://entities/fighter.gd
-res://script/battle.gd
+res://script/dummy.gd
 res://script/elizabeth.gd
-res://script/enemy_fighter.gd
-res://script/player_fighter.gd
-res://script/start_battle.gd
+res://script/glock.gd
 res://entities/player/player_team/elizabeth.tscn
+res://entities/enemies/dummy.tscn
 res://area/battle.tscn
 res://area/map.tscn
 res://entities/player/player.tscn
-res://entities/enemies/dummy.tscn
-res://script/dummy.gd
+res://script/player_fighter.gd
 res://script/global script/battle_manager.gd
-res://script/lowest_health.gd
-res://script/global script/utilities_manager.gd
-res://script/glock.gd
+res://script/enemy_fighter.gd
+res://script/global script/signal_manager.gd
+res://script/map.gd
+res://script/start_battle.gd
+res://script/player.gd
+res://script/global script/stats_manager.gd
+res://script/global script/player_manager.gd
+res://ui/player_fighter_stats.tscn

@@ -9,6 +9,7 @@ func _on_body_entered(body:Node3D) -> void:
 		BattleManager.create_enemies(team)
 		BattleManager.start_battle()
 		call_deferred("switch_to_battle")
+		call_deferred("queue_free")
 	
 func switch_to_battle() -> void:
 	BattleManager.switch_to_battle()

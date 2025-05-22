@@ -21,10 +21,10 @@ config/icon="res://icon.svg"
 SignalManager="*res://script/global script/signal_manager.gd"
 DialogueManager="*res://script/global script/dialogue_manager.gd"
 GlobalManager="*res://script/global script/global_manager.gd"
-StatsManager="*res://script/global script/stats_manager.gd"
 SceneManager="*res://script/global script/scene_manager.gd"
 UtilitiesManager="*res://script/global script/utilities_manager.gd"
 BattleManager="*res://script/global script/battle_manager.gd"
+PlayerManager="*res://script/global script/player_manager.gd"
 
 [input]
 

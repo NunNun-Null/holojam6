@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=21 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
+[ext_resource type="Script" uid="uid://dlrqfyq1thyl6" path="res://script/map.gd" id="1_2onle"]
 [ext_resource type="PackedScene" uid="uid://co5ld71wi8i2r" path="res://entities/player/player.tscn" id="1_yy0tc"]
 [ext_resource type="PackedScene" uid="uid://dj52hcitqw3on" path="res://component/teleport_component.tscn" id="2_2v2a0"]
 [ext_resource type="Script" uid="uid://vw30jb8u5xqp" path="res://script/hallway.gd" id="3_mjj2x"]
@@ -37,6 +38,7 @@ tonemap_mode = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj77h"]
 
 [node name="Map" type="Node3D"]
+script = ExtResource("1_2onle")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dlyd2")
@@ -349,8 +351,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_yy0tc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.46, 0, 15.6)
+squad = Array[PackedScene]([])
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
+[node name="Camera" type="Camera3D" parent="Player"]
 transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.09402, -3.58871)
 
 [node name="Start Battle" parent="." instance=ExtResource("8_forqk")]
