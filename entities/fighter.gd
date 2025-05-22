@@ -1,11 +1,8 @@
-extends Node
+extends Node3D
 class_name Fighter
 
 @export var moves: Node
 @export var effects: Node
-
-signal on_turn()
-signal turn_complete()
 
 var _speed: int
 var _health: int

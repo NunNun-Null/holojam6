@@ -1,6 +1,8 @@
+res://entities/player/player_team
+res://entities/enemies
+res://ui
 res://objects
 res://behavior/effects
-res://entities/enemies
 C:/Users/Unuser/Documents/Program files/Godot Projects/holojam-6/behavior/moves
 res://behavior/strategies
 res://behavior/moves
@@ -9,4 +11,3 @@ res://script/global script
 res://area
 res://entities/player
 res://component
-res://ui

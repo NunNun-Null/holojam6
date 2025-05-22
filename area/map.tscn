@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=20 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
 [ext_resource type="PackedScene" uid="uid://co5ld71wi8i2r" path="res://entities/player/player.tscn" id="1_yy0tc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d34vjow0dvtke" path="res://script/dreams.gd" id="5_wn0ld"]
 [ext_resource type="Script" uid="uid://cq002x5i80hnj" path="res://script/thorn.gd" id="6_pq3op"]
 [ext_resource type="PackedScene" uid="uid://bb01cioxfmsk3" path="res://objects/start_battle.tscn" id="8_forqk"]
+[ext_resource type="PackedScene" uid="uid://b8btlrylypjkg" path="res://entities/enemies/dummy.tscn" id="9_mp1sc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -347,11 +348,13 @@ shape = SubResource("BoxShape3D_2onle")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_yy0tc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.46, 0, 15.6)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.09402, -3.58871)
 
 [node name="Start Battle" parent="." instance=ExtResource("8_forqk")]
+enemies = Array[PackedScene]([ExtResource("9_mp1sc")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Start Battle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.78, 0.6, 16.35)

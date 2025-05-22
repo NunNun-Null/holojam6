@@ -1,0 +1,13 @@
+res://entities/fighter.gd
+res://script/battle.gd
+res://script/dummy.gd
+res://script/elizabeth.gd
+res://script/player_fighter.gd
+res://script/global script/battle_manager.gd
+res://script/global script/signal_manager.gd
+res://area/battle.tscn
+res://area/map.tscn
+res://entities/player/player_team/elizabeth.tscn
+res://entities/player/player.tscn
+res://script/start_battle.gd
+res://script/glock.gd
