@@ -96,12 +96,17 @@ func start_turn() -> void:
 		start_turn()
 		return
 	
-	fighter.apply_effects()
+	fighter.apply_effects(fighter)
 
 	if (!fighter):
 		start_turn()
 		return
 	
-	fighter.start_turn()
+	if (!fighter.get_stun()):
+		fighter.start_turn()
+	else:
+		print(fighter.name + " is stunned")
 	print("\n")
 	pop_fighter()
+	if (fighter.get_stun()):
+		start_turn()

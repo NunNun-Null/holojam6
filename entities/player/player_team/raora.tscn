@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://h3o8u2id1wyj"]
+
+[ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_d8a4p"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_pumfg"]
+[ext_resource type="PackedScene" uid="uid://dsp4ea8gv3q62" path="res://behavior/effects/basic_mark.tscn" id="4_36ao6"]
+[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_oy7oo"]
+[ext_resource type="PackedScene" uid="uid://bf1exih6tydyj" path="res://behavior/moves/basic_stats.tscn" id="4_pumfg"]
+
+[node name="Raora" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
+script = ExtResource("1_d8a4p")
+speed = 2
+health = 25
+max_health = 25
+moves = NodePath("Moves")
+effects = NodePath("Current Effects")
+
+[node name="Moves" type="Node" parent="."]
+
+[node name="Scratch" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_pumfg")]
+damage = 2
+_strategies = [NodePath("../../Strategy/Lowest Health")]
+
+[node name="Debug Mark" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("4_pumfg")]
+strength = 5
+effects = Array[PackedScene]([ExtResource("4_36ao6")])
+apply_immediate = true
+_strategies = [NodePath("../../Strategy/Lowest Health")]
+
+[node name="Strategy" type="Node" parent="."]
+
+[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_oy7oo")]
+switch_to_enemies = true
+
+[node name="Current Effects" type="Node" parent="."]

@@ -1,19 +1,23 @@
-res://entities/fighter.gd
-res://script/dummy.gd
+res://script/basic_attack.gd
+res://script/basic_buff.gd
+res://script/effect.gd
 res://script/elizabeth.gd
-res://script/glock.gd
-res://entities/player/player_team/elizabeth.tscn
+res://behavior/moves/basic_stats.tscn
+res://script/basic_stats.gd
+res://entities/fighter.gd
+res://script/defense_effect.gd
+res://behavior/effects/defense_effect.tscn
+res://entities/player/player_team/raora.tscn
 res://entities/enemies/dummy.tscn
-res://area/battle.tscn
 res://area/map.tscn
-res://entities/player/player.tscn
-res://script/player_fighter.gd
-res://script/global script/battle_manager.gd
+res://entities/player/player_team/elizabeth.tscn
+res://entities/player/player_team/cecilia.tscn
+res://entities/player/player_team/gigi.tscn
+res://behavior/moves/basic_stun.tscn
 res://script/enemy_fighter.gd
-res://script/global script/signal_manager.gd
-res://script/map.gd
-res://script/start_battle.gd
-res://script/player.gd
-res://script/global script/stats_manager.gd
-res://script/global script/player_manager.gd
-res://ui/player_fighter_stats.tscn
+res://script/player_fighter.gd
+res://script/basic_stun.gd
+res://script/global script/battle_manager.gd
+res://script/basic_mark.gd
+res://behavior/effects/basic_mark.tscn
+res://behavior/effects/basic_stun.tscn

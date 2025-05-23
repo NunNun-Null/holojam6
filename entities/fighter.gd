@@ -13,6 +13,31 @@ var _max_health: int
 var _adjusted_speed: int
 var _adjusted_defense: int
 
+var _is_stunned: bool = false
+
+var _is_marked: bool = false
+
+var _damage_multiplier: int = 0
+
+func add_damage_multipler(amount: int) -> void:
+    _damage_multiplier += amount
+
+func remove_damage_multipler(amount: int) -> void:
+    _damage_multiplier -= amount
+
+func get_mark() -> bool:
+    return _is_marked
+
+func set_mark(value: bool) -> void:
+    _is_marked = value
+
+
+func get_stun() -> bool:
+    return _is_stunned
+
+func set_stun(value: bool) -> void:
+    _is_stunned = value
+
 func get_speed() -> int:
     return _speed + _adjusted_speed
 
@@ -61,8 +86,17 @@ func set_speed(amount: int) -> void:
 func heal(amount: int) -> void:
     _health = min(_max_health,_health+amount)
 
-func take_damage(amount: int) -> void:
-    _health -= max(0,amount-get_defense())
+func add_effect(effect: Effect) -> void:
+    effects.add_child(effect)
+
+func take_damage(amount: int, pierce: int = 0) -> void:
+    var pierce_amount: int = max(0,get_defense()-pierce)
+    var damage: int = max(0,amount-pierce_amount)
+    if (damage <= 0):
+        print(name + " absorbed the damage")
+        return
+    print(name + " took " + str(damage) + " damage")
+    _health -= damage + _damage_multiplier
     if (_health <= 0):
         dead()
 
@@ -73,10 +107,10 @@ func start_turn() -> void:
     push_error(name + " is missing a start_turn() method")
     SignalManager.on_move_completed.emit()
 
-func apply_effects() -> void:
+func apply_effects(fighter: Fighter) -> void:
     for effect in effects.get_children():
         if (effect is Effect):
-            effect.apply_effect()
+            effect.apply_effect(fighter)
 
 func reset_effects() -> void:
     for effect in effects.get_children():

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsp4ea8gv3q62"]
+
+[ext_resource type="Script" uid="uid://br8w0ccbfnk0v" path="res://script/basic_mark.gd" id="1_3utm6"]
+
+[node name="Basic Mark" type="Node"]
+script = ExtResource("1_3utm6")

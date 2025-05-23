@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://7edrxlmx87f5"]
+
+[ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_m1xs3"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_ty07m"]
+[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_00qa6"]
+
+[node name="Gigi" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
+script = ExtResource("1_m1xs3")
+speed = 8
+health = 25
+max_health = 25
+defense = 2
+moves = NodePath("Moves")
+effects = NodePath("Current Effects")
+
+[node name="Moves" type="Node" parent="."]
+
+[node name="Fister Smash" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_ty07m")]
+damage = 6
+accuracy = 85
+_strategies = [NodePath("../../Strategy/Lowest Health")]
+
+[node name="Strategy" type="Node" parent="."]
+
+[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_00qa6")]
+switch_to_enemies = true
+
+[node name="Current Effects" type="Node" parent="."]

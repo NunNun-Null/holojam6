@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmnoe64pc13nt"]
+
+[ext_resource type="Script" uid="uid://b6m01thdggwaf" path="res://script/basic_stun.gd" id="1_r5kfi"]
+
+[node name="Basic Stun" type="Node"]
+script = ExtResource("1_r5kfi")

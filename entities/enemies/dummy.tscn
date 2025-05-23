@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_dubhn"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="1_evlql"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/glock.tscn" id="2_dubhn"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="2_dubhn"]
 [ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="3_05x41"]
 
 [node name="Dummy" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_dubhn")
 health = 20
 max_health = 20
+defense = 5
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
@@ -17,7 +18,7 @@ effects = NodePath("Current Effects")
 [node name="Moves" type="Node" parent="."]
 
 [node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("2_dubhn")]
-damage = 5
+damage = 3
 _strategies = [NodePath("../../Strategy/Lowest Health")]
 
 [node name="Strategy" type="Node" parent="."]

@@ -15,3 +15,10 @@ func get_random_strategy() -> Strategy:
 
 func move() -> void:
 	push_error(name + " is missing a move() method")
+
+func accuracy_test(amount: int) -> bool:
+	randomize()
+	var rand: int = randi_range(1,100)
+	if (amount >= rand):
+		return true
+	return false

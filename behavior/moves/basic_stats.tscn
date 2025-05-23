@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf1exih6tydyj"]
+
+[ext_resource type="Script" uid="uid://btei8rxva2wgy" path="res://script/basic_stats.gd" id="1_guor8"]
+
+[node name="Basic Buff" type="Node"]
+script = ExtResource("1_guor8")

@@ -9,6 +9,11 @@ var _jump_power: int = 100
 func _init() -> void:
 	GlobalManager.set_player(self)
 
+func _ready() -> void:
+	set_collision_layer_value(1,false)
+	await get_tree().create_timer(1).timeout
+	set_collision_layer_value(1,true)
+
 func _physics_process(delta: float) -> void:
 	var input_direction: Vector2 = input()
 	movement(input_direction,delta)
