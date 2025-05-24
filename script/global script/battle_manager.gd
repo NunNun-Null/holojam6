@@ -10,8 +10,6 @@ var _round: Array[Fighter]
 
 	
 func _ready() -> void:
-	_battle = BATTLE.instantiate()
-	get_tree().root.add_child.call_deferred(_battle)
 	SignalManager.on_move_completed.connect(start_turn)
 
 func get_battle_map() -> Node3D:
@@ -24,6 +22,11 @@ func create_enemies(list: Array[EnemyFighter]) -> void:
 func create_players(list: Array[PlayerFighter]) -> void:
 	_players.append_array(list)
 
+func remove_player_fighter(fighter: PlayerFighter):
+	var index: int
+	index = _round.find(fighter)
+	_round.remove_at(index)
+
 func switch_to_battle() -> void:
 	SignalManager.on_switch_to_battle.emit()
 	get_tree().change_scene_to_file("res://area/battle.tscn")
@@ -33,7 +36,9 @@ func switch_to_map() -> void:
 	SignalManager.on_switch_to_map.emit()
 
 func establish_order() -> void:
-	_round.append_array(_players)
+	for player in _players:
+		if !player.get_dead():
+			_round.append(player)
 	_round.append_array(_enemies)
 	_round = UtilitiesManager.sort(_round)
 	print("Round Order" + str(_round))
@@ -91,7 +96,7 @@ func start_turn() -> void:
 		return
 	
 	var fighter: Fighter = get_top_fighter()
-	print("current turn: " + fighter.name)
+	print("current turn: " + fighter.get_given_name())
 	if (!fighter):
 		start_turn()
 		return
@@ -105,7 +110,7 @@ func start_turn() -> void:
 	if (!fighter.get_stun()):
 		fighter.start_turn()
 	else:
-		print(fighter.name + " is stunned")
+		print(fighter.get_given_name() + " is stunned")
 	print("\n")
 	pop_fighter()
 	if (fighter.get_stun()):

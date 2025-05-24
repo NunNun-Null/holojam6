@@ -10,6 +10,7 @@ script = ExtResource("1_dubhn")
 health = 20
 max_health = 20
 defense = 5
+given_name = "Dummy"
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 

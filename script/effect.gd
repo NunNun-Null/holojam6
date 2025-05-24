@@ -9,16 +9,29 @@ var active: bool = false
 
 var target: Fighter
 
+var host: Fighter
+
 func apply_effect(fighter: Fighter) -> void:
     if (!active):
         active = true
         target = fighter
         effect()
     print("applying " + name)
+    reapply()
     lower_duration()
 
+
+func reapply() -> void:
+    return
+
 func effect() -> void:
-    push_error(name + " is missing effect() method")
+    return
+
+func set_host(fighter: Fighter) -> void:
+    host = fighter
+
+func get_host() -> Fighter:
+    return host
 
 func reverse_effect() -> void:
     push_error(name + " is missing reverse_effect() method")

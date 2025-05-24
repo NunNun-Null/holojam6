@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxv4il6kym6er"]
+[gd_scene load_steps=10 format=3 uid="uid://cxv4il6kym6er"]
 
 [ext_resource type="Script" uid="uid://bpfvbsptijktm" path="res://script/battle.gd" id="1_8vt7n"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_ka70e"]
+[ext_resource type="PackedScene" uid="uid://cco8kr0b17jea" path="res://ui/player_fighter_stats.tscn" id="2_tjbvg"]
+[ext_resource type="PackedScene" uid="uid://blqy8ufehtn2s" path="res://ui/ingame_interface.tscn" id="4_sp4u6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8vt7n"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,6 +17,12 @@ background_mode = 2
 sky = SubResource("Sky_tjbvg")
 tonemap_mode = 2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_utwrf"]
+viewport_path = NodePath("Characters/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ka70e"]
+viewport_path = NodePath("Interface/SubViewport")
+
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_8vt7n")
 
@@ -24,23 +33,47 @@ environment = SubResource("Environment_utwrf")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.237976, -0.110458, -0.343811)
-size = Vector3(7.32458, 0.0512695, 8.828)
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.67084)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189389, 1.74945, 0.389646)
 
 [node name="Enemy Positions" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79641, 0, -1.40373)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.939384, 0.628766, -5.31118)
 
 [node name="0" type="Node3D" parent="Enemy Positions"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 4.27809)
+
+[node name="blockbench_export" parent="Enemy Positions/0" instance=ExtResource("2_ka70e")]
 
 [node name="1" type="Node3D" parent="Enemy Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.669069)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0.809153)
+
+[node name="blockbench_export" parent="Enemy Positions/1" instance=ExtResource("2_ka70e")]
 
 [node name="2" type="Node3D" parent="Enemy Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.61317)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.46371)
+
+[node name="blockbench_export" parent="Enemy Positions/2" instance=ExtResource("2_ka70e")]
 
 [node name="3" type="Node3D" parent="Enemy Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.41436)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -6.02356)
+
+[node name="blockbench_export" parent="Enemy Positions/3" instance=ExtResource("2_ka70e")]
+
+[node name="Characters" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408455, -1.7111, -2.07353)
+texture = SubResource("ViewportTexture_utwrf")
+
+[node name="SubViewport" type="SubViewport" parent="Characters"]
+transparent_bg = true
+
+[node name="Player Fighter Stats" parent="Characters/SubViewport" instance=ExtResource("2_tjbvg")]
+
+[node name="Interface" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.191284, 5.14068, -6.45844)
+texture = SubResource("ViewportTexture_ka70e")
+
+[node name="SubViewport" type="SubViewport" parent="Interface"]
+transparent_bg = true
+size = Vector2i(1800, 300)
+
+[node name="Ingame Interface" parent="Interface/SubViewport" instance=ExtResource("4_sp4u6")]

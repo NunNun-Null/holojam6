@@ -10,4 +10,10 @@ signal on_switch_to_battle() #Signal before scene changes to battle
 
 signal on_entered_battle(node: Node3D) #Signal when before scene switches to battle scene (enemies are already created)
 
+signal on_player_defeated(Fighter: PlayerFighter) #Signal on a player squad member dead
+
+signal on_player_revived(Fighter: PlayerFighter) #Signal on a player squad member revived (MUST IMPLEMENT)
+
+signal on_player_stat_updated(Fighter: PlayerFighter)
+
 signal on_enemy_defeated() #Signal when an enemy is defeated

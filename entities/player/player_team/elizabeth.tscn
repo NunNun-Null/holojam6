@@ -10,6 +10,8 @@ speed = 1
 health = 40
 max_health = 40
 defense = 4
+special_point = 15
+given_name = "Elizabeth"
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
@@ -17,7 +19,7 @@ effects = NodePath("Current Effects")
 
 [node name="Sword Cleave" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_onll2")]
 damage = 8
-accuracy = 70
+accuracy = 75
 _strategies = [NodePath("../../Strategy/Lowest Health")]
 
 [node name="Strategy" type="Node" parent="."]

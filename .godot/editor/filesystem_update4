@@ -1,23 +1,26 @@
-res://script/basic_attack.gd
-res://script/basic_buff.gd
-res://script/effect.gd
-res://script/elizabeth.gd
-res://behavior/moves/basic_stats.tscn
-res://script/basic_stats.gd
-res://entities/fighter.gd
-res://script/defense_effect.gd
-res://behavior/effects/defense_effect.tscn
-res://entities/player/player_team/raora.tscn
-res://entities/enemies/dummy.tscn
+res://script/player_fighter_stats.gd
+res://ui/player_fighter_stats.tscn
+res://area/battle.tscn
 res://area/map.tscn
 res://entities/player/player_team/elizabeth.tscn
 res://entities/player/player_team/cecilia.tscn
+res://entities/player/player_team/raora.tscn
 res://entities/player/player_team/gigi.tscn
-res://behavior/moves/basic_stun.tscn
-res://script/enemy_fighter.gd
+res://entities/enemies/dummy.tscn
+res://script/elizabeth.gd
 res://script/player_fighter.gd
-res://script/basic_stun.gd
+res://entities/fighter.gd
+res://script/dummy.gd
+res://script/attack_move.gd
+res://script/basic_attack.gd
+res://script/basic_stats.gd
+res://script/heal_move.gd
 res://script/global script/battle_manager.gd
-res://script/basic_mark.gd
-res://behavior/effects/basic_mark.tscn
-res://behavior/effects/basic_stun.tscn
+res://script/global script/scene_manager.gd
+res://script/global script/player_manager.gd
+res://script/effect.gd
+res://script/defend_effect.gd
+res://script/global script/dialogue_manager.gd
+res://script/battle.gd
+res://script/start_battle.gd
+res://ui/ingame_interface.tscn

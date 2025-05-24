@@ -15,7 +15,7 @@ func change_room(origin: Room, destination: Room, location: Node3D) -> void:
 	destination.set_player_location(location)
 
 func add_battle(node: Node3D) -> void:
-	var battle: bool = battle_progression.has(node.name)
+	var battle: bool = battle_progression.has(node)
 	if (battle):
 		return
 	battle_progression.assign({node.name:true})

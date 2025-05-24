@@ -5,7 +5,7 @@ class_name Move
 
 func _ready() -> void:
 	if (_strategies.is_empty()):
-		push_error("There are no strategies for the move " + name + " for " + get_parent().get_parent().name)
+		push_error("There are no strategies for the move " + name + " for " + get_parent().get_parent().get_given_name())
 
 func get_strategy(index: int) -> Strategy:
 	return _strategies.get(index)

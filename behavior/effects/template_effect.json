@@ -1,0 +1,28 @@
+{
+    "name":"test name",
+    "stat":{
+        "type":"buff/debuff",
+        "duration":0,
+        "strength":0
+    },
+    "mark":{
+        "duration":0
+    },
+    "stun":{
+        "duration":0
+    },
+    "defend":{
+        "duration":0
+    },
+    "heal":{
+        "strength":0
+    },
+    "poison":{
+        "duration":0,
+        "strength":0
+    },
+    "regen":{
+        "duration":0,
+        "strength":0
+    }
+}

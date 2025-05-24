@@ -17,4 +17,3 @@ func _on_body_entered(body:Node3D) -> void:
 func switch_to_battle() -> void:
 	SignalManager.on_entered_battle.emit(self)
 	BattleManager.switch_to_battle()
-	BattleManager.get_battle_map().update_positions()

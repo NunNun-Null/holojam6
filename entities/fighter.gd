@@ -4,9 +4,13 @@ class_name Fighter
 @export var moves: Node
 @export var effects: Node
 
+
+var _given_name: String
 var _speed: int
 var _health: int
 var _defense: int
+
+var _defended: Fighter
 
 var _max_health: int 
 
@@ -19,6 +23,25 @@ var _is_marked: bool = false
 
 var _damage_multiplier: int = 0
 
+func set_defended(target: Fighter) -> void:
+    _defended = target
+
+func reset_defended() -> void:
+    _defended = null
+
+func is_defended() -> bool:
+    if (_defended):
+        return true
+    return false
+
+func get_defended() -> Fighter:
+    return _defended
+
+func set_given_name(text: String) -> void:
+    _given_name = text
+
+func get_given_name() -> String:
+    return _given_name
 func add_damage_multipler(amount: int) -> void:
     _damage_multiplier += amount
 
@@ -90,12 +113,16 @@ func add_effect(effect: Effect) -> void:
     effects.add_child(effect)
 
 func take_damage(amount: int, pierce: int = 0) -> void:
+    if (is_defended()):
+        print(get_given_name() + " is defended by " + get_defended().get_given_name())
+        _defended.take_damage(amount,pierce)
+        return
     var pierce_amount: int = max(0,get_defense()-pierce)
     var damage: int = max(0,amount-pierce_amount)
     if (damage <= 0):
-        print(name + " absorbed the damage")
+        print(get_given_name() + " absorbed the damage")
         return
-    print(name + " took " + str(damage) + " damage")
+    print(get_given_name() + " took " + str(damage) + " damage")
     _health -= damage + _damage_multiplier
     if (_health <= 0):
         dead()

@@ -10,6 +10,8 @@ speed = 4
 health = 30
 max_health = 30
 defense = 1
+special_point = 10
+given_name = "Cecilia"
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 

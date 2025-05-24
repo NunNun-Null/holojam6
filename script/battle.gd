@@ -1,9 +1,11 @@
 extends Node3D
 
+@export var data: JSON
 func _ready() -> void:
 	SignalManager.on_enemy_defeated.connect(update_positions)
 	SignalManager.on_switch_to_map.connect(close_battle)
-	close_battle()
+	SignalManager.on_switch_to_battle.connect(update_positions)
+	update_positions()
 	
 func update_positions() -> void:
 	visible = true
