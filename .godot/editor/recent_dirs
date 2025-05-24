@@ -1,3 +1,4 @@
+res://behavior/moves
 res://ui
 res://asset/texture
 res://component
@@ -9,7 +10,6 @@ res://entities/enemies
 res://objects
 C:/Users/Unuser/Documents/Program files/Godot Projects/holojam-6/behavior/moves
 res://behavior/strategies
-res://behavior/moves
 res://entities
 res://area
 res://entities/player

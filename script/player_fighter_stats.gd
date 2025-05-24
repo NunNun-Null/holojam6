@@ -6,6 +6,10 @@ func _ready() -> void:
 	SignalManager.on_entered_battle.connect(init_stats)
 	SignalManager.on_player_select.connect(make_select)
 	SignalManager.on_player_unselect.connect(make_unselect)
+	for fighter in BattleManager._players:
+		update_stat(fighter)
+		if (fighter.get_dead()):
+			dead_player(fighter)
 
 
 func dead_player(fighter: PlayerFighter) -> void:

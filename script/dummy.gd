@@ -24,9 +24,9 @@ func start_turn() -> void:
 	attack.move()
 	await get_tree().create_timer(2).timeout
 	print(get_given_name() + " used " + str(attack.name))
-	SignalManager.on_move_completed.emit()
 
 func dead() -> void:
+	super()
 	BattleManager.remove_enemy_fighter(self)
 	SignalManager.on_enemy_defeated.emit()
 	queue_free()

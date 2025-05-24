@@ -14,8 +14,12 @@ var current: PlayerFighter
 
 var player_list: Array[PlayerFighter]
 
+var can_continue: bool = false
+
 func _ready() -> void:
 	SignalManager.on_player_turn.connect(init_player)
+	SignalManager.on_dialogue_pushed.connect(dialogue)
+
 	if (BattleManager.get_top_fighter() is PlayerFighter):
 		init_player(BattleManager.get_top_fighter())
 
@@ -119,9 +123,6 @@ func init_targets() -> void:
 	update_desc(selected_target)
 
 
-
-
-
 func _process(_delta: float) -> void:
 	if (is_choosing_move):
 		if (Input.is_action_just_pressed("choose_up") and selected_move_index > 0):
@@ -136,6 +137,8 @@ func _process(_delta: float) -> void:
 			highlighted_move(selected_move_index,-1)
 		
 		elif (Input.is_action_just_pressed("interact")):
+			if (!selected_move.has_enough_sp(current.get_special())):
+				return
 			change_to_target_selector()
 			init_targets()
 
@@ -169,6 +172,18 @@ func _process(_delta: float) -> void:
 			change_to_dialogue()
 			clear_nodes()
 			move()
+	
+	elif (is_battle_dialogue):
+		if (Input.is_action_just_pressed("interact")):
+			if (can_continue):
+				can_continue = false
+				$"Dialogue Screen/Text".text = ""
+				DialogueManager.clear_dialogue()
+				SignalManager.on_move_completed.emit()
+			# else:
+			# 	$"Dialogue Screen/Text".visible_ratio = 1
+			# 	can_continue = true
+				
 
 func clear_nodes() -> void:
 	if (selected_target is EnemyFighter):
@@ -185,6 +200,17 @@ func clear_nodes() -> void:
 		if (node.name == "Title"):
 			continue
 		node.queue_free()
+
+func dialogue() -> void:
+	$"Dialogue Screen/Text".visible_ratio = 0
+	$"Dialogue Screen/Text".text = ""
+	for content in DialogueManager.get_dialogue_list():
+		$"Dialogue Screen/Text".text += content + "\n"
+	var tween := create_tween()
+	tween.tween_property($"Dialogue Screen/Text","visible_ratio",1,2)
+	await tween.finished
+	print("Dialogue complete")
+	can_continue = true
 
 func highlighted_target(index: int, offset: int) -> void:
 	if (!selected_move.is_for_allies()):
@@ -204,7 +230,7 @@ func highlighted_target(index: int, offset: int) -> void:
 	update_desc(selected_target)
 
 func update_desc(fighter: Fighter) -> void:
-	$"Choose Target/HBoxContainer/Description".text = fighter.get_given_name() + "'s Stats\nHealth: " + str(fighter.get_health()) + "\nDefense: " + str(fighter.get_defense()) + "\nSpeed: " + str(fighter.get_speed())
+	$"Choose Target/HBoxContainer/Description".text = fighter.get_given_name() + "'s Stats\nHealth: " + str(fighter.get_health()) + "/" + str(fighter.get_max_health()) + "\nDefense: " + str(fighter.get_defense()) + "\nSpeed: " + str(fighter.get_speed())
 	if (fighter.get_mark()):
 		$"Choose Target/HBoxContainer/Description".text += "Is Marked"
 	if (fighter.get_stun()):

@@ -29,9 +29,8 @@ func start_turn() -> void:
 	add_special(1)
 
 func play_turn(action: Move) -> void:
+	remove_special(action.get_cost())
 	action.move()
-	SignalManager.on_move_completed.emit()
 
 func dead() -> void:
 	super()
-

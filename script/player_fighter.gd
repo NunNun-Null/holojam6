@@ -24,21 +24,20 @@ func add_special(amount: int) -> void:
 	SignalManager.on_player_stat_updated.emit(self)
 
 
-func remove_special(amount: int) -> bool:
-	if (special < amount):
-		return false
+func remove_special(amount: int) -> void:
 	special -= amount
 	SignalManager.on_player_stat_updated.emit(self)
-	return true
 
 func start_turn() -> void: 
 	push_error(name + " is missing a start_turn() method")
-	SignalManager.on_move_completed.emit()
 
 func take_damage(amount: int, pierce: int = 0) -> void:
 	super(amount,pierce)
 	SignalManager.on_player_stat_updated.emit(self)
 	
 func dead() -> void:
+	DialogueManager.add_battle_dialogue(get_given_name() + " is down")
+	print(get_given_name() + " is down")
 	SignalManager.on_player_defeated.emit(self)
+	SignalManager.on_dialogue_pushed.emit()
 	set_dead(true)

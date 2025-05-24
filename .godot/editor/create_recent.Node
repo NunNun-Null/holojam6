@@ -1,3 +1,5 @@
+Node
+Label
 PanelContainer
 TextEdit
 SubViewport
@@ -5,10 +7,8 @@ Sprite3D
 ColorRect
 CSGBox3D
 MenuBar
-Label
 HBoxContainer
 Control
 VBoxContainer
 HScrollBar
 SubViewportContainer
-Panel

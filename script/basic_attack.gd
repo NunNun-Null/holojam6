@@ -9,10 +9,14 @@ func move() -> void:
 		var strategy: Strategy = get_random_strategy()
 		strategy.determine_target()
 		set_target(strategy.get_target())
-	print("used " + name + " on " + get_target().get_given_name())
+	
+	DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
+	print(BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
+	
 	if (!accuracy_test(accuracy)):
+		DialogueManager.add_battle_dialogue(name + " missed")
 		print(name + " missed")
 		return
-	get_target().take_damage(damage)
-	print(get_target().get_given_name() + " took damage. total health " + str(get_target().get_health()))
+	
+	get_target().take_damage(damage,armor_pierce)
 

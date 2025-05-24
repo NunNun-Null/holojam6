@@ -107,25 +107,42 @@ func set_speed(amount: int) -> void:
     _speed = amount
 
 func heal(amount: int) -> void:
-    _health = min(_max_health,_health+amount)
+    var hp: int = 0
+    if (amount >= _max_health-_health):
+        hp = _max_health-_health
+        _health += hp
+    else:
+        hp = amount
+        _health += hp
+    DialogueManager.add_battle_dialogue(get_given_name() + " healed " + str(hp) + " health")
+    SignalManager.on_player_stat_updated.emit(self)
+    SignalManager.on_dialogue_pushed.emit()
 
 func add_effect(effect: Effect) -> void:
     effects.add_child(effect)
 
 func take_damage(amount: int, pierce: int = 0) -> void:
     if (is_defended()):
+        DialogueManager.add_battle_dialogue(get_given_name() + " is defended by " + get_defended().get_given_name())
         print(get_given_name() + " is defended by " + get_defended().get_given_name())
         _defended.take_damage(amount,pierce)
         return
+    
     var pierce_amount: int = max(0,get_defense()-pierce)
     var damage: int = max(0,amount-pierce_amount)
     if (damage <= 0):
+        DialogueManager.add_battle_dialogue(get_given_name() + " absorbed the damage")
         print(get_given_name() + " absorbed the damage")
+        SignalManager.on_dialogue_pushed.emit()
         return
+    DialogueManager.add_battle_dialogue(get_given_name() + " took " + str(damage) + " damage")
+
     print(get_given_name() + " took " + str(damage) + " damage")
     _health -= damage + _damage_multiplier
     if (_health <= 0):
         dead()
+    else:
+        SignalManager.on_dialogue_pushed.emit()
 
 func dead() -> void:
     push_error(name + " is missing a dead() method")

@@ -1,13 +1,15 @@
-res://script/attack_move.gd
 res://area/battle.tscn
-res://ui/visual_order.tscn
 res://ui/ingame_interface.tscn
-res://script/visual_order.gd
-res://script/global script/signal_manager.gd
-res://script/global script/battle_manager.gd
-res://entities/player/player_team/raora.tscn
 res://entities/player/player_team/cecilia.tscn
 res://entities/player/player_team/elizabeth.tscn
 res://entities/player/player_team/gigi.tscn
-res://ui/player_fighter_stats.tscn
-res://script/basic_attack.gd
+res://entities/player/player_team/raora.tscn
+res://script/heal.gd
+res://behavior/moves/heal.tscn
+res://script/attack_move.gd
+res://entities/fighter.gd
+res://behavior/effects/effect.tscn
+res://script/player_fighter_stats.gd
+res://script/ingame_interface.gd
+res://script/elizabeth.gd
+res://script/player_fighter.gd

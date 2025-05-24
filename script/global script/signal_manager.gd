@@ -25,3 +25,5 @@ signal on_player_stat_updated(Fighter: PlayerFighter) #Signal on any buff/debuff
 signal on_enemy_defeated() #Signal when an enemy is defeated
 
 signal on_order_updated(list: Array[Fighter]) #Signal when order is updated
+
+signal on_dialogue_pushed() #Signal when dialogue pushed through

@@ -41,4 +41,3 @@ func compare_fighters(fighter1: Fighter, fighter2: Fighter) -> int:
 		return -1
 	return 0
 
-	

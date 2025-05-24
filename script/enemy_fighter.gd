@@ -9,10 +9,12 @@ func _ready() -> void:
         
 func start_turn() -> void: 
     push_error(name + " is missing a start_turn() method")
-    SignalManager.on_move_completed.emit()
 
 func dead() -> void:
-    push_error(name + " is missing a dead() method")
+    DialogueManager.add_battle_dialogue(get_given_name() + " is defeated")
+    print(get_given_name() + " is defeated")
+    SignalManager.on_dialogue_pushed.emit()
+
 
 func set_selected(value: bool) -> void:
     if (!selected_box):
