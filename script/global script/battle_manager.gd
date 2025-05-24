@@ -10,7 +10,7 @@ var _round: Array[Fighter]
 
 	
 func _ready() -> void:
-	SignalManager.on_move_completed.connect(start_turn)
+	SignalManager.on_move_completed.connect(end_turn)
 
 func get_battle_map() -> Node3D:
 	return _battle
@@ -112,6 +112,9 @@ func start_turn() -> void:
 	else:
 		print(fighter.get_given_name() + " is stunned")
 	print("\n")
-	pop_fighter()
 	if (fighter.get_stun()):
 		start_turn()
+
+func end_turn() -> void:
+	pop_fighter()
+	start_turn()

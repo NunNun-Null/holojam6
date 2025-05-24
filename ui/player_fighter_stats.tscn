@@ -14,8 +14,8 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krw2q"]
-bg_color = Color(0.227364, 0.548608, 0.243832, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keevf"]
+bg_color = Color(0.782511, 0.474161, 0.109108, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -38,8 +38,8 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keevf"]
-bg_color = Color(0.782511, 0.474161, 0.109108, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krw2q"]
+bg_color = Color(0.227364, 0.548608, 0.243832, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -61,8 +61,8 @@ script = ExtResource("1_krw2q")
 
 [node name="elizabeth" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 81.0
+offset_bottom = 87.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_mkg15")
 
 [node name="Base Stats" type="VBoxContainer" parent="elizabeth"]
@@ -95,88 +95,6 @@ layout_mode = 2
 text = "SP:"
 
 [node name="Amount" type="Label" parent="elizabeth/Base Stats/Special"]
-layout_mode = 2
-text = "10"
-horizontal_alignment = 1
-
-[node name="cecilia" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 227.0
-offset_right = 308.0
-offset_bottom = 87.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_krw2q")
-
-[node name="Base Stats" type="VBoxContainer" parent="cecilia"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="cecilia/Base Stats"]
-layout_mode = 2
-text = "Cecilia"
-horizontal_alignment = 1
-
-[node name="Health" type="HBoxContainer" parent="cecilia/Base Stats"]
-layout_mode = 2
-alignment = 1
-
-[node name="Title" type="Label" parent="cecilia/Base Stats/Health"]
-layout_mode = 2
-text = "HP:"
-
-[node name="Amount" type="Label" parent="cecilia/Base Stats/Health"]
-layout_mode = 2
-text = "10"
-horizontal_alignment = 1
-
-[node name="Special" type="HBoxContainer" parent="cecilia/Base Stats"]
-layout_mode = 2
-alignment = 1
-
-[node name="Title" type="Label" parent="cecilia/Base Stats/Special"]
-layout_mode = 2
-text = "SP:"
-
-[node name="Amount" type="Label" parent="cecilia/Base Stats/Special"]
-layout_mode = 2
-text = "10"
-horizontal_alignment = 1
-
-[node name="raora" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 110.0
-offset_right = 191.0
-offset_bottom = 87.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b1sqe")
-
-[node name="Base Stats" type="VBoxContainer" parent="raora"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="raora/Base Stats"]
-layout_mode = 2
-text = "Raora"
-horizontal_alignment = 1
-
-[node name="Health" type="HBoxContainer" parent="raora/Base Stats"]
-layout_mode = 2
-alignment = 1
-
-[node name="Title" type="Label" parent="raora/Base Stats/Health"]
-layout_mode = 2
-text = "HP:"
-
-[node name="Amount" type="Label" parent="raora/Base Stats/Health"]
-layout_mode = 2
-text = "10"
-horizontal_alignment = 1
-
-[node name="Special" type="HBoxContainer" parent="raora/Base Stats"]
-layout_mode = 2
-alignment = 1
-
-[node name="Title" type="Label" parent="raora/Base Stats/Special"]
-layout_mode = 2
-text = "SP:"
-
-[node name="Amount" type="Label" parent="raora/Base Stats/Special"]
 layout_mode = 2
 text = "10"
 horizontal_alignment = 1
@@ -221,3 +139,121 @@ text = "SP:"
 layout_mode = 2
 text = "10"
 horizontal_alignment = 1
+
+[node name="raora" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_right = 308.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1sqe")
+
+[node name="Base Stats" type="VBoxContainer" parent="raora"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="raora/Base Stats"]
+layout_mode = 2
+text = "Raora"
+horizontal_alignment = 1
+
+[node name="Health" type="HBoxContainer" parent="raora/Base Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="raora/Base Stats/Health"]
+layout_mode = 2
+text = "HP:"
+
+[node name="Amount" type="Label" parent="raora/Base Stats/Health"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+
+[node name="Special" type="HBoxContainer" parent="raora/Base Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="raora/Base Stats/Special"]
+layout_mode = 2
+text = "SP:"
+
+[node name="Amount" type="Label" parent="raora/Base Stats/Special"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+
+[node name="cecilia" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_right = 196.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_krw2q")
+
+[node name="Base Stats" type="VBoxContainer" parent="cecilia"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="cecilia/Base Stats"]
+layout_mode = 2
+text = "Cecilia"
+horizontal_alignment = 1
+
+[node name="Health" type="HBoxContainer" parent="cecilia/Base Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="cecilia/Base Stats/Health"]
+layout_mode = 2
+text = "HP:"
+
+[node name="Amount" type="Label" parent="cecilia/Base Stats/Health"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+
+[node name="Special" type="HBoxContainer" parent="cecilia/Base Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="cecilia/Base Stats/Special"]
+layout_mode = 2
+text = "SP:"
+
+[node name="Amount" type="Label" parent="cecilia/Base Stats/Special"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+
+[node name="elizabeth_select" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -5.0
+offset_top = -7.0
+offset_right = 88.0
+offset_bottom = 94.0
+color = Color(0, 1, 0, 0.509804)
+
+[node name="raora_select" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 221.0
+offset_top = -7.0
+offset_right = 314.0
+offset_bottom = 94.0
+color = Color(0, 1, 0, 0.509804)
+
+[node name="cecilia_select" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 110.0
+offset_top = -7.0
+offset_right = 203.0
+offset_bottom = 94.0
+color = Color(0, 1, 0, 0.509804)
+
+[node name="gigi_select" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 341.0
+offset_top = -7.0
+offset_right = 434.0
+offset_bottom = 94.0
+color = Color(0, 1, 0, 0.509804)

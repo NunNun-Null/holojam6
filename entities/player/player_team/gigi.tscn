@@ -17,10 +17,12 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Fister Smash" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_ty07m")]
+[node name="Fister Smash" parent="Moves" instance=ExtResource("3_ty07m")]
 damage = 6
 accuracy = 85
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+description = "Damage: 6
+Accuracy: 85
+Classic Autofister fister move"
 
 [node name="Strategy" type="Node" parent="."]
 

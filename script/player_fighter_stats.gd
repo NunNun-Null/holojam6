@@ -4,6 +4,9 @@ func _ready() -> void:
 	SignalManager.on_player_defeated.connect(dead_player)
 	SignalManager.on_player_stat_updated.connect(update_stat)
 	SignalManager.on_entered_battle.connect(init_stats)
+	SignalManager.on_player_select.connect(make_select)
+	SignalManager.on_player_unselect.connect(make_unselect)
+
 
 func dead_player(fighter: PlayerFighter) -> void:
 	var node: Control = find_child(fighter.name.to_lower())
@@ -13,6 +16,13 @@ func dead_player(fighter: PlayerFighter) -> void:
 	node.self_modulate = Color8(41,41,41,41)
 	node.get_child(0).self_modulate = Color8(41,41,41,41)
 
+func make_select(fighter: PlayerFighter) -> void:
+	var node: ColorRect = find_child(fighter.name.to_lower()+"_select")
+	node.visible = true
+
+func make_unselect(fighter: PlayerFighter) -> void:
+	var node: ColorRect = find_child(fighter.name.to_lower()+"_select")
+	node.visible = false
 
 func update_stat(fighter: PlayerFighter) -> void:
 	var node: Control = find_child(fighter.name.to_lower()) #This not shown

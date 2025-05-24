@@ -17,11 +17,14 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Spear Pierce" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_tk7oo")]
+[node name="Spear Pierce" parent="Moves" instance=ExtResource("3_tk7oo")]
 damage = 5
 accuracy = 95
 armor_pierce = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+description = "Damage: 5
+Accuracy: 95
+Armor Pierce: 3
+Spear thrust that can pierce target armor "
 
 [node name="Strategy" type="Node" parent="."]
 

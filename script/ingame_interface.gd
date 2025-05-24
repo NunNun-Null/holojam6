@@ -1,0 +1,224 @@
+extends Control
+
+var is_choosing_move: bool = false
+var is_choosing_target: bool = false
+var is_battle_dialogue: bool = false
+
+var selected_move_index: int = -1
+var selected_move: Move
+
+var selected_target_index: int = -1
+var selected_target: Fighter
+
+var current: PlayerFighter
+
+var player_list: Array[PlayerFighter]
+
+func _ready() -> void:
+	SignalManager.on_player_turn.connect(init_player)
+	if (BattleManager.get_top_fighter() is PlayerFighter):
+		init_player(BattleManager.get_top_fighter())
+
+func change_to_move_selector() -> void:
+	print("on move")
+	$"Combat Interface".visible = true
+	$"Dialogue Screen".visible = false
+	$"Choose Target".visible = false
+
+	is_choosing_move = true
+	is_choosing_target = false
+	is_battle_dialogue = false
+
+func change_to_target_selector() -> void:
+	print("on target")
+	$"Combat Interface".visible = false
+	$"Choose Target".visible = true
+	$"Dialogue Screen".visible = false
+
+	is_choosing_move = false
+	is_choosing_target = true
+	is_battle_dialogue = false
+
+func change_to_dialogue() -> void:
+	print("on yap")
+	$"Combat Interface".visible = false
+	$"Choose Target".visible = false
+	$"Dialogue Screen".visible = true
+
+	is_choosing_move = false
+	is_choosing_target = false
+	is_battle_dialogue = true
+
+func init_player(player: PlayerFighter) -> void:
+	current = player 
+	print("establishing for " + current.get_given_name())
+	change_to_move_selector()
+	var label: Label
+
+	$"Combat Interface/HBoxContainer/VBoxContainer/Title".text = player.get_given_name() + "'s Turn"
+
+	for index in range(player.valid_moves.size()):
+		label = Label.new()
+		label.name = str(index)
+		label.text = player.valid_moves.get(index).name
+		label.add_theme_font_size_override("font_size",40)
+		$"Combat Interface/HBoxContainer/VBoxContainer/".add_child(label)
+	
+	if (!label):
+		push_error("No valid moves???")
+		return
+	selected_move_index = 0
+
+	selected_move = current.valid_moves.get(selected_move_index)
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(selected_move_index+1).text = "> " + current.valid_moves.get(selected_move_index).name
+	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves.get(selected_move_index).name + "\n" + current.valid_moves.get(selected_move_index).get_desc()
+
+func init_targets() -> void:
+	var label: Label
+
+	$"Choose Target/HBoxContainer/VBoxContainer/Title".text = current.get_given_name() + "'s Turn"
+
+	if (!selected_move.is_for_allies()):
+		for index in range(BattleManager.get_enemies_size()):
+			label = Label.new()
+			label.name = str(index)
+			label.text = BattleManager.get_enemy_fighter(index).get_given_name()
+			label.add_theme_font_size_override("font_size",40)
+			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
+	else:
+		player_list.clear()
+		for index in range(BattleManager.get_players_size()):
+			if (BattleManager.get_player_fighter(index).get_dead()):
+				continue
+			label = Label.new()
+			label.name = str(index)
+			label.text = BattleManager.get_player_fighter(index).get_given_name()
+			label.add_theme_font_size_override("font_size",40)
+			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
+		
+		for player in BattleManager._players:
+			if (player.get_dead()):
+				continue
+			player_list.append(player)
+		
+	if (!label):
+		push_error("No valid moves???")
+		return
+	
+	selected_target_index = 0
+
+	if (!selected_move.is_for_allies()):
+		selected_target = BattleManager.get_enemy_fighter(selected_target_index)
+		selected_target.set_selected(true)
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + BattleManager.get_enemy_fighter(selected_target_index).get_given_name()
+	else:
+		selected_target = player_list.get(selected_target_index)
+		SignalManager.on_player_select.emit(selected_target)
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + player_list.get(selected_target_index).get_given_name()
+	
+	update_desc(selected_target)
+
+
+
+
+
+func _process(_delta: float) -> void:
+	if (is_choosing_move):
+		if (Input.is_action_just_pressed("choose_up") and selected_move_index > 0):
+			print("going up")
+			selected_move_index -= 1
+			highlighted_move(selected_move_index,1)
+
+
+		elif (Input.is_action_just_pressed("choose_down") and selected_move_index < current.valid_moves.size()-1):
+			print("going down")
+			selected_move_index += 1
+			highlighted_move(selected_move_index,-1)
+		
+		elif (Input.is_action_just_pressed("interact")):
+			change_to_target_selector()
+			init_targets()
+
+	elif (is_choosing_target):
+		if (Input.is_action_just_pressed("back")):
+			change_to_move_selector()
+			selected_target_index = 0
+			if (selected_target is EnemyFighter):
+				selected_target.set_selected(false)
+			else:
+				SignalManager.on_player_unselect.emit(selected_target)
+
+			selected_target = null
+			for node in $"Choose Target/HBoxContainer/VBoxContainer/".get_children():
+				if (node.name == "Title"):
+					continue
+				node.queue_free()
+		
+		if (Input.is_action_just_pressed("choose_up") and selected_target_index > 0):
+			print("going up")
+			selected_target_index -= 1
+			highlighted_target(selected_target_index,1)
+
+
+		elif (Input.is_action_just_pressed("choose_down") and selected_target_index < $"Choose Target/HBoxContainer/VBoxContainer/".get_child_count()-2):
+			print("going down")
+			selected_target_index += 1
+			highlighted_target(selected_target_index,-1)
+		
+		elif (Input.is_action_just_pressed("interact")):
+			change_to_dialogue()
+			clear_nodes()
+			move()
+
+func clear_nodes() -> void:
+	if (selected_target is EnemyFighter):
+		selected_target.set_selected(false)
+	else:
+		SignalManager.on_player_unselect.emit(selected_target)
+	
+	for node in $"Choose Target/HBoxContainer/VBoxContainer/".get_children():
+		if (node.name == "Title"):
+			continue
+		node.queue_free()
+
+	for node in $"Combat Interface/HBoxContainer/VBoxContainer/".get_children():
+		if (node.name == "Title"):
+			continue
+		node.queue_free()
+
+func highlighted_target(index: int, offset: int) -> void:
+	if (!selected_move.is_for_allies()):
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = BattleManager.get_enemy_fighter(index+offset).get_given_name()
+		selected_target = BattleManager.get_enemy_fighter(index)
+		selected_target.set_selected(true)
+		BattleManager.get_enemy_fighter(index+offset).set_selected(false)
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + BattleManager.get_enemy_fighter(index).get_given_name()
+
+	else:
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = player_list.get(index+offset).get_given_name()
+		SignalManager.on_player_unselect.emit(selected_target)
+		selected_target = player_list.get(index)
+		SignalManager.on_player_select.emit(selected_target)
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + player_list.get(index).get_given_name()
+	
+	update_desc(selected_target)
+
+func update_desc(fighter: Fighter) -> void:
+	$"Choose Target/HBoxContainer/Description".text = fighter.get_given_name() + "'s Stats\nHealth: " + str(fighter.get_health()) + "\nDefense: " + str(fighter.get_defense()) + "\nSpeed: " + str(fighter.get_speed())
+	if (fighter.get_mark()):
+		$"Choose Target/HBoxContainer/Description".text += "Is Marked"
+	if (fighter.get_stun()):
+		$"Choose Target/HBoxContainer/Description".text += "Is Stunned"
+	if (fighter.is_defended()):
+		$"Choose Target/HBoxContainer/Description".text += "Defended by: " + str(fighter.get_defended()) 
+
+func highlighted_move(index: int, offset: int) -> void:
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = current.valid_moves.get(index+offset).name
+
+	selected_move = current.valid_moves.get(index)
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + current.valid_moves.get(index).name
+	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves.get(index).name + "\n" + current.valid_moves.get(index).get_desc()
+
+func move() -> void:
+	selected_move.set_target(selected_target)
+	current.play_turn(selected_move)

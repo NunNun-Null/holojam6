@@ -16,9 +16,11 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Scratch" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_pumfg")]
+[node name="Scratch" parent="Moves" instance=ExtResource("3_pumfg")]
 damage = 2
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+description = "Damage: 2
+Accuracy: 100
+Simple scratch from the beeg cat"
 
 [node name="Strategy" type="Node" parent="."]
 

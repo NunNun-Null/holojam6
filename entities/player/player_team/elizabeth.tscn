@@ -17,10 +17,12 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Sword Cleave" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_onll2")]
+[node name="Thorn Slash" parent="Moves" instance=ExtResource("3_onll2")]
 damage = 8
-accuracy = 75
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+accuracy = 70
+description = "Damage: 8
+Accuracy: 70
+Greatsword Slash from Elizabeth's Thorn"
 
 [node name="Strategy" type="Node" parent="."]
 

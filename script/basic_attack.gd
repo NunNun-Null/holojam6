@@ -5,9 +5,13 @@ extends Move
 @export var armor_pierce: int = 0
 
 func move() -> void:
-	var strategy: Strategy = get_random_strategy()
-	strategy.determine_target()
-	var fighter: Fighter = strategy.get_target()
+	var fighter: Fighter
+	if (has_strategy()):
+		var strategy: Strategy = get_random_strategy()
+		strategy.determine_target()
+		fighter = strategy.get_target()
+	else:
+		fighter = get_target()
 	print("used " + name + " on " + fighter.get_given_name())
 	if (!accuracy_test(accuracy)):
 		print(name + " missed")

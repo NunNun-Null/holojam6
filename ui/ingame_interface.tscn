@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://blqy8ufehtn2s"]
+[gd_scene load_steps=2 format=3 uid="uid://blqy8ufehtn2s"]
+
+[ext_resource type="Script" uid="uid://rd21dlwt0krw" path="res://script/ingame_interface.gd" id="1_duw0w"]
 
 [node name="Ingame Interface" type="Control"]
 layout_mode = 3
@@ -7,23 +9,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_duw0w")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Combat Interface" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 2039.0
 offset_bottom = 495.0
 
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Combat Interface"]
 layout_mode = 2
-text = "Hello there
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Combat Interface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
+[node name="Title" type="Label" parent="Combat Interface/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Elizabeth"
 
+[node name="Description" type="TextEdit" parent="Combat Interface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Move Name
+Description of Move"
+wrap_mode = 1
 
+[node name="Dialogue Screen" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 2039.0
+offset_bottom = 495.0
 
+[node name="Choose Target" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 2039.0
+offset_bottom = 495.0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Choose Target"]
+layout_mode = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Choose Target/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
+[node name="Title" type="Label" parent="Choose Target/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Choose a Target"
 
-
-"
+[node name="Description" type="TextEdit" parent="Choose Target/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Placeholder"
+wrap_mode = 1

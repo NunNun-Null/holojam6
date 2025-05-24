@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8btlrylypjkg"]
+[gd_scene load_steps=6 format=3 uid="uid://b8btlrylypjkg"]
 
 [ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_dubhn"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="1_evlql"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="2_dubhn"]
 [ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="3_05x41"]
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
+blend_mode = 3
+albedo_color = Color(1, 0.207843, 0.223529, 1)
+normal_scale = 0.5
+
+[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_dubhn")
 health = 20
 max_health = 20
 defense = 5
 given_name = "Dummy"
+selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
@@ -27,3 +33,9 @@ _strategies = [NodePath("../../Strategy/Lowest Health")]
 [node name="Lowest Health" parent="Strategy" instance=ExtResource("3_05x41")]
 
 [node name="Current Effects" type="Node" parent="."]
+
+[node name="Selected" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245, 0)
+visible = false
+size = Vector3(1, 1.49, 1)
+material = SubResource("StandardMaterial3D_dubhn")

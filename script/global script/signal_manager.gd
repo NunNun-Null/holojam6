@@ -12,8 +12,14 @@ signal on_entered_battle(node: Node3D) #Signal when before scene switches to bat
 
 signal on_player_defeated(Fighter: PlayerFighter) #Signal on a player squad member dead
 
+signal on_player_turn(fighter: PlayerFighter) #Signal when it's a player member's turn
+
 signal on_player_revived(Fighter: PlayerFighter) #Signal on a player squad member revived (MUST IMPLEMENT)
 
-signal on_player_stat_updated(Fighter: PlayerFighter)
+signal on_player_select(fighter: PlayerFighter) #Signal on combat screen, player is highlighted
+
+signal on_player_unselect(fighter: PlayerFighter) #Signal on combat screen, player is unhighlighted
+
+signal on_player_stat_updated(Fighter: PlayerFighter) #Signal on any buff/debuff/damage/heal
 
 signal on_enemy_defeated() #Signal when an enemy is defeated
