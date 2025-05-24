@@ -37,6 +37,8 @@ func move() -> void:
 	push_error(name + " is missing a move() method")
 
 func accuracy_test(amount: int) -> bool:
+	if (!get_target().get_mark()):
+		return true
 	randomize()
 	var rand: int = randi_range(1,100)
 	if (amount >= rand):

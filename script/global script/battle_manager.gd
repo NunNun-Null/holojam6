@@ -42,6 +42,7 @@ func establish_order() -> void:
 	_round.append_array(_enemies)
 	_round = UtilitiesManager.sort(_round)
 	print("Round Order" + str(_round))
+	SignalManager.on_order_updated.emit(_round)
 
 
 func get_enemy_fighter(index: int) -> EnemyFighter:
@@ -62,6 +63,7 @@ func start_battle() -> void:
 	_round.clear()
 	establish_order()
 	start_turn()
+	SignalManager.on_order_updated.emit(_round)
 
 func get_top_fighter() -> Fighter:
 	return _round.get(_round.size()-1)
@@ -117,4 +119,5 @@ func start_turn() -> void:
 
 func end_turn() -> void:
 	pop_fighter()
+	SignalManager.on_order_updated.emit(_round)
 	start_turn()

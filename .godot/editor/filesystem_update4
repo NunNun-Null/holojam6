@@ -1,0 +1,13 @@
+res://script/attack_move.gd
+res://area/battle.tscn
+res://ui/visual_order.tscn
+res://ui/ingame_interface.tscn
+res://script/visual_order.gd
+res://script/global script/signal_manager.gd
+res://script/global script/battle_manager.gd
+res://entities/player/player_team/raora.tscn
+res://entities/player/player_team/cecilia.tscn
+res://entities/player/player_team/elizabeth.tscn
+res://entities/player/player_team/gigi.tscn
+res://ui/player_fighter_stats.tscn
+res://script/basic_attack.gd

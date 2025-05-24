@@ -23,3 +23,5 @@ signal on_player_unselect(fighter: PlayerFighter) #Signal on combat screen, play
 signal on_player_stat_updated(Fighter: PlayerFighter) #Signal on any buff/debuff/damage/heal
 
 signal on_enemy_defeated() #Signal when an enemy is defeated
+
+signal on_order_updated(list: Array[Fighter]) #Signal when order is updated
