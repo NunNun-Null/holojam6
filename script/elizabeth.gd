@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 func start_turn() -> void:
 	SignalManager.on_player_turn.emit(self)
-	add_special(1)
+	add_special(1,false)
 
 func play_turn(action: Move) -> void:
 	remove_special(action.get_cost())

@@ -13,6 +13,7 @@ func change_room(origin: Room, destination: Room, location: Node3D) -> void:
 	destination.visible = true
 	destination.reset_room()
 	destination.set_player_location(location)
+	PlayerManager.room = destination.name
 
 func add_battle(node: Node3D) -> void:
 	var battle: bool = battle_progression.has(node)

@@ -90,3 +90,4 @@ back={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/canvas_textures/default_texture_filter=1

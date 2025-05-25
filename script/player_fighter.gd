@@ -19,9 +19,12 @@ func set_special(amount: int) -> void:
 	SignalManager.on_player_stat_updated.emit(self)
 
 
-func add_special(amount: int) -> void:
+func add_special(amount: int,value:bool=false) -> void:
 	special += amount
 	SignalManager.on_player_stat_updated.emit(self)
+	if (value):
+		DialogueManager.add_battle_dialogue(get_given_name() + " gained " + str(amount) + " SP")
+		SignalManager.on_dialogue_pushed.emit()
 
 
 func remove_special(amount: int) -> void:

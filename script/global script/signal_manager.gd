@@ -27,3 +27,9 @@ signal on_enemy_defeated() #Signal when an enemy is defeated
 signal on_order_updated(list: Array[Fighter]) #Signal when order is updated
 
 signal on_dialogue_pushed() #Signal when dialogue pushed through
+
+signal on_victory() #Signal when player wins battle
+
+signal on_map_ready() #Signal when map is init
+
+signal on_dialogue_finished() #Signal when dialogue is finished

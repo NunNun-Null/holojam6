@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlxoxknngtqtb"]
+[gd_scene load_steps=4 format=3 uid="uid://dlxoxknngtqtb"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_rg58c"]
+[ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_hti84"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_tk7oo"]
 
 [node name="Cecilia" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
@@ -24,6 +25,14 @@ description = "Damage: 5
 Accuracy: 95
 Armor Pierce: 3
 Spear thrust that can pierce target armor "
+
+[node name="Pass" parent="Moves" instance=ExtResource("3_hti84")]
+hp = 0
+sp = 2
+self_move = true
+description = "+2 SP
+Pass Turn"
+intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]
 

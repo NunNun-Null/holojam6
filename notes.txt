@@ -1,0 +1,72 @@
+Pass
+	+2 SP
+
+Elizabeth (tank/heavy attack):
+Thorn Slash - basic free attack
+	8 damage
+	2 armor pierce
+	70 accuracy
+
+Thorn Cleave - strong attack
+	16 damage
+	25 accuracy
+	8 armor pierce
+	10 SP cost
+	intended to be paired with a marked target (Raora)
+
+Defend - support skill
+	+3 HP
+	6 SP cost
+	+1 defense for 3 turns
+	marked for 3 turns
+	defend effect on intended ally for 3 turns
+	intended to be a shield for others
+
+
+Raora (healer/support):
+
+Scratch - basic free attack
+	2 damage
+	85 accuracy
+
+Heal - single target heal
+	+7 HP
+	+1 SP (won't work on self)
+	5 SP cost
+	intended for single target heal
+
+Perceived - mark target
+	mark target
+	-2 defense on target for 3 turns
+	4 SP cost
+
+blinding light - stun
+	1 damage
+	75 accuracy
+	stun target for 3 turns
+	-1 attack for 6 turns
+	-15 accuracy for 6 turns
+	6 SP cost
+
+Cecilia (support/specialist):
+
+Spear pierce - basic free attack
+	5 damage
+	95 accuracy
+	3 armor pierce
+
+Violin - Global Support Buff
+	+2 attack for 2 turns
+	+1 defense for 2 turns
+	+1 speed for 2 turns
+	+10 accuracy for 2 turns
+	10 SP cost
+
+Spear Thrust - Offsensive Debuff
+	2 damage
+	2 armor pierce
+	-4 defense for 5 turns
+	5 SP cost
+
+
+Gigi (offense/offensive support):

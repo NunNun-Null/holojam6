@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=28 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
 [ext_resource type="Script" uid="uid://dlrqfyq1thyl6" path="res://script/map.gd" id="1_2onle"]
@@ -7,9 +7,12 @@
 [ext_resource type="Script" uid="uid://vw30jb8u5xqp" path="res://script/hallway.gd" id="3_mjj2x"]
 [ext_resource type="PackedScene" uid="uid://cdb1sbtmq802" path="res://objects/teleport_location.tscn" id="3_wn0ld"]
 [ext_resource type="Script" uid="uid://d34vjow0dvtke" path="res://script/dreams.gd" id="5_wn0ld"]
+[ext_resource type="PackedScene" uid="uid://bmoedl7bjdj0a" path="res://component/dialogue_interactable.tscn" id="6_oj6s4"]
 [ext_resource type="Script" uid="uid://cq002x5i80hnj" path="res://script/thorn.gd" id="6_pq3op"]
 [ext_resource type="PackedScene" uid="uid://bb01cioxfmsk3" path="res://objects/start_battle.tscn" id="8_forqk"]
+[ext_resource type="Script" uid="uid://oasb386acjfo" path="res://script/core_emotion.gd" id="8_uj77h"]
 [ext_resource type="PackedScene" uid="uid://b8btlrylypjkg" path="res://entities/enemies/dummy.tscn" id="9_mp1sc"]
+[ext_resource type="PackedScene" uid="uid://bo7avmssp3a4o" path="res://ui/map_dialogue.tscn" id="10_trnge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -25,15 +28,27 @@ tonemap_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wn0ld"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mjj2x"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vwu25"]
+size = Vector3(2.65, 1, 1.39)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trnge"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_forqk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjj2x"]
+size = Vector3(1, 1, 4.96)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pq3op"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mp1sc"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_oj6s4"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2onle"]
+size = Vector3(1, 1, 4.82)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oj6s4"]
+viewport_path = NodePath("Player/Camera/Sprite3D/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj77h"]
 
@@ -139,9 +154,28 @@ size = Vector3(0.175781, 1, 1)
 [node name="hallway_to_bedroom" parent="Bedroom" instance=ExtResource("3_wn0ld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66347, 0.025, 0)
 
+[node name="objects" type="Node3D" parent="Bedroom"]
+
+[node name="bed" type="CSGBox3D" parent="Bedroom/objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54, 0.16, 1.61)
+use_collision = true
+size = Vector3(2.08, 0.27, 1)
+
+[node name="Dialogue Interactable" parent="Bedroom/objects/bed" instance=ExtResource("6_oj6s4")]
+content = Array[String](["this is my bed", "#", "it sucks alright", "I mean it's boat goes binted fr"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bedroom/objects/bed/Dialogue Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0749999, 0, -0.0550001)
+shape = SubResource("BoxShape3D_vwu25")
+
+[node name="pillow" type="CSGBox3D" parent="Bedroom/objects/bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.865, 0.186, 0.0300001)
+size = Vector3(0.35, 0.1, 0.7)
+
 [node name="Hallway" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25222, -2.38419e-07, 0.000154972)
 script = ExtResource("3_mjj2x")
+required_battle = "Start Battle"
 
 [node name="floor" type="CSGBox3D" parent="Hallway"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
@@ -180,7 +214,7 @@ location_point = NodePath("../../../../Bedroom/hallway_to_bedroom")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/doors/bedroom/Teleport Component"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426939, 0, 0)
-shape = SubResource("BoxShape3D_mjj2x")
+shape = SubResource("BoxShape3D_trnge")
 
 [node name="dream" type="CSGBox3D" parent="Hallway/doors"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.99066, 0.525, 2.3244)
@@ -201,16 +235,30 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.452
 use_collision = true
 size = Vector3(0.175781, 1, 1)
 
-[node name="memory_lane 3" type="CSGBox3D" parent="Hallway/doors"]
+[node name="Core Emotion" type="CSGBox3D" parent="Hallway/doors"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17.3993, 0.525, -0.00744963)
 use_collision = true
 size = Vector3(0.175781, 1, 4.8855)
+
+[node name="Teleport Component" parent="Hallway/doors/Core Emotion" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.844727, 0, 0)
+can_teleport = false
+destination = NodePath("../../../../Core Emotion")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Core Emotion/hallway_to_core_emotion")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/doors/Core Emotion/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426939, 0, 0.0500003)
+shape = SubResource("BoxShape3D_mjj2x")
 
 [node name="bedroom_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.76801, 0.025, 0)
 
 [node name="dream_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51736, 0.0250002, 1.67496)
+
+[node name="core_emotion_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9074, 0.0250002, 0.37496)
 
 [node name="Dream" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6707, 0, 6.19923)
@@ -344,20 +392,90 @@ location_point = NodePath("../../../../Dream/thorn_to_dream")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Thorn/doors/door/Teleport Component"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
-shape = SubResource("BoxShape3D_2onle")
+shape = SubResource("BoxShape3D_oj6s4")
 
 [node name="dream_to_thorn" parent="Thorn" instance=ExtResource("3_wn0ld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
 
+[node name="Core Emotion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5099, 0, -0.0555992)
+script = ExtResource("8_uj77h")
+
+[node name="floor" type="CSGBox3D" parent="Core Emotion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27, 0, 0)
+use_collision = true
+size = Vector3(13.54, 0.05, 5)
+
+[node name="walls" type="Node3D" parent="Core Emotion"]
+
+[node name="wall_back" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 4.26503, 0.583779, -2.474)
+use_collision = true
+size = Vector3(13.52, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(1, -5.75263e-05, 0.00013634, 5.75738e-05, 1, -0.000257165, -0.00013632, 0.000257176, 1, 4.265, 0.583107, 2.46575)
+use_collision = true
+size = Vector3(13.53, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.003, 0.583, -0.00344276)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Core Emotion"]
+
+[node name="door" type="CSGBox3D" parent="Core Emotion/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31335, 0.525, 0.02)
+use_collision = true
+size = Vector3(0.175781, 1, 4.84)
+
+[node name="Teleport Component" parent="Core Emotion/doors/door" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Hallway")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Hallway/core_emotion_to_hallway")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Core Emotion/doors/door/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0.0100001)
+shape = SubResource("BoxShape3D_2onle")
+
+[node name="hallway_to_core_emotion" parent="Core Emotion" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
+
 [node name="Player" parent="." instance=ExtResource("1_yy0tc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.46, 0, 15.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.06, 0, 16.94)
 
 [node name="Camera" type="Camera3D" parent="Player"]
-transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.09402, -3.58871)
+transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, -0.42, 2.50402, -2.61871)
+fov = 90.0
 
-[node name="Start Battle" parent="." instance=ExtResource("8_forqk")]
+[node name="Sprite3D" type="Sprite3D" parent="Player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000999868, -0.369106, -0.789121)
+pixel_size = 0.005
+texture = SubResource("ViewportTexture_oj6s4")
+
+[node name="SubViewport" type="SubViewport" parent="Player/Camera/Sprite3D"]
+transparent_bg = true
+size = Vector2i(535, 150)
+
+[node name="map_dialogue" parent="Player/Camera/Sprite3D/SubViewport" instance=ExtResource("10_trnge")]
+visible = false
+
+[node name="Tutorial Boss" parent="." instance=ExtResource("8_forqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.34, 0.67, 16.42)
 enemies = Array[PackedScene]([ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Start Battle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.78, 0.6, 16.35)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tutorial Boss"]
+shape = SubResource("BoxShape3D_uj77h")
+
+[node name="Midgame Boss" parent="." instance=ExtResource("8_forqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.71, 0.67, -0.0899999)
+enemies = Array[PackedScene]([ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Midgame Boss"]
 shape = SubResource("BoxShape3D_uj77h")

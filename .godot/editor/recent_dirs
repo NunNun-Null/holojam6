@@ -1,7 +1,9 @@
-res://behavior/moves
-res://ui
-res://asset/texture
+C:/Users/Unuser/Documents/Program files/Godot Projects/holojam-6
 res://component
+res://ui
+res://area
+res://behavior/moves
+res://asset/texture
 res://behavior/effects
 res://script/global script
 C:/Users/Unuser/Documents/Program files/Godot Projects/holojam-6/script
@@ -11,5 +13,4 @@ res://objects
 C:/Users/Unuser/Documents/Program files/Godot Projects/holojam-6/behavior/moves
 res://behavior/strategies
 res://entities
-res://area
 res://entities/player

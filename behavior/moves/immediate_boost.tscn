@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3ppybldixkjb"]
+
+[ext_resource type="Script" uid="uid://ccpmkbs065bar" path="res://script/immediate_boost.gd" id="1_7a2o6"]
+
+[node name="Immediate Boost" type="Node"]
+script = ExtResource("1_7a2o6")

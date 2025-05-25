@@ -81,30 +81,41 @@ func init_targets() -> void:
 	var label: Label
 
 	$"Choose Target/HBoxContainer/VBoxContainer/Title".text = current.get_given_name() + "'s Turn"
+	if (selected_move.has_method("get_self_only")):
+		if (selected_move.get_self_only()):
+			selected_target = current
+			player_list.clear()
+			player_list.append(current)
+			label = Label.new()
+			label.name = "0"
+			label.text = current.get_given_name()
+			label.add_theme_font_size_override("font_size",40)
+			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
 
-	if (!selected_move.is_for_allies()):
-		for index in range(BattleManager.get_enemies_size()):
-			label = Label.new()
-			label.name = str(index)
-			label.text = BattleManager.get_enemy_fighter(index).get_given_name()
-			label.add_theme_font_size_override("font_size",40)
-			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
 	else:
-		player_list.clear()
-		for index in range(BattleManager.get_players_size()):
-			if (BattleManager.get_player_fighter(index).get_dead()):
-				continue
-			label = Label.new()
-			label.name = str(index)
-			label.text = BattleManager.get_player_fighter(index).get_given_name()
-			label.add_theme_font_size_override("font_size",40)
-			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
-		
-		for player in BattleManager._players:
-			if (player.get_dead()):
-				continue
-			player_list.append(player)
-		
+		if (!selected_move.is_for_allies()):
+			for index in range(BattleManager.get_enemies_size()):
+				label = Label.new()
+				label.name = str(index)
+				label.text = BattleManager.get_enemy_fighter(index).get_given_name()
+				label.add_theme_font_size_override("font_size",40)
+				$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
+		else:
+			player_list.clear()
+			for index in range(BattleManager.get_players_size()):
+				if (BattleManager.get_player_fighter(index).get_dead()):
+					continue
+				label = Label.new()
+				label.name = str(index)
+				label.text = BattleManager.get_player_fighter(index).get_given_name()
+				label.add_theme_font_size_override("font_size",40)
+				$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
+			
+			for player in BattleManager._players:
+				if (player.get_dead()):
+					continue
+				player_list.append(player)
+			
 	if (!label):
 		push_error("No valid moves???")
 		return
@@ -180,9 +191,6 @@ func _process(_delta: float) -> void:
 				$"Dialogue Screen/Text".text = ""
 				DialogueManager.clear_dialogue()
 				SignalManager.on_move_completed.emit()
-			# else:
-			# 	$"Dialogue Screen/Text".visible_ratio = 1
-			# 	can_continue = true
 				
 
 func clear_nodes() -> void:

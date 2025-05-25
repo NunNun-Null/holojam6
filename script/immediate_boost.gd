@@ -1,7 +1,13 @@
 extends Move
 
-@export var strength: int = 1
+@export var hp: int = 1
+@export var sp: int = 0
+@export var clear_stun: bool = false
+@export var clear_mark: bool = false
+@export var self_move: bool = false
 
+func get_self_only() -> bool:
+	return self_move
 
 func move() -> void:
 	if (has_strategy()):
@@ -16,4 +22,5 @@ func move() -> void:
 	else:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
 	
-	get_target().heal(strength)
+	get_target().add_special(sp,true)
+	get_target().heal(hp)

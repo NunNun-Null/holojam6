@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmoedl7bjdj0a"]
+
+[ext_resource type="Script" uid="uid://vk3prpjbljuk" path="res://script/dialogue_interactable.gd" id="1_8rqvb"]
+
+[node name="Dialogue Interactable" type="Area3D"]
+script = ExtResource("1_8rqvb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

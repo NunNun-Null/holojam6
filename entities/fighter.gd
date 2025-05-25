@@ -114,9 +114,10 @@ func heal(amount: int) -> void:
     else:
         hp = amount
         _health += hp
-    DialogueManager.add_battle_dialogue(get_given_name() + " healed " + str(hp) + " health")
     SignalManager.on_player_stat_updated.emit(self)
-    SignalManager.on_dialogue_pushed.emit()
+    if (hp > 0):
+        DialogueManager.add_battle_dialogue(get_given_name() + " healed " + str(hp) + " health")
+        SignalManager.on_dialogue_pushed.emit()
 
 func add_effect(effect: Effect) -> void:
     effects.add_child(effect)
