@@ -2,12 +2,7 @@ extends Move
 
 @export var hp: int = 1
 @export var sp: int = 0
-@export var clear_stun: bool = false
-@export var clear_mark: bool = false
-@export var self_move: bool = false
-
-func get_self_only() -> bool:
-	return self_move
+@export var clear_negatives: bool = false
 
 func move() -> void:
 	if (has_strategy()):
@@ -21,6 +16,7 @@ func move() -> void:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on themselves")
 	else:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
-	
 	get_target().add_special(sp,true)
 	get_target().heal(hp)
+	if (clear_negatives):
+		get_target().clear_negatives()

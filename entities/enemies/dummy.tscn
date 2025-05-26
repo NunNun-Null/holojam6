@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8btlrylypjkg"]
+[gd_scene load_steps=10 format=3 uid="uid://b8btlrylypjkg"]
 
 [ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_dubhn"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="1_evlql"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="2_dubhn"]
 [ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="3_05x41"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_t4n70"]
+[ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="4_px1ll"]
+[ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="5_jgja0"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="6_8huac"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
@@ -12,6 +16,7 @@ normal_scale = 0.5
 
 [node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_dubhn")
+speed = 20
 health = 20
 max_health = 20
 defense = 5
@@ -24,9 +29,21 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("2_dubhn")]
-damage = 3
+[node name="Dummy Blind" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_t4n70")]
+effects = Array[PackedScene]([ExtResource("4_px1ll"), ExtResource("5_jgja0"), ExtResource("6_8huac")])
+strengths = Array[int]([1, 1, 15])
+durations = Array[int]([3, 6, 6])
+is_debuffs = Array[bool]([true, true, true])
+accuracy = 80
 _strategies = [NodePath("../../Strategy/Lowest Health")]
+description = "Accuracy: 80
+stuns target for 3 turns
+-1 attack for 6 turns
+-15 accuracy for 6 turns
+SP Cost: 6
+
+Raora's God Eyes are bright (citation needed). Probably bright enough to blind someone"
+sp_cost = 6
 
 [node name="Strategy" type="Node" parent="."]
 
@@ -39,3 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245, 0)
 visible = false
 size = Vector3(1, 1.49, 1)
 material = SubResource("StandardMaterial3D_dubhn")
+
+[node name="Glock" parent="." node_paths=PackedStringArray("_strategies") instance=ExtResource("2_dubhn")]
+damage = 3
+_strategies = [NodePath("../Strategy/Lowest Health")]

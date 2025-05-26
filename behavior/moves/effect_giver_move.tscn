@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdgmkvnfs70ht"]
+
+[ext_resource type="Script" uid="uid://b828421puk8h6" path="res://script/effect_giver_move.gd" id="1_ir2gn"]
+
+[node name="Effect Giver Move" type="Node"]
+script = ExtResource("1_ir2gn")

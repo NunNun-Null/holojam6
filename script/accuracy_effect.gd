@@ -1,6 +1,7 @@
 extends Effect
 
-@export var is_debuff: bool
+func _ready() -> void:
+	given_effect_name = "accuracy"
 
 func effect() -> void:
 	if (!is_debuff):

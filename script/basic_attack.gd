@@ -18,11 +18,11 @@ func move() -> void:
 		added_accuracy = get_parent().get_parent().get_bonus_accuracy()
 	DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
 	print(BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
-	
+	print(accuracy+added_accuracy)
 	if (!accuracy_test(accuracy+added_accuracy)):
 		DialogueManager.add_battle_dialogue(name + " missed")
 		print(name + " missed")
+		SignalManager.on_dialogue_pushed.emit()
 		return
 	
 	get_target().take_damage(damage+added_damage,armor_pierce)
-

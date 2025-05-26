@@ -8,11 +8,16 @@ class_name Move
 @export_multiline var description: String = ""
 @export var intended_for_allies: bool = false
 @export var sp_cost: int = 0
+@export var self_move: bool = false
+
 
 var _target: Fighter
 func _ready() -> void:
 	if (_strategies.is_empty() and get_parent().get_parent() is not PlayerFighter ):
 		push_error("There are no strategies for the move " + name + " for " + get_parent().get_parent().get_given_name())
+
+func get_self_only() -> bool:
+	return self_move
 
 func get_strategy(index: int) -> Strategy:
 	return _strategies.get(index)
@@ -41,7 +46,7 @@ func move() -> void:
 	push_error(name + " is missing a move() method")
 
 func accuracy_test(amount: int) -> bool:
-	if (!get_target().get_mark()):
+	if (get_target().get_mark()):
 		return true
 	randomize()
 	var rand: int = randi_range(1,100)

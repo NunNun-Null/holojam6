@@ -28,8 +28,12 @@ signal on_order_updated(list: Array[Fighter]) #Signal when order is updated
 
 signal on_dialogue_pushed() #Signal when dialogue pushed through
 
+#For moves, it must be called at the end (take_damage() from fighter class has it called already)
+
 signal on_victory() #Signal when player wins battle
 
 signal on_map_ready() #Signal when map is init
 
 signal on_dialogue_finished() #Signal when dialogue is finished
+
+signal on_new_round() #Signal when a new round begins

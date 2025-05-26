@@ -8,7 +8,8 @@ func _ready() -> void:
         selected_box.visible = false
         
 func start_turn() -> void: 
-    push_error(name + " is missing a start_turn() method")
+    super()
+
 
 func dead() -> void:
     DialogueManager.add_battle_dialogue(get_given_name() + " is defeated")

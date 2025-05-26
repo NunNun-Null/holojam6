@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://7edrxlmx87f5"]
+[gd_scene load_steps=8 format=3 uid="uid://7edrxlmx87f5"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_m1xs3"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_00qa6"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_q8iyd"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_ty07m"]
+[ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="4_qqtq5"]
+[ext_resource type="PackedScene" uid="uid://dj7oslkb708ni" path="res://behavior/effects/speed_effect.tscn" id="5_jvk5v"]
+[ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="6_6spgi"]
 
 [node name="Gigi" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_m1xs3")
@@ -20,17 +24,34 @@ effects = NodePath("Current Effects")
 [node name="Fister Smash" parent="Moves" instance=ExtResource("3_ty07m")]
 damage = 6
 accuracy = 85
-description = "Damage: 6
-Accuracy: 85
-Classic Autofister fister move"
+description = "Base Damage: 6
+Base Accuracy: 85
+
+Classic da fister move"
+
+[node name="Energize" parent="Moves" instance=ExtResource("3_00qa6")]
+effects = Array[PackedScene]([ExtResource("4_qqtq5"), ExtResource("5_jvk5v"), ExtResource("6_6spgi")])
+strengths = Array[int]([1, 3, 3])
+durations = Array[int]([3, 3, 3])
+is_debuffs = Array[bool]([false, false, false])
+description = "+3 attack for 3 turns
++3 speed for 3 turns
++1 defense for 3 turns
+SP Cost: 7
+
+Energize gigi by showing women She's not aggressive or horny. 
+Especially Agressive..."
+intended_for_allies = true
+sp_cost = 7
+self_move = true
 
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_q8iyd")]
 hp = 0
 sp = 2
-self_move = true
 description = "+2 SP
 "
 intended_for_allies = true
+self_move = true
 
 [node name="Strategy" type="Node" parent="."]
 

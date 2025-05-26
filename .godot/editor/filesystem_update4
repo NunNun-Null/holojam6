@@ -1,14 +1,21 @@
-res://behavior/effects/stun_effect.tscn
+res://entities/player/player_team/gigi.tscn
 res://notes.txt
-res://behavior/effects/attack_effect.tscn
-res://script/attack_effect.gd
-res://entities/fighter.gd
-res://script/attack_move.gd
-res://script/basic_attack.gd
-res://behavior/effects/defend_effect.tscn
-res://script/defend_effect.gd
-res://behavior/effects/accuracy_effect.tscn
-res://script/accuracy_effect.gd
-res://script/effect.gd
+res://script/elizabeth.gd
+res://script/global script/dialogue_manager.gd
 res://script/constant_harm_effect.gd
-res://script/stun_effect.gd
+res://script/effect_giver_move.gd
+res://entities/player/player_team/elizabeth.tscn
+res://entities/player/player_team/raora.tscn
+res://entities/player/player_team/cecilia.tscn
+res://ui/visual_order.tscn
+res://script/immediate_boost.gd
+res://area/battle.tscn
+res://ui/ingame_interface.tscn
+res://entities/fighter.gd
+res://script/player_fighter.gd
+res://behavior/moves/immediate_boost.tscn
+res://script/dummy.gd
+res://script/global script/battle_manager.gd
+res://entities/enemies/dummy.tscn
+res://script/enemy_fighter.gd
+res://script/ingame_interface.gd

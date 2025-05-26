@@ -1,7 +1,7 @@
 extends Effect
 
-@export var is_debuff: bool
-
+func _ready() -> void:
+	given_effect_name = "speed"
 func effect() -> void:
 	if (!is_debuff):
 		get_target().add_adjusted_speed(strength)

@@ -5,6 +5,7 @@ func _ready() -> void:
 	update_order(BattleManager._round)
 
 func update_order(list: Array[Fighter]) -> void:
-	$PanelContainer/Text.text = "> " + list.get(list.size()-1).get_given_name() + "\n"
+	$PanelContainer/Text.text = "Round " + str(BattleManager.get_current_round()) + "\n"
+	$PanelContainer/Text.text += "> " + list.get(list.size()-1).get_given_name() + "\n"
 	for index in range(list.size()-1):
 		$PanelContainer/Text.text += list.get(list.size()-index-2).get_given_name() + "\n"

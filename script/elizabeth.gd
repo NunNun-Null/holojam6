@@ -25,6 +25,7 @@ func _ready() -> void:
 			valid_moves.append(move)
 	
 func start_turn() -> void:
+	super()
 	SignalManager.on_player_turn.emit(self)
 	add_special(1,false)
 

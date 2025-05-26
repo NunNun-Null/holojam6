@@ -19,20 +19,21 @@ effects = NodePath("Current Effects")
 
 [node name="Thorn Slash" parent="Moves" instance=ExtResource("3_onll2")]
 damage = 8
-accuracy = 70
+accuracy = 75
 armor_pierce = 2
-description = "Damage: 8
-Accuracy: 70
-Armor Pierce: 2
-Greatsword Slash from Elizabeth's Thorn"
+description = "Base Damage: 8
+Base Accuracy: 70
+Base Armor Pierce: 2
+
+Classic Slash from Elizabeth's Thorn"
 
 [node name="Thorn Cleave" parent="Moves" instance=ExtResource("3_onll2")]
 damage = 16
 accuracy = 25
 armor_pierce = 8
-description = "Damage: 14
-Accuracy: 25
-Armor Pierce: 1
+description = "Base Damage: 14
+Base Accuracy: 25
+Base Armor Pierce: 1
 SP Cost: 10
 
 Cleaves right through an enemy"
@@ -41,9 +42,9 @@ sp_cost = 10
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_ydlly")]
 hp = 0
 sp = 2
-self_move = true
 description = "+2 SP"
 intended_for_allies = true
+self_move = true
 
 [node name="Strategy" type="Node" parent="."]
 

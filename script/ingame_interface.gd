@@ -22,6 +22,8 @@ func _ready() -> void:
 
 	if (BattleManager.get_top_fighter() is PlayerFighter):
 		init_player(BattleManager.get_top_fighter())
+	elif (BattleManager.get_top_fighter() is EnemyFighter):
+		change_to_dialogue()
 
 func change_to_move_selector() -> void:
 	print("on move")
@@ -81,16 +83,15 @@ func init_targets() -> void:
 	var label: Label
 
 	$"Choose Target/HBoxContainer/VBoxContainer/Title".text = current.get_given_name() + "'s Turn"
-	if (selected_move.has_method("get_self_only")):
-		if (selected_move.get_self_only()):
-			selected_target = current
-			player_list.clear()
-			player_list.append(current)
-			label = Label.new()
-			label.name = "0"
-			label.text = current.get_given_name()
-			label.add_theme_font_size_override("font_size",40)
-			$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
+	if (selected_move.get_self_only()):
+		selected_target = current
+		player_list.clear()
+		player_list.append(current)
+		label = Label.new()
+		label.name = "0"
+		label.text = current.get_given_name()
+		label.add_theme_font_size_override("font_size",40)
+		$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
 
 	else:
 		if (!selected_move.is_for_allies()):

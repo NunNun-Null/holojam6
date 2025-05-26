@@ -7,6 +7,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 248.0
+offset_bottom = -198.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_duw0w")
@@ -14,8 +16,8 @@ script = ExtResource("1_duw0w")
 [node name="Combat Interface" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 0
-offset_right = 2039.0
-offset_bottom = 495.0
+offset_right = 1400.0
+offset_bottom = 450.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Combat Interface"]
 layout_mode = 2
@@ -39,8 +41,8 @@ wrap_mode = 1
 
 [node name="Dialogue Screen" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 2039.0
-offset_bottom = 495.0
+offset_right = 1400.0
+offset_bottom = 450.0
 
 [node name="Text" type="Label" parent="Dialogue Screen"]
 layout_mode = 2
@@ -51,8 +53,8 @@ text = "> Placeholder"
 [node name="Choose Target" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 0
-offset_right = 2039.0
-offset_bottom = 495.0
+offset_right = 1400.0
+offset_bottom = 450.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Choose Target"]
 layout_mode = 2

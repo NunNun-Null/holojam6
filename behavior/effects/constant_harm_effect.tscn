@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://l282dju0p6h5"]
 
-[ext_resource type="Script" uid="uid://bjsc0fxoy5hwt" path="res://script/accuracy_effect.gd" id="1_yph3n"]
+[ext_resource type="Script" uid="uid://b3esvlycav8y1" path="res://script/constant_harm_effect.gd" id="1_yph3n"]
 
-[node name="Accuracy Effect" type="Node"]
+[node name="Constant Harm Effect" type="Node"]
 script = ExtResource("1_yph3n")

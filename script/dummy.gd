@@ -20,10 +20,9 @@ func _ready() -> void:
 			valid_moves.append(move)
 
 func start_turn() -> void:
+	super()
 	var attack: Move = valid_moves.pick_random()
 	attack.move()
-	await get_tree().create_timer(2).timeout
-	print(get_given_name() + " used " + str(attack.name))
 
 func dead() -> void:
 	super()

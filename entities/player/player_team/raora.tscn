@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://h3o8u2id1wyj"]
+[gd_scene load_steps=10 format=3 uid="uid://h3o8u2id1wyj"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_d8a4p"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_k0eu8"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_pumfg"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_pumfg"]
+[ext_resource type="PackedScene" uid="uid://dqgy0k84kxwj6" path="res://behavior/effects/mark_effect.tscn" id="5_pumfg"]
+[ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="6_vson1"]
+[ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="7_s6w86"]
+[ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="8_546ya"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="9_2is2h"]
 
 [node name="Raora" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_d8a4p")
@@ -19,24 +25,56 @@ effects = NodePath("Current Effects")
 [node name="Scratch" parent="Moves" instance=ExtResource("3_pumfg")]
 damage = 2
 accuracy = 85
-description = "Damage: 2
-Accuracy: 100
+description = "Base Damage: 2
+Base Accuracy: 100
+
 Simple scratch from the beeg cat"
 
 [node name="Heal" parent="Moves" instance=ExtResource("3_k0eu8")]
 hp = 6
 description = "Heal Strength: 6
-SP Cost: 4
+SP Cost: 5
+
 Heals single team member"
 intended_for_allies = true
 sp_cost = 5
 
+[node name="Perceive" parent="Moves" instance=ExtResource("4_pumfg")]
+effects = Array[PackedScene]([ExtResource("5_pumfg"), ExtResource("6_vson1")])
+strengths = Array[int]([1, 2])
+durations = Array[int]([3, 3])
+is_debuffs = Array[bool]([true, true])
+accuracy = 90
+description = "Base Accuracy: 90
+-2 defense for 3 turns
+Marks target
+SP Cost: 5
+
+Use Raora's god eyes to lock on the target
+"
+sp_cost = 5
+
+[node name="Blinding Light" parent="Moves" instance=ExtResource("4_pumfg")]
+effects = Array[PackedScene]([ExtResource("7_s6w86"), ExtResource("8_546ya"), ExtResource("9_2is2h")])
+strengths = Array[int]([1, 1, 15])
+durations = Array[int]([3, 6, 6])
+is_debuffs = Array[bool]([true, true, true])
+accuracy = 80
+description = "Accuracy: 80
+stuns target for 3 turns
+-1 attack for 6 turns
+-15 accuracy for 6 turns
+SP Cost: 6
+
+Raora's God Eyes are bright (citation needed). Probably bright enough to blind someone"
+sp_cost = 6
+
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_k0eu8")]
 hp = 0
 sp = 2
-self_move = true
 description = "+2 SP"
 intended_for_allies = true
+self_move = true
 
 [node name="Strategy" type="Node" parent="."]
 

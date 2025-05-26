@@ -8,6 +8,10 @@ var _enemies: Array[EnemyFighter]
 
 var _round: Array[Fighter]
 
+var current_round: int = 1
+
+func get_current_round() -> int:
+	return current_round
 	
 func _ready() -> void:
 	SignalManager.on_move_completed.connect(end_turn)
@@ -60,6 +64,7 @@ func get_players_size() -> int:
 
 func start_battle() -> void:
 	print("Starting Battle")
+	current_round = 1
 	_round.clear()
 	establish_order()
 	start_turn()
@@ -72,6 +77,8 @@ func pop_fighter() -> void:
 	_round.remove_at(_round.size()-1)
 	if (_round.is_empty()):
 		establish_order()
+		current_round+=1
+		SignalManager.on_new_round.emit()
 
 func remove_enemy_fighter(fighter: EnemyFighter):
 	var index: int
@@ -109,13 +116,7 @@ func start_turn() -> void:
 		start_turn()
 		return
 	
-	if (!fighter.get_stun()):
-		fighter.start_turn()
-	else:
-		print(fighter.get_given_name() + " is stunned")
-	print("\n")
-	if (fighter.get_stun()):
-		start_turn()
+	fighter.start_turn()
 
 func end_turn() -> void:
 	pop_fighter()
