@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqgy0k84kxwj6"]
+
+[ext_resource type="Script" uid="uid://saucj6uackui" path="res://script/mark_effect.gd" id="1_tegli"]
+
+[node name="Mark Effect" type="Node"]
+script = ExtResource("1_tegli")

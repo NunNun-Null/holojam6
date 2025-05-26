@@ -1,3 +1,4 @@
+Node
 CSGBox3D
 CollisionShape3D
 Node3D
@@ -6,7 +7,6 @@ SubViewport
 Sprite3D
 Label
 PanelContainer
-Node
 TextEdit
 ColorRect
 MenuBar

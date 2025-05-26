@@ -24,20 +24,18 @@ Accuracy: 100
 Simple scratch from the beeg cat"
 
 [node name="Heal" parent="Moves" instance=ExtResource("3_k0eu8")]
-hp = 7
-sp = 1
-description = "Heal Strength: 7
-SP Cost: 5
+hp = 6
+description = "Heal Strength: 6
+SP Cost: 4
 Heals single team member"
 intended_for_allies = true
 sp_cost = 5
 
-[node name="Pass" parent="Moves" instance=ExtResource("3_k0eu8")]
+[node name="Pass Turn" parent="Moves" instance=ExtResource("3_k0eu8")]
 hp = 0
 sp = 2
 self_move = true
-description = "+2 SP
-Pass Turn"
+description = "+2 SP"
 intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]

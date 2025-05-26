@@ -14,6 +14,12 @@ Thorn Cleave - strong attack
 	10 SP cost
 	intended to be paired with a marked target (Raora)
 
+Thorn Hew - all enemy attack
+	6 damage
+	1 armor pierce
+	65 accuracy
+	8 SP cost
+
 Defend - support skill
 	+3 HP
 	6 SP cost
@@ -30,9 +36,9 @@ Scratch - basic free attack
 	85 accuracy
 
 Heal - single target heal
-	+7 HP
-	+1 SP (won't work on self)
+	+6 HP
 	5 SP cost
+	Clears Poison
 	intended for single target heal
 
 Perceived - mark target
@@ -59,7 +65,7 @@ Violin - Global Support Buff
 	+2 attack for 2 turns
 	+1 defense for 2 turns
 	+1 speed for 2 turns
-	+10 accuracy for 2 turns
+	+15 accuracy for 2 turns
 	10 SP cost
 
 Spear Thrust - Offsensive Debuff
@@ -68,5 +74,25 @@ Spear Thrust - Offsensive Debuff
 	-4 defense for 5 turns
 	5 SP cost
 
+Placeholder name - effect clear
+	Clears stun
+	Clears mark
+	5 SP cost
 
 Gigi (offense/offensive support):
+
+Fister Smash - Basic Free attack
+	6 damage
+	85 accuracy
+
+Bark - offensive effect for all enemies
+	+1 damage taken for 3 turns
+	-1 defense for 3 turns
+	-1 speed for 3 turns
+	5 SP cost
+
+Energize - self boost skill
+	+3 attack for 3 turns
+	+3 speed for 3 turns
+	+1 defense for 3 turns
+	7 SP cost

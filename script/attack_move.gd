@@ -10,7 +10,6 @@ class_name Move
 @export var sp_cost: int = 0
 
 var _target: Fighter
-
 func _ready() -> void:
 	if (_strategies.is_empty() and get_parent().get_parent() is not PlayerFighter ):
 		push_error("There are no strategies for the move " + name + " for " + get_parent().get_parent().get_given_name())

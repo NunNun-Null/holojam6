@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj7oslkb708ni"]
+
+[ext_resource type="Script" uid="uid://kix6qjv106sh" path="res://script/speed_effect.gd" id="1_ixn84"]
+
+[node name="Speed Effect" type="Node"]
+script = ExtResource("1_ixn84")

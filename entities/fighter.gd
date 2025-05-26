@@ -16,12 +16,32 @@ var _max_health: int
 
 var _adjusted_speed: int
 var _adjusted_defense: int
-
+var _bonus_damage: int = 0
+var _bonus_accuracy: int = 0
 var _is_stunned: bool = false
 
 var _is_marked: bool = false
 
 var _damage_multiplier: int = 0
+
+
+func get_bonus_accuracy() -> int:
+    return _bonus_accuracy
+
+func add_bonus_accuracy(amount: int) -> void:
+    _bonus_accuracy += amount
+
+func remove_bonus_accuracy(amount: int) -> void:
+    _bonus_accuracy -= amount
+
+func get_bonus_damage() -> int:
+    return _bonus_damage
+
+func add_bonus_damage(amount: int) -> void:
+    _bonus_damage += amount
+
+func remove_bonus_damage(amount: int) -> void:
+    _bonus_damage -= amount
 
 func set_defended(target: Fighter) -> void:
     _defended = target
@@ -42,6 +62,7 @@ func set_given_name(text: String) -> void:
 
 func get_given_name() -> String:
     return _given_name
+
 func add_damage_multipler(amount: int) -> void:
     _damage_multiplier += amount
 
@@ -100,6 +121,11 @@ func set_max_health(amount: int) -> void:
 func set_health(amount: int) -> void:
     _health = amount
 
+func remove_health(amount: int) -> void:
+    _health -= amount
+    if (_health <= 0):
+        dead() 
+    
 func set_defense(amount: int) -> void:
     _defense = amount
 

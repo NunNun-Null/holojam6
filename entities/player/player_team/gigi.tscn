@@ -24,12 +24,12 @@ description = "Damage: 6
 Accuracy: 85
 Classic Autofister fister move"
 
-[node name="Pass" parent="Moves" instance=ExtResource("3_q8iyd")]
+[node name="Pass Turn" parent="Moves" instance=ExtResource("3_q8iyd")]
 hp = 0
 sp = 2
 self_move = true
 description = "+2 SP
-Pass Turn"
+"
 intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]

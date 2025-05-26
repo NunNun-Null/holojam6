@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://thn0th4c5nsl"]
+
+[ext_resource type="Script" uid="uid://cld57le4bbdu6" path="res://script/attack_effect.gd" id="1_oc360"]
+
+[node name="Attack Effect" type="Node"]
+script = ExtResource("1_oc360")

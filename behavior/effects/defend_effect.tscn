@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be81bekaqu70s"]
+
+[ext_resource type="Script" uid="uid://ctqles58h2s6t" path="res://script/defend_effect.gd" id="1_igqae"]
+
+[node name="Defend Effect" type="Node"]
+script = ExtResource("1_igqae")

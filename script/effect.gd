@@ -12,16 +12,11 @@ var target: Fighter
 var host: Fighter
 
 func apply_effect(fighter: Fighter) -> void:
-    if (!active):
-        active = true
-        target = fighter
-        effect()
-    print("applying " + name)
-    reapply()
+    reapply(fighter)
     lower_duration()
 
 
-func reapply() -> void:
+func reapply(fighter: Fighter) -> void:
     return
 
 func effect() -> void:
@@ -29,6 +24,9 @@ func effect() -> void:
 
 func set_host(fighter: Fighter) -> void:
     host = fighter
+
+func set_target(fighter: Fighter) -> void:
+    target = fighter
 
 func get_host() -> Fighter:
     return host
@@ -42,7 +40,7 @@ func set_duration(amount: int) -> void:
 func set_strength(amount: int) -> void:
     strength = amount
     
-func get_fighter() -> Fighter:
+func get_target() -> Fighter:
     return target
 
 func lower_duration() -> void:

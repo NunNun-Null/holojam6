@@ -38,12 +38,11 @@ SP Cost: 10
 Cleaves right through an enemy"
 sp_cost = 10
 
-[node name="Pass" parent="Moves" instance=ExtResource("3_ydlly")]
+[node name="Pass Turn" parent="Moves" instance=ExtResource("3_ydlly")]
 hp = 0
 sp = 2
 self_move = true
-description = "+2 SP
-Pass Turn"
+description = "+2 SP"
 intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdd0xd5lxj7hc"]
+
+[ext_resource type="Script" uid="uid://bjsc0fxoy5hwt" path="res://script/accuracy_effect.gd" id="1_02sp4"]
+
+[node name="Accuracy Effect" type="Node"]
+script = ExtResource("1_02sp4")
