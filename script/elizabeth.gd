@@ -25,8 +25,11 @@ func _ready() -> void:
 			valid_moves.append(move)
 	
 func start_turn() -> void:
-	super()
-	SignalManager.on_player_turn.emit(self)
+	if (get_stun()):
+		DialogueManager.add_battle_dialogue("> " + get_given_name() + " is stunned")
+		SignalManager.on_dialogue_pushed.emit()
+	else:
+		SignalManager.on_player_turn.emit(self)
 	add_special(1,false)
 
 func play_turn(action: Move) -> void:

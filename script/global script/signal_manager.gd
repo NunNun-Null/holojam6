@@ -14,6 +14,8 @@ signal on_player_defeated(Fighter: PlayerFighter) #Signal on a player squad memb
 
 signal on_player_turn(fighter: PlayerFighter) #Signal when it's a player member's turn
 
+signal on_enemy_turn(fighter: EnemyFighter) #Signal when it's an enemy turn
+
 signal on_player_revived(Fighter: PlayerFighter) #Signal on a player squad member revived (MUST IMPLEMENT)
 
 signal on_player_select(fighter: PlayerFighter) #Signal on combat screen, player is highlighted
@@ -27,9 +29,11 @@ signal on_enemy_defeated() #Signal when an enemy is defeated
 signal on_order_updated(list: Array[Fighter]) #Signal when order is updated
 
 signal on_dialogue_pushed() #Signal when dialogue pushed through
-
 #For moves, it must be called at the end (take_damage() from fighter class has it called already)
 
+signal on_first_enemy_fighter_ready() #Signal ready for the first enemy fighter 
+
+signal on_player_turn_stunned() #Signal when a player starts their turn with stun effect (turn skipped)
 signal on_victory() #Signal when player wins battle
 
 signal on_map_ready() #Signal when map is init

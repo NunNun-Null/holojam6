@@ -20,7 +20,13 @@ func _ready() -> void:
 			valid_moves.append(move)
 
 func start_turn() -> void:
-	super()
+	if (BattleManager.turn == 1):
+		await SignalManager.on_enemy_turn
+	if (get_stun()):
+		DialogueManager.add_battle_dialogue("> " + get_given_name() + " is stunned")
+		SignalManager.on_dialogue_pushed.emit()
+		return
+	SignalManager.on_enemy_turn.emit()
 	var attack: Move = valid_moves.pick_random()
 	attack.move()
 

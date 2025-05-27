@@ -18,12 +18,14 @@ var can_continue: bool = false
 
 func _ready() -> void:
 	SignalManager.on_player_turn.connect(init_player)
+	SignalManager.on_enemy_turn.connect(change_to_dialogue)
 	SignalManager.on_dialogue_pushed.connect(dialogue)
-
+	SignalManager.on_player_turn_stunned.connect(change_to_dialogue)
 	if (BattleManager.get_top_fighter() is PlayerFighter):
 		init_player(BattleManager.get_top_fighter())
-	elif (BattleManager.get_top_fighter() is EnemyFighter):
+	if (BattleManager.get_top_fighter() is EnemyFighter):
 		change_to_dialogue()
+		SignalManager.on_enemy_turn.emit()
 
 func change_to_move_selector() -> void:
 	print("on move")
@@ -239,13 +241,24 @@ func highlighted_target(index: int, offset: int) -> void:
 	update_desc(selected_target)
 
 func update_desc(fighter: Fighter) -> void:
-	$"Choose Target/HBoxContainer/Description".text = fighter.get_given_name() + "'s Stats\nHealth: " + str(fighter.get_health()) + "/" + str(fighter.get_max_health()) + "\nDefense: " + str(fighter.get_defense()) + "\nSpeed: " + str(fighter.get_speed())
+	$"Choose Target/HBoxContainer/Description".text = fighter.get_given_name() + "'s Stats\nHealth: " + str(fighter.get_health()) + "/" + str(fighter.get_max_health()) + "\nDefense: " + str(fighter.get_defense()) + "\nSpeed: " + str(fighter.get_speed()) +  "\n"
 	if (fighter.get_mark()):
-		$"Choose Target/HBoxContainer/Description".text += "Is Marked"
+		$"Choose Target/HBoxContainer/Description".text += "Is Marked" + "\n"
 	if (fighter.get_stun()):
-		$"Choose Target/HBoxContainer/Description".text += "Is Stunned"
+		$"Choose Target/HBoxContainer/Description".text += "Is Stunned" + "\n"
 	if (fighter.is_defended()):
-		$"Choose Target/HBoxContainer/Description".text += "Defended by: " + str(fighter.get_defended()) 
+		$"Choose Target/HBoxContainer/Description".text += "Defended by: " + str(fighter.get_defended()) + "\n"
+	if (fighter._damage_multiplier != 0):
+		$"Choose Target/HBoxContainer/Description".text += "Damage taken bonus: " + str(fighter._damage_multiplier) + "\n"
+	if (fighter.get_bonus_accuracy() != 0):
+		$"Choose Target/HBoxContainer/Description".text += "Accuracy Bonus: " + str(fighter.get_bonus_accuracy()) + "\n"
+	if (fighter._adjusted_defense != 0):
+		$"Choose Target/HBoxContainer/Description".text += "Defense Bonus: " + str(fighter._adjusted_defense) + "\n"
+	if (fighter.get_bonus_damage() != 0):
+		$"Choose Target/HBoxContainer/Description".text += "Damage Bonus: " + str(fighter.get_bonus_damage()) + "\n"
+	if (fighter._adjusted_speed != 0):
+		$"Choose Target/HBoxContainer/Description".text += "Speed Bonus: " + str(fighter._adjusted_speed) + "\n"
+	
 
 func highlighted_move(index: int, offset: int) -> void:
 	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = current.valid_moves.get(index+offset).name

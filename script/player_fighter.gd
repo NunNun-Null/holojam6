@@ -31,7 +31,7 @@ func remove_special(amount: int) -> void:
 	SignalManager.on_player_stat_updated.emit(self)
 
 func start_turn() -> void: 
-	push_error(name + " is missing a start_turn() method")
+	return
 
 func take_damage(amount: int, pierce: int = 0) -> void:
 	super(amount,pierce)

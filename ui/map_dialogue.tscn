@@ -16,10 +16,9 @@ layout_mode = 0
 offset_right = 550.0
 offset_bottom = 150.0
 
-[node name="Text" type="Label" parent="PanelContainer"]
+[node name="Text" type="RichTextLabel" parent="PanelContainer"]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 16
+bbcode_enabled = true
 text = "Person Speaking:
 gap gap wap wap
 asdasdada

@@ -9,6 +9,7 @@ class_name Move
 @export var intended_for_allies: bool = false
 @export var sp_cost: int = 0
 @export var self_move: bool = false
+@export var for_everyone: bool = false
 
 
 var _target: Fighter

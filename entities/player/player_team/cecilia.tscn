@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlxoxknngtqtb"]
+[gd_scene load_steps=8 format=3 uid="uid://dlxoxknngtqtb"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_rg58c"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_hti84"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_tk7oo"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_mqpp7"]
 [ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="5_tk7oo"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="6_al6ua"]
+[ext_resource type="PackedScene" uid="uid://dj7oslkb708ni" path="res://behavior/effects/speed_effect.tscn" id="7_22f3j"]
 
 [node name="Cecilia" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_rg58c")
@@ -55,6 +57,24 @@ SP Cost: 8
 Clearly Tea is better, none of that weak coffee energy (womp womp)"
 intended_for_allies = true
 sp_cost = 8
+
+[node name="Violin" parent="Moves" instance=ExtResource("4_mqpp7")]
+effects = Array[PackedScene]([ExtResource("6_al6ua"), ExtResource("7_22f3j")])
+strengths = Array[int]([25, 3])
+durations = Array[int]([2, 2])
+is_debuffs = Array[bool]([false, false])
+max_accuracy = true
+description = "Guaranteed Accuracy
++3 speed for 2 turns
++25 accuracy for 2 turns
+Targets all Allies
+SP Cost: 10
+
+Peak Performance incoming 
+:CeciliaCinema:"
+intended_for_allies = true
+sp_cost = 10
+for_everyone = true
 
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_hti84")]
 hp = 0

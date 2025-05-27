@@ -78,12 +78,12 @@ transparent_bg = true
 [node name="Player Fighter Stats" parent="Characters/SubViewport" instance=ExtResource("2_tjbvg")]
 
 [node name="Interface" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03353, 6.23738, -6.45844)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03353, 5.70971, -6.45844)
 texture = SubResource("ViewportTexture_ka70e")
 
 [node name="SubViewport" type="SubViewport" parent="Interface"]
 transparent_bg = true
-size = Vector2i(1400, 450)
+size = Vector2i(1400, 550)
 
 [node name="Ingame Interface" parent="Interface/SubViewport" instance=ExtResource("4_sp4u6")]
 

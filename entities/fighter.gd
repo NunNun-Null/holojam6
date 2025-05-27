@@ -19,11 +19,13 @@ var _adjusted_defense: int
 var _bonus_damage: int = 0
 var _bonus_accuracy: int = 0
 var _is_stunned: bool = false
-
+var _is_debuffed: bool = false
 var _is_marked: bool = false
 
 var _damage_multiplier: int = 0
 
+func get_is_debuffed() -> bool:
+	return !effects.get_children().is_empty()
 
 func get_bonus_accuracy() -> int:
 	return _bonus_accuracy
@@ -137,9 +139,9 @@ func clear_negatives() -> void:
 		DialogueManager.add_battle_dialogue(get_given_name() + "'s imaginary negative effects have been nullified...")
 		SignalManager.on_dialogue_pushed.emit()
 		return
-	for node in effects:
-		if node.is_debuff:
-			node.queue_free()
+	for i in range(effects.get_children().size()):
+		if effects.get_child(i).is_debuff:
+			effects.get_child(i).reverse_effect()
 	DialogueManager.add_battle_dialogue(get_given_name() + "'s negative effects have been nullified")
 	SignalManager.on_dialogue_pushed.emit()
 
@@ -152,9 +154,13 @@ func heal(amount: int) -> void:
 	else:
 		hp = amount
 		_health += hp
-	SignalManager.on_player_stat_updated.emit(self)
+	if (self is PlayerFighter):
+		SignalManager.on_player_stat_updated.emit(self)
 	if (hp > 0):
 		DialogueManager.add_battle_dialogue(get_given_name() + " healed " + str(hp) + " health")
+		SignalManager.on_dialogue_pushed.emit()
+	elif (amount > 0):
+		DialogueManager.add_battle_dialogue(get_given_name() + " healed to full health")
 		SignalManager.on_dialogue_pushed.emit()
 
 func add_effect(effect: Effect) -> void:
@@ -187,6 +193,7 @@ func dead() -> void:
 	push_error(name + " is missing a dead() method")
 
 func start_turn() -> void:
+	await get_tree().create_timer(3).timeout
 	if (get_stun()):
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " is stunned")
 		SignalManager.on_dialogue_pushed.emit()

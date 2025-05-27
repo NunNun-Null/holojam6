@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0uqf2dwcvna"]
+[gd_scene load_steps=6 format=3 uid="uid://d0uqf2dwcvna"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_qsoi3"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_onll2"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_wcwtr"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_ydlly"]
+[ext_resource type="PackedScene" uid="uid://be81bekaqu70s" path="res://behavior/effects/defend_effect.tscn" id="4_onll2"]
 
 [node name="Elizabeth" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_qsoi3")
@@ -27,6 +29,19 @@ Base Armor Pierce: 2
 
 Classic Slash from Elizabeth's Thorn"
 
+[node name="Thorn Hew" parent="Moves" instance=ExtResource("3_onll2")]
+damage = 6
+accuracy = 65
+armor_pierce = 1
+description = "Base Damage: 6
+Base Accuracy: 65
+Base Armor Pierce: 1
+Targets all Enemies
+
+Sweep all the enemies. "
+sp_cost = 8
+for_everyone = true
+
 [node name="Thorn Cleave" parent="Moves" instance=ExtResource("3_onll2")]
 damage = 16
 accuracy = 25
@@ -36,8 +51,19 @@ Base Accuracy: 25
 Base Armor Pierce: 1
 SP Cost: 10
 
-Cleaves right through an enemy"
+Cleaves right through an enemy. Probably best to get a good mark on the enemy first (idk just sayin')"
 sp_cost = 10
+
+[node name="Defend" parent="Moves" instance=ExtResource("3_wcwtr")]
+effects = Array[PackedScene]([ExtResource("4_onll2")])
+strengths = Array[int]([1])
+durations = Array[int]([3])
+is_debuffs = Array[bool]([false])
+description = "SP Cost: 6
+
+Redirects all attacks from the target to Elizabeth"
+intended_for_allies = true
+sp_cost = 6
 
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_ydlly")]
 hp = 0

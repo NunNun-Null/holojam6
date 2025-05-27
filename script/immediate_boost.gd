@@ -16,7 +16,8 @@ func move() -> void:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on themselves")
 	else:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
-	get_target().add_special(sp,true)
+	if (get_target() is PlayerFighter):
+		get_target().add_special(sp,true)
 	get_target().heal(hp)
 	if (clear_negatives):
 		get_target().clear_negatives()

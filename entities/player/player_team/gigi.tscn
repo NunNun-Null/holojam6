@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7edrxlmx87f5"]
+[gd_scene load_steps=9 format=3 uid="uid://7edrxlmx87f5"]
 
 [ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_m1xs3"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_00qa6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="4_qqtq5"]
 [ext_resource type="PackedScene" uid="uid://dj7oslkb708ni" path="res://behavior/effects/speed_effect.tscn" id="5_jvk5v"]
 [ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="6_6spgi"]
+[ext_resource type="PackedScene" uid="uid://l282dju0p6h5" path="res://behavior/effects/constant_harm_effect.tscn" id="8_qqtq5"]
 
 [node name="Gigi" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_m1xs3")
@@ -44,6 +45,40 @@ Especially Agressive..."
 intended_for_allies = true
 sp_cost = 7
 self_move = true
+
+[node name="Fister Barrage" parent="Moves" instance=ExtResource("3_00qa6")]
+effects = Array[PackedScene]([ExtResource("8_qqtq5")])
+strengths = Array[int]([1])
+durations = Array[int]([3])
+is_debuffs = Array[bool]([true])
+damage = 3
+accuracy = 70
+description = "Base Damage: 3
++1 poison damage for 3 turns
+Base Accuracy: 70
+Targets all Enemies
+SP Cost: 6
+
+Rains a Barrage of fists on all the the enemies"
+sp_cost = 6
+for_everyone = true
+
+[node name="Bark" parent="Moves" instance=ExtResource("3_00qa6")]
+effects = Array[PackedScene]([ExtResource("4_qqtq5"), ExtResource("5_jvk5v")])
+strengths = Array[int]([2, 2])
+durations = Array[int]([3, 3])
+is_debuffs = Array[bool]([true, true])
+accuracy = 95
+description = "Base Accuracy: 95
++1 Damage taken for 3 turns
+-1 defense for 3 turns
+-1 speed for 3 turns
+Targets all Enemies
+SP Cost: 5
+
+Arf Arf Arf!!!!!"
+sp_cost = 5
+for_everyone = true
 
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_q8iyd")]
 hp = 0

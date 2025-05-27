@@ -9,7 +9,7 @@ var _enemies: Array[EnemyFighter]
 var _round: Array[Fighter]
 
 var current_round: int = 1
-
+var turn: int = 1
 func get_current_round() -> int:
 	return current_round
 	
@@ -32,8 +32,8 @@ func remove_player_fighter(fighter: PlayerFighter):
 	_round.remove_at(index)
 
 func switch_to_battle() -> void:
-	SignalManager.on_switch_to_battle.emit()
 	get_tree().change_scene_to_file("res://area/battle.tscn")
+	SignalManager.on_switch_to_battle.emit()
 
 func switch_to_map() -> void:
 	get_tree().change_scene_to_file("res://area/map.tscn")
@@ -65,6 +65,7 @@ func get_players_size() -> int:
 func start_battle() -> void:
 	print("Starting Battle")
 	current_round = 1
+	turn = 0
 	_round.clear()
 	establish_order()
 	start_turn()
@@ -88,9 +89,12 @@ func remove_enemy_fighter(fighter: EnemyFighter):
 	index = _round.find(fighter)
 	_round.remove_at(index)
 
+	SignalManager.on_order_updated.emit(_round)
+
 
 
 func start_turn() -> void:
+	turn+=1
 	if (_players.is_empty()):
 		print("LOSE")
 		_round.clear()

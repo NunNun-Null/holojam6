@@ -1,21 +1,16 @@
-res://entities/player/player_team/gigi.tscn
-res://notes.txt
-res://script/elizabeth.gd
-res://script/global script/dialogue_manager.gd
-res://script/constant_harm_effect.gd
-res://script/effect_giver_move.gd
+res://ui/map_dialogue.tscn
 res://entities/player/player_team/elizabeth.tscn
 res://entities/player/player_team/raora.tscn
 res://entities/player/player_team/cecilia.tscn
-res://ui/visual_order.tscn
-res://script/immediate_boost.gd
+res://entities/player/player_team/gigi.tscn
 res://area/battle.tscn
-res://ui/ingame_interface.tscn
-res://entities/fighter.gd
-res://script/player_fighter.gd
-res://behavior/moves/immediate_boost.tscn
-res://script/dummy.gd
-res://script/global script/battle_manager.gd
+res://area/map.tscn
 res://entities/enemies/dummy.tscn
-res://script/enemy_fighter.gd
-res://script/ingame_interface.gd
+res://script/immediate_boost.gd
+res://entities/fighter.gd
+res://script/dialogue_interactable.gd
+res://component/dialogue_interactable.tscn
+res://script/basic_attack.gd
+res://notes.txt
+res://script/effect_giver_move.gd
+res://behavior/moves/effect_giver_move.tscn

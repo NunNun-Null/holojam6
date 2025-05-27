@@ -17,7 +17,7 @@ script = ExtResource("1_duw0w")
 visible = false
 layout_mode = 0
 offset_right = 1400.0
-offset_bottom = 450.0
+offset_bottom = 550.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Combat Interface"]
 layout_mode = 2
@@ -42,7 +42,7 @@ wrap_mode = 1
 [node name="Dialogue Screen" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 1400.0
-offset_bottom = 450.0
+offset_bottom = 550.0
 
 [node name="Text" type="Label" parent="Dialogue Screen"]
 layout_mode = 2
@@ -54,7 +54,7 @@ text = "> Placeholder"
 visible = false
 layout_mode = 0
 offset_right = 1400.0
-offset_bottom = 450.0
+offset_bottom = 550.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Choose Target"]
 layout_mode = 2

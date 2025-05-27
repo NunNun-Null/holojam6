@@ -8,6 +8,7 @@ func _ready() -> void:
         selected_box.visible = false
         
 func start_turn() -> void: 
+    SignalManager.on_enemy_turn.emit()
     super()
 
 
