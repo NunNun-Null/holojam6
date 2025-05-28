@@ -14,7 +14,7 @@ class_name Move
 
 var _target: Fighter
 func _ready() -> void:
-	if (_strategies.is_empty() and get_parent().get_parent() is not PlayerFighter ):
+	if (_strategies.is_empty() and get_parent().get_parent() is not PlayerFighter and !for_everyone):
 		push_error("There are no strategies for the move " + name + " for " + get_parent().get_parent().get_given_name())
 
 func get_self_only() -> bool:

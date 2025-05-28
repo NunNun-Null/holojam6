@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4h5rd0fkaa4m"]
+
+[ext_resource type="Script" uid="uid://b828421puk8h6" path="res://script/effect_giver_move.gd" id="1_4tn2c"]
+[ext_resource type="PackedScene" uid="uid://d3pgql2u8ncq8" path="res://behavior/effects/perfect_protected_effect.tscn" id="2_fs8s3"]
+
+[node name="Empathic Spirit Fragment" type="Node"]
+script = ExtResource("1_4tn2c")
+effects = Array[PackedScene]([ExtResource("2_fs8s3")])
+strengths = Array[int]([1])
+durations = Array[int]([5])
+is_debuffs = Array[bool]([false])
+max_accuracy = true
+intended_for_allies = true
+for_everyone = true

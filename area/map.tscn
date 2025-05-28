@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=35 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
 [ext_resource type="Script" uid="uid://dlrqfyq1thyl6" path="res://script/map.gd" id="1_2onle"]
@@ -11,13 +11,14 @@
 [ext_resource type="Script" uid="uid://cq002x5i80hnj" path="res://script/thorn.gd" id="6_pq3op"]
 [ext_resource type="PackedScene" uid="uid://bb01cioxfmsk3" path="res://objects/start_battle.tscn" id="8_forqk"]
 [ext_resource type="Script" uid="uid://oasb386acjfo" path="res://script/core_emotion.gd" id="8_uj77h"]
-[ext_resource type="PackedScene" uid="uid://b8btlrylypjkg" path="res://entities/enemies/dummy.tscn" id="9_mp1sc"]
 [ext_resource type="PackedScene" uid="uid://bo7avmssp3a4o" path="res://ui/map_dialogue.tscn" id="10_trnge"]
 [ext_resource type="PackedScene" uid="uid://b557ap6u1wdck" path="res://entities/enemies/orange_green_tainted_memory.tscn" id="13_lyj3h"]
 [ext_resource type="PackedScene" uid="uid://dyokdoskbsaoj" path="res://entities/enemies/pink_tainted_memory.tscn" id="14_7upnb"]
 [ext_resource type="PackedScene" uid="uid://do0wt6v5mdluj" path="res://entities/enemies/red_tainted_memory.tscn" id="14_vwu25"]
 [ext_resource type="PackedScene" uid="uid://ql401mwihanc" path="res://entities/enemies/blue_tainted_memory.tscn" id="15_o2b50"]
 [ext_resource type="PackedScene" uid="uid://c203i5173a1tl" path="res://objects/save_point.tscn" id="17_o2b50"]
+[ext_resource type="PackedScene" uid="uid://cvh57pkko1dma" path="res://entities/enemies/perfect_red_memory.tscn" id="17_y6r8g"]
+[ext_resource type="PackedScene" uid="uid://dm5pr85r7e2s2" path="res://entities/enemies/perfect_red_memory_support.tscn" id="18_ygvrv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -482,7 +483,7 @@ shape = SubResource("BoxShape3D_uj77h")
 
 [node name="Midgame Boss" parent="." instance=ExtResource("8_forqk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.71, 0.67, -0.0899999)
-enemies = Array[PackedScene]([ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc")])
+enemies = Array[PackedScene]([ExtResource("17_y6r8g"), ExtResource("17_y6r8g"), ExtResource("18_ygvrv"), ExtResource("18_ygvrv")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Midgame Boss"]
 shape = SubResource("BoxShape3D_uj77h")

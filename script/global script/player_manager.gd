@@ -1,9 +1,9 @@
 extends Node
 
-var _elizabeth: PackedScene = load("res://entities/player/player_team/elizabeth.tscn")
-var _cecila: PackedScene = load("res://entities/player/player_team/cecilia.tscn")
-var _raora: PackedScene = load("res://entities/player/player_team/raora.tscn")
-var _gigi: PackedScene = load("res://entities/player/player_team/gigi.tscn")
+var _elizabeth: PackedScene = preload("res://entities/player/player_team/elizabeth.tscn")
+var _cecila: PackedScene = preload("res://entities/player/player_team/cecilia.tscn")
+var _raora: PackedScene = preload("res://entities/player/player_team/raora.tscn")
+var _gigi: PackedScene = preload("res://entities/player/player_team/gigi.tscn")
 
 var _squad: Array[PackedScene]
 

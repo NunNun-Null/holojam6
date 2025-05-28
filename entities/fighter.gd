@@ -23,7 +23,18 @@ var _is_stunned: bool = false
 var _is_debuffed: bool = false
 var _is_marked: bool = false
 
+var perfect_protected: bool = false
+
 var _damage_multiplier: int = 0
+
+func make_perfect_protected() -> void:
+	perfect_protected = true
+
+func reset_perfect_protected() -> void:
+	perfect_protected = false
+
+func get_perfect_protected() -> bool:
+	return perfect_protected
 
 func set_defender(fighter: Fighter) -> void:
 	_defender = fighter

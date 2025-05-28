@@ -17,7 +17,6 @@ func dialogue() -> void:
 
     for content in contents:
         $PanelContainer/Text.text += content + "\n"
-    
     var tween: Tween = create_tween()
     tween.tween_property($"PanelContainer/Text","visible_ratio",1,2)
     await tween.finished

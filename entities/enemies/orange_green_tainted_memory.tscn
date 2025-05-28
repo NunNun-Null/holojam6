@@ -17,6 +17,11 @@ normal_scale = 0.5
 
 [node name="Orange Green Tainted Memory" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_u5ihy")
+speed = 0
+health = 35
+max_health = 35
+defense = 3
+given_name = "Orange Green Tainted Memory"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")

@@ -30,7 +30,6 @@ func start_turn() -> void:
 	SignalManager.on_enemy_turn.emit()
 
 	var attack: Move
-	cycle += 1
 	cycle = cycle % 5
 
 	if (cycle == 0 and BattleManager._enemies.size() > 1):
@@ -39,6 +38,8 @@ func start_turn() -> void:
 		attack = moves.get_child(1)
 	else:
 		attack = moves.get_child(0)
+
+	cycle += 1
 	attack.move()
 
 func dead() -> void:

@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://byy43hna1w4r"]
+[gd_scene load_steps=4 format=3 uid="uid://byy43hna1w4r"]
 
 [ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_a46kv"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_btfay"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_cc5g2"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_h8buv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
@@ -25,13 +23,7 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_cc5g2")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
-
 [node name="Strategy" type="Node" parent="."]
-
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_h8buv")]
 
 [node name="Current Effects" type="Node" parent="."]
 

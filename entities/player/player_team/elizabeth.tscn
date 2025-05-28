@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d0uqf2dwcvna"]
 
-[ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/elizabeth.gd" id="1_qsoi3"]
+[ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/squad_member.gd" id="1_qsoi3"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_onll2"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_wcwtr"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_ydlly"]
@@ -11,8 +11,8 @@ script = ExtResource("1_qsoi3")
 speed = 1
 health = 40
 max_health = 40
-defense = 2
-special_point = 15
+defense = 3
+special_point = 20
 given_name = "Elizabeth"
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")

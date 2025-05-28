@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm5pr85r7e2s2"]
+
+[ext_resource type="Script" uid="uid://brdrkhq4mekdq" path="res://script/perfect_red_memory.gd" id="1_bdu88"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_qj807"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_4mw8n"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_ip33d"]
+[ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="5_nqfl1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
+blend_mode = 3
+albedo_color = Color(1, 0.207843, 0.223529, 1)
+normal_scale = 0.5
+
+[node name="Perfect Red Memory Support" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_bdu88")
+health = 30
+max_health = 30
+defense = 2
+given_name = "Perfect Red Memory (Support)"
+is_attacker = false
+selected_box = NodePath("Selected")
+moves = NodePath("Moves")
+effects = NodePath("Current Effects")
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_qj807")]
+
+[node name="Moves" type="Node" parent="."]
+
+[node name="Strike" parent="Moves" instance=ExtResource("3_4mw8n")]
+damage = 7
+armor_pierce = 2
+
+[node name="Execution" parent="Moves" instance=ExtResource("4_ip33d")]
+effects = Array[PackedScene]([ExtResource("5_nqfl1")])
+strengths = Array[int]([1])
+durations = Array[int]([1])
+is_debuffs = Array[bool]([true])
+damage = 12
+
+[node name="Judicial Sentence" parent="Moves" instance=ExtResource("4_ip33d")]
+effects = Array[PackedScene]([ExtResource("5_nqfl1")])
+strengths = Array[int]([1])
+durations = Array[int]([1])
+is_debuffs = Array[bool]([true])
+damage = 12
+
+[node name="Rally" parent="Moves" instance=ExtResource("4_ip33d")]
+effects = Array[PackedScene]([ExtResource("5_nqfl1")])
+strengths = Array[int]([1])
+durations = Array[int]([1])
+is_debuffs = Array[bool]([true])
+damage = 12
+
+[node name="Corruptable Mind" parent="Moves" instance=ExtResource("4_ip33d")]
+
+[node name="Strategy" type="Node" parent="."]
+
+[node name="Current Effects" type="Node" parent="."]
+
+[node name="Selected" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245, 0)
+visible = false
+size = Vector3(1, 1.49, 1)
+material = SubResource("StandardMaterial3D_dubhn")
