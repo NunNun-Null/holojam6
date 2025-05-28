@@ -1,37 +1,59 @@
-[gd_scene load_steps=6 format=3 uid="uid://b557ap6u1wdck"]
+[gd_scene load_steps=11 format=3 uid="uid://b557ap6u1wdck"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_u5ihy"]
-[ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_bsm12"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_orcjg"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_buh50"]
+[ext_resource type="Script" uid="uid://bmro6d2cui86w" path="res://script/orange_green_tainted_memory.gd" id="1_u5ihy"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_0c636"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_buh50"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_u5ihy"]
+[ext_resource type="PackedScene" uid="uid://be81bekaqu70s" path="res://behavior/effects/defend_effect.tscn" id="4_bsm12"]
+[ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="5_6oqxm"]
+[ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="6_kn5lp"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="8_6oqxm"]
+[ext_resource type="PackedScene" uid="uid://bue0v3u0sxx72" path="res://behavior/strategies/support_defend.tscn" id="9_kn5lp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+[node name="Orange Green Tainted Memory" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_u5ihy")
-speed = 1
-health = 20
-max_health = 20
-defense = 3
-given_name = "Dummy"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
-[node name="Sample Model" parent="." instance=ExtResource("2_bsm12")]
+[node name="model" parent="." instance=ExtResource("2_0c636")]
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_orcjg")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+[node name="Ground Pound" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_buh50")]
+damage = 6
+accuracy = 75
+_strategies = [NodePath("../../Strategy/Random Target")]
+
+[node name="Rain of Mechanical Fists" parent="Moves" instance=ExtResource("3_u5ihy")]
+effects = Array[PackedScene]([ExtResource("5_6oqxm"), ExtResource("6_kn5lp")])
+strengths = Array[int]([1, 1])
+durations = Array[int]([2, 3])
+is_debuffs = Array[bool]([true, true])
+damage = 5
+accuracy = 50
+for_everyone = true
+
+[node name="Defend Their Pearl" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_u5ihy")]
+effects = Array[PackedScene]([ExtResource("4_bsm12")])
+strengths = Array[int]([1])
+durations = Array[int]([3])
+is_debuffs = Array[bool]([false])
+max_accuracy = true
+_strategies = [NodePath("../../Strategy/Support members")]
+intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]
 
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_buh50")]
+[node name="Random Target" parent="Strategy" instance=ExtResource("8_6oqxm")]
+switch_to_enemies = true
+
+[node name="Support members" parent="Strategy" instance=ExtResource("9_kn5lp")]
 
 [node name="Current Effects" type="Node" parent="."]
 

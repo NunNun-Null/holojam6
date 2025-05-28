@@ -38,6 +38,8 @@ func take_damage(amount: int, pierce: int = 0) -> void:
 	SignalManager.on_player_stat_updated.emit(self)
 	
 func dead() -> void:
+	for eff in effects:
+		eff.reverse_effect()
 	DialogueManager.add_battle_dialogue(get_given_name() + " is down")
 	print(get_given_name() + " is down")
 	SignalManager.on_player_defeated.emit(self)

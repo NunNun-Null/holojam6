@@ -15,6 +15,7 @@ func get_current_round() -> int:
 	
 func _ready() -> void:
 	SignalManager.on_move_completed.connect(end_turn)
+	SignalManager.on_victory.connect(remove_all_fighter_effects)
 
 func get_battle_map() -> Node3D:
 	return _battle
@@ -91,7 +92,11 @@ func remove_enemy_fighter(fighter: EnemyFighter):
 
 	SignalManager.on_order_updated.emit(_round)
 
-
+func remove_all_fighter_effects() -> void:
+	for ally in _players:
+		for node in ally.effects.get_children():
+			if (node is Effect):
+				node.reverse_effect()
 
 func start_turn() -> void:
 	turn+=1
@@ -105,21 +110,27 @@ func start_turn() -> void:
 	if (_enemies.is_empty()):
 		print("WIN")
 		_round.clear()
+		SignalManager.on_victory.emit()
 		call_deferred("switch_to_map")
 		return
 	
 	var fighter: Fighter = get_top_fighter()
 	print("current turn: " + fighter.get_given_name())
 	if (!fighter):
-		start_turn()
+		end_turn()
 		return
 	
 	fighter.apply_effects(fighter)
 
 	if (!fighter):
-		start_turn()
+		end_turn()
 		return
 	
+	if (fighter is PlayerFighter):
+		if (fighter.get_dead()):
+			end_turn()
+			return
+
 	fighter.start_turn()
 
 func end_turn() -> void:

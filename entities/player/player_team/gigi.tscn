@@ -70,7 +70,6 @@ durations = Array[int]([3, 3])
 is_debuffs = Array[bool]([true, true])
 accuracy = 95
 description = "Base Accuracy: 95
-+1 Damage taken for 3 turns
 -1 defense for 3 turns
 -1 speed for 3 turns
 Targets all Enemies

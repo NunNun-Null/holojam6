@@ -9,6 +9,7 @@ extends Move
 @export var accuracy: int = 100
 @export var armor_pierce: int = 0
 @export var max_accuracy: bool = false
+
 func move() -> void:
 	var added_damage = get_parent().get_parent().get_bonus_damage()
 	var added_accuracy = get_parent().get_parent().get_bonus_accuracy()
@@ -18,8 +19,10 @@ func move() -> void:
 		strategy.determine_target()
 		set_target(strategy.get_target())
 
-	if (!self_move):
+	if (!self_move and !for_everyone):
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
+	elif (!self_move and for_everyone):
+		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on all enemies")
 	else:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on themselves")
 	
@@ -31,8 +34,12 @@ func move() -> void:
 			list = BattleManager._enemies
 
 		for enemy in list:
+			if (enemy is PlayerFighter):
+				if (enemy.get_dead()):
+					continue
+			set_target(enemy)
 			if (!accuracy_test((accuracy+added_accuracy)) and !max_accuracy):
-				DialogueManager.add_battle_dialogue(name + " missed for " + enemy.get_given_name())
+				DialogueManager.add_battle_dialogue(name + " missed for " + get_target().get_given_name())
 				SignalManager.on_dialogue_pushed.emit()
 				continue
 
@@ -50,10 +57,11 @@ func move() -> void:
 				eff.is_debuff = is_debuffs.get(i)
 				eff.set_host(get_parent().get_parent())
 				eff.set_target(enemy)
-				enemy.effects.add_child(eff)
+				get_target().effects.add_child(eff)
 				eff.effect()
 
-				var content: String = enemy.get_given_name() + " is effected with " + eff.given_effect_name
+
+				var content: String = get_target().get_given_name() + " is effected with " + eff.given_effect_name
 
 				if (eff.is_debuff):
 					content += " debuff for " + str(eff.duration) + " turns"
@@ -63,7 +71,7 @@ func move() -> void:
 				DialogueManager.add_battle_dialogue(content)
 
 			if (damage > 0):
-				enemy.take_damage(damage+added_damage,armor_pierce)
+				get_target().take_damage(damage+added_damage,armor_pierce)
 			else:
 				SignalManager.on_dialogue_pushed.emit()
 
@@ -86,8 +94,14 @@ func move() -> void:
 			eff.is_debuff = is_debuffs.get(i)
 			eff.set_host(get_parent().get_parent())
 			eff.set_target(get_target())
-			get_target().effects.add_child(eff)
+			if (eff.given_effect_name == "defended"):
+				for node in get_target().effects.get_children():
+					if (node is Effect):
+						if (node.given_effect_name == "defended"):
+							DialogueManager.add_battle_dialogue(node.get_target().get_given_name() + "'s defended effect ended")
+							node.reverse_effect()
 			eff.effect()
+			get_target().effects.add_child(eff)
 			var content: String = get_target().get_given_name() + " is effected with " + eff.given_effect_name
 			if (eff.is_debuff):
 				content += " debuff for " + str(eff.duration) + " turns"

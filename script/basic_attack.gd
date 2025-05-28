@@ -20,16 +20,26 @@ func move() -> void:
 	DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
 	print(BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
 	
+	var list
+	if (is_for_allies()):
+		list = BattleManager._players
+	else:
+		list = BattleManager._enemies
+
 	if (for_everyone):
-		for enemy in BattleManager._enemies:
+		for enemy in list:
+			if (enemy is PlayerFighter):
+				if (enemy.get_dead()):
+					continue
+			set_target(enemy)
 			print(accuracy+added_accuracy)
 			if (!accuracy_test(accuracy+added_accuracy)):
-				DialogueManager.add_battle_dialogue(name + " missed on " + enemy.get_given_name())
+				DialogueManager.add_battle_dialogue(name + " missed on " + get_target().get_given_name())
 				print(name + " missed")
 				SignalManager.on_dialogue_pushed.emit()
 				continue
 			
-			enemy.take_damage(damage+added_damage,armor_pierce)
+			get_target().take_damage(damage+added_damage,armor_pierce)
 	else:
 		print(accuracy+added_accuracy)
 		if (!accuracy_test(accuracy+added_accuracy)):

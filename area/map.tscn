@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=34 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
 [ext_resource type="Script" uid="uid://dlrqfyq1thyl6" path="res://script/map.gd" id="1_2onle"]
@@ -13,6 +13,11 @@
 [ext_resource type="Script" uid="uid://oasb386acjfo" path="res://script/core_emotion.gd" id="8_uj77h"]
 [ext_resource type="PackedScene" uid="uid://b8btlrylypjkg" path="res://entities/enemies/dummy.tscn" id="9_mp1sc"]
 [ext_resource type="PackedScene" uid="uid://bo7avmssp3a4o" path="res://ui/map_dialogue.tscn" id="10_trnge"]
+[ext_resource type="PackedScene" uid="uid://b557ap6u1wdck" path="res://entities/enemies/orange_green_tainted_memory.tscn" id="13_lyj3h"]
+[ext_resource type="PackedScene" uid="uid://dyokdoskbsaoj" path="res://entities/enemies/pink_tainted_memory.tscn" id="14_7upnb"]
+[ext_resource type="PackedScene" uid="uid://do0wt6v5mdluj" path="res://entities/enemies/red_tainted_memory.tscn" id="14_vwu25"]
+[ext_resource type="PackedScene" uid="uid://ql401mwihanc" path="res://entities/enemies/blue_tainted_memory.tscn" id="15_o2b50"]
+[ext_resource type="PackedScene" uid="uid://c203i5173a1tl" path="res://objects/save_point.tscn" id="17_o2b50"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -51,6 +56,8 @@ size = Vector3(1, 1, 4.82)
 viewport_path = NodePath("Player/Camera/Sprite3D/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj77h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyj3h"]
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_2onle")
@@ -175,7 +182,7 @@ size = Vector3(0.35, 0.1, 0.7)
 [node name="Hallway" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25222, -2.38419e-07, 0.000154972)
 script = ExtResource("3_mjj2x")
-required_battle = "Tutorial Boss"
+required_battle = "Test Battle"
 
 [node name="floor" type="CSGBox3D" parent="Hallway"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
@@ -451,7 +458,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -1.14)
 
 [node name="Camera" type="Camera3D" parent="Player"]
-transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, -0.42, 2.50402, -2.61871)
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -0.02, 2.77402, 0.34129)
 fov = 90.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Player/Camera"]
@@ -466,11 +473,11 @@ size = Vector2i(535, 150)
 [node name="map_dialogue" parent="Player/Camera/Sprite3D/SubViewport" instance=ExtResource("10_trnge")]
 visible = false
 
-[node name="Tutorial Boss" parent="." instance=ExtResource("8_forqk")]
+[node name="Test Battle" parent="." instance=ExtResource("8_forqk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17, 0.67, -0.459999)
-enemies = Array[PackedScene]([ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), ExtResource("9_mp1sc")])
+enemies = Array[PackedScene]([ExtResource("13_lyj3h"), ExtResource("15_o2b50"), ExtResource("14_vwu25"), ExtResource("14_7upnb")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tutorial Boss"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Test Battle"]
 shape = SubResource("BoxShape3D_uj77h")
 
 [node name="Midgame Boss" parent="." instance=ExtResource("8_forqk")]
@@ -479,3 +486,10 @@ enemies = Array[PackedScene]([ExtResource("9_mp1sc"), ExtResource("9_mp1sc"), Ex
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Midgame Boss"]
 shape = SubResource("BoxShape3D_uj77h")
+
+[node name="Save Point" parent="." instance=ExtResource("17_o2b50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.47, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Save Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.57, 0)
+shape = SubResource("BoxShape3D_lyj3h")

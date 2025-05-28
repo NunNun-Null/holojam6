@@ -13,6 +13,8 @@ func start_turn() -> void:
 
 
 func dead() -> void:
+    for eff in effects:
+        eff.reverse_effect()
     DialogueManager.add_battle_dialogue(get_given_name() + " is defeated")
     print(get_given_name() + " is defeated")
     SignalManager.on_dialogue_pushed.emit()

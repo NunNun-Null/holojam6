@@ -29,15 +29,13 @@ size_flags_horizontal = 3
 [node name="Title" type="Label" parent="Combat Interface/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Elizabeth"
 
 [node name="Description" type="TextEdit" parent="Combat Interface/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-text = "Move Name
-Description of Move"
 wrap_mode = 1
+scroll_vertical = 1.0
 
 [node name="Dialogue Screen" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -48,7 +46,6 @@ offset_bottom = 550.0
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 30
-text = "> Placeholder"
 
 [node name="Choose Target" type="PanelContainer" parent="."]
 visible = false
@@ -66,12 +63,12 @@ size_flags_horizontal = 3
 [node name="Title" type="Label" parent="Choose Target/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Choose a Target"
+text = "Choose a Target
+"
 
 [node name="Description" type="TextEdit" parent="Choose Target/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-text = "Placeholder"
 editable = false
 wrap_mode = 1

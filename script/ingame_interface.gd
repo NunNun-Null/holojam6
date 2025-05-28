@@ -94,7 +94,12 @@ func init_targets() -> void:
 		label.text = current.get_given_name()
 		label.add_theme_font_size_override("font_size",40)
 		$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
-
+	elif (selected_move.for_everyone):
+		label = Label.new()
+		label.name = "0"
+		label.text = "> Everyone"
+		label.add_theme_font_size_override("font_size",40)
+		$"Choose Target/HBoxContainer/VBoxContainer/".add_child(label)
 	else:
 		if (!selected_move.is_for_allies()):
 			for index in range(BattleManager.get_enemies_size()):
@@ -123,18 +128,33 @@ func init_targets() -> void:
 		push_error("No valid moves???")
 		return
 	
-	selected_target_index = 0
+	if (!selected_move.for_everyone):
+		selected_target_index = 0
 
-	if (!selected_move.is_for_allies()):
-		selected_target = BattleManager.get_enemy_fighter(selected_target_index)
-		selected_target.set_selected(true)
-		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + BattleManager.get_enemy_fighter(selected_target_index).get_given_name()
+		if (!selected_move.is_for_allies()):
+			selected_target = BattleManager.get_enemy_fighter(selected_target_index)
+			selected_target.set_selected(true)
+			$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + BattleManager.get_enemy_fighter(selected_target_index).get_given_name()
+		else:
+			selected_target = player_list.get(selected_target_index)
+			SignalManager.on_player_select.emit(selected_target)
+			$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + player_list.get(selected_target_index).get_given_name()
+		
+		update_desc(selected_target)
 	else:
-		selected_target = player_list.get(selected_target_index)
-		SignalManager.on_player_select.emit(selected_target)
-		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + player_list.get(selected_target_index).get_given_name()
-	
-	update_desc(selected_target)
+
+		if (!selected_move.is_for_allies()):
+			for enemy in BattleManager._enemies:
+				enemy.set_selected(true)
+		else:
+			player_list.clear()
+			for player in BattleManager._players:
+				if (player.get_dead()):
+					continue
+				player_list.append(player)
+			
+			for ally in player_list:
+				SignalManager.on_player_select.emit(ally)
 
 
 func _process(_delta: float) -> void:
@@ -162,8 +182,14 @@ func _process(_delta: float) -> void:
 			selected_target_index = 0
 			if (selected_target is EnemyFighter):
 				selected_target.set_selected(false)
-			else:
+			elif (selected_target is PlayerFighter):
 				SignalManager.on_player_unselect.emit(selected_target)
+			elif (selected_move.for_everyone and selected_move.intended_for_allies):
+				for player in BattleManager._players:
+					SignalManager.on_player_unselect.emit(player)
+			elif (selected_move.for_everyone and !selected_move.intended_for_allies):
+				for enemy in BattleManager._enemies:
+					enemy.set_selected(false)
 
 			selected_target = null
 			for node in $"Choose Target/HBoxContainer/VBoxContainer/".get_children():
@@ -171,13 +197,13 @@ func _process(_delta: float) -> void:
 					continue
 				node.queue_free()
 		
-		if (Input.is_action_just_pressed("choose_up") and selected_target_index > 0):
+		if (Input.is_action_just_pressed("choose_up") and selected_target_index > 0 and !selected_move.for_everyone):
 			print("going up")
 			selected_target_index -= 1
 			highlighted_target(selected_target_index,1)
 
 
-		elif (Input.is_action_just_pressed("choose_down") and selected_target_index < $"Choose Target/HBoxContainer/VBoxContainer/".get_child_count()-2):
+		elif (Input.is_action_just_pressed("choose_down") and selected_target_index < $"Choose Target/HBoxContainer/VBoxContainer/".get_child_count()-2 and !selected_move.for_everyone):
 			print("going down")
 			selected_target_index += 1
 			highlighted_target(selected_target_index,-1)
@@ -199,9 +225,17 @@ func _process(_delta: float) -> void:
 func clear_nodes() -> void:
 	if (selected_target is EnemyFighter):
 		selected_target.set_selected(false)
-	else:
+	elif (selected_target is PlayerFighter):
 		SignalManager.on_player_unselect.emit(selected_target)
 	
+	if (selected_move.for_everyone):
+		if (selected_move.is_for_allies()):
+			for player in player_list:
+				SignalManager.on_player_unselect.emit(player)
+		else:
+			for enemy in BattleManager._enemies:
+				enemy.set_selected(false)
+
 	for node in $"Choose Target/HBoxContainer/VBoxContainer/".get_children():
 		if (node.name == "Title"):
 			continue
@@ -247,7 +281,7 @@ func update_desc(fighter: Fighter) -> void:
 	if (fighter.get_stun()):
 		$"Choose Target/HBoxContainer/Description".text += "Is Stunned" + "\n"
 	if (fighter.is_defended()):
-		$"Choose Target/HBoxContainer/Description".text += "Defended by: " + str(fighter.get_defended()) + "\n"
+		$"Choose Target/HBoxContainer/Description".text += "Defended by: " + fighter.get_defended().get_given_name() + "\n"
 	if (fighter._damage_multiplier != 0):
 		$"Choose Target/HBoxContainer/Description".text += "Damage taken bonus: " + str(fighter._damage_multiplier) + "\n"
 	if (fighter.get_bonus_accuracy() != 0):

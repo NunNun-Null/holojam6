@@ -1,37 +1,67 @@
-[gd_scene load_steps=6 format=3 uid="uid://ql401mwihanc"]
+[gd_scene load_steps=11 format=3 uid="uid://ql401mwihanc"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_p2n8g"]
-[ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_3up73"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_vpm3c"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_kwy7f"]
+[ext_resource type="Script" uid="uid://rg0ipoem0c6y" path="res://script/blue_tainted_memory.gd" id="1_3up73"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_8wicm"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_p2n8g"]
+[ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="4_3up73"]
+[ext_resource type="PackedScene" uid="uid://e5gfmxopihf2" path="res://behavior/strategies/highest_hp_not_stun.tscn" id="5_3up73"]
+[ext_resource type="PackedScene" uid="uid://l282dju0p6h5" path="res://behavior/effects/constant_harm_effect.tscn" id="5_5bnun"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="6_eyrgf"]
+[ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="6_i504w"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="8_eyrgf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
-script = ExtResource("1_p2n8g")
-speed = 1
-health = 20
-max_health = 20
-defense = 3
-given_name = "Dummy"
+[node name="Blue Tainted Memory" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_3up73")
+speed = 4
+health = 15
+max_health = 15
+given_name = "Blue Tainted Memory"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
-[node name="Sample Model" parent="." instance=ExtResource("2_3up73")]
+[node name="blockbench_export" parent="." instance=ExtResource("2_8wicm")]
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_vpm3c")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+[node name="Enter the Dream State" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_p2n8g")]
+effects = Array[PackedScene]([ExtResource("4_3up73")])
+strengths = Array[int]([1])
+durations = Array[int]([2])
+is_debuffs = Array[bool]([true])
+accuracy = 90
+_strategies = [NodePath("../../Strategy/Highest HP Not Stun")]
+
+[node name="Enticing Melody" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_p2n8g")]
+effects = Array[PackedScene]([ExtResource("6_i504w"), ExtResource("6_eyrgf")])
+strengths = Array[int]([1, 20])
+durations = Array[int]([2, 2])
+is_debuffs = Array[bool]([false, false])
+max_accuracy = true
+_strategies = [NodePath("../../Strategy/Highest HP Not Stun")]
+for_everyone = true
+
+[node name="Lyrics" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_p2n8g")]
+effects = Array[PackedScene]([ExtResource("5_5bnun"), ExtResource("6_i504w")])
+strengths = Array[int]([1, 1])
+durations = Array[int]([3, 2])
+is_debuffs = Array[bool]([true, true])
+damage = 1
+accuracy = 95
+armor_pierce = 1
+_strategies = [NodePath("../../Strategy/Random Target")]
 
 [node name="Strategy" type="Node" parent="."]
 
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_kwy7f")]
+[node name="Highest HP Not Stun" parent="Strategy" instance=ExtResource("5_3up73")]
+
+[node name="Random Target" parent="Strategy" instance=ExtResource("8_eyrgf")]
+switch_to_enemies = true
 
 [node name="Current Effects" type="Node" parent="."]
 

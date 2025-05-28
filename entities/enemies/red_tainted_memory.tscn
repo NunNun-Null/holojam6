@@ -1,37 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://do0wt6v5mdluj"]
+[gd_scene load_steps=7 format=3 uid="uid://do0wt6v5mdluj"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_6fqy3"]
-[ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_bpjdi"]
+[ext_resource type="Script" uid="uid://cdsgd1slqsp4o" path="res://script/red_tainted_memory.gd" id="1_verp5"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_bpjdi"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_upq7n"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_bi2lv"]
+[ext_resource type="PackedScene" uid="uid://dtrdx7fi6vicg" path="res://behavior/strategies/marked_target.tscn" id="5_bpjdi"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="5_upq7n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
-script = ExtResource("1_6fqy3")
-speed = 1
-health = 20
-max_health = 20
-defense = 3
-given_name = "Dummy"
+[node name="Red Tainted Memory" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_verp5")
+health = 25
+max_health = 25
+given_name = "Red Tainted Memory"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
-[node name="Sample Model" parent="." instance=ExtResource("2_bpjdi")]
+[node name="blockbench_export" parent="." instance=ExtResource("2_bpjdi")]
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_upq7n")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+[node name="Strike" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_upq7n")]
+damage = 4
+accuracy = 85
+_strategies = [NodePath("../../Strategy/Random Target")]
+
+[node name="Execute" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_upq7n")]
+damage = 10
+accuracy = 90
+_strategies = [NodePath("../../Strategy/Marked Target")]
 
 [node name="Strategy" type="Node" parent="."]
 
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_bi2lv")]
+[node name="Random Target" parent="Strategy" instance=ExtResource("5_upq7n")]
+switch_to_enemies = true
+
+[node name="Marked Target" parent="Strategy" instance=ExtResource("5_bpjdi")]
 
 [node name="Current Effects" type="Node" parent="."]
 

@@ -11,6 +11,7 @@ var _health: int
 var _defense: int
 
 var _defended: Fighter
+var _defender: Fighter
 
 var _max_health: int 
 
@@ -23,6 +24,18 @@ var _is_debuffed: bool = false
 var _is_marked: bool = false
 
 var _damage_multiplier: int = 0
+
+func set_defender(fighter: Fighter) -> void:
+	_defender = fighter
+
+func reset_defender() -> void:
+	_defender = null
+
+func is_defender() -> bool:
+	if (_defender):
+		return true
+	return false
+
 
 func get_is_debuffed() -> bool:
 	return !effects.get_children().is_empty()

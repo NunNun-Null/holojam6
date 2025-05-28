@@ -1,37 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyokdoskbsaoj"]
+[gd_scene load_steps=10 format=3 uid="uid://dyokdoskbsaoj"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_duril"]
-[ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_v4cqh"]
+[ext_resource type="Script" uid="uid://en65yt88qj3j" path="res://script/pink_tainted_memory.gd" id="1_duril"]
+[ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_iow81"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_sg20w"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_654e1"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="4_duril"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_iow81"]
+[ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="5_iow81"]
+[ext_resource type="PackedScene" uid="uid://dqgy0k84kxwj6" path="res://behavior/effects/mark_effect.tscn" id="6_4toav"]
+[ext_resource type="PackedScene" uid="uid://e5gfmxopihf2" path="res://behavior/strategies/highest_hp_not_stun.tscn" id="8_lqh1u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+[node name="Pink Tainted Memory" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_duril")
-speed = 1
-health = 20
-max_health = 20
-defense = 3
-given_name = "Dummy"
+speed = 8
+health = 10
+max_health = 10
+given_name = "Pink Tainted Memory"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
 
-[node name="Sample Model" parent="." instance=ExtResource("2_v4cqh")]
+[node name="blockbench_export" parent="." instance=ExtResource("2_iow81")]
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_sg20w")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+[node name="Strike in the dark" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_sg20w")]
+damage = 4
+accuracy = 70
+armor_pierce = 1
+_strategies = [NodePath("../../Strategy/Random Target")]
+
+[node name="Piercing Gaze" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("4_iow81")]
+effects = Array[PackedScene]([ExtResource("5_iow81"), ExtResource("6_4toav")])
+strengths = Array[int]([3, 3])
+durations = Array[int]([2, 2])
+is_debuffs = Array[bool]([true, true])
+damage = 1
+accuracy = 95
+_strategies = [NodePath("../../Strategy/Highest HP Not Mark")]
 
 [node name="Strategy" type="Node" parent="."]
 
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_654e1")]
+[node name="Random Target" parent="Strategy" instance=ExtResource("4_duril")]
+switch_to_enemies = true
+
+[node name="Highest HP Not Mark" parent="Strategy" instance=ExtResource("8_lqh1u")]
+switch_to_mark = true
 
 [node name="Current Effects" type="Node" parent="."]
 

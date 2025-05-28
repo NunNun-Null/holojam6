@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bue0v3u0sxx72"]
+
+[ext_resource type="Script" uid="uid://bf04nkflaqlaq" path="res://script/support_defend.gd" id="1_dt2a3"]
+
+[node name="Defend Support Members" type="Node"]
+script = ExtResource("1_dt2a3")

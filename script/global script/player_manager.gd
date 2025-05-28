@@ -22,6 +22,10 @@ func _ready() -> void:
 	SignalManager.on_map_ready.connect(set_last_room_visible)
 
 func reset_team() -> void:
+	for node in get_tree().root.get_children():
+		if (node is PlayerFighter):
+			node.queue_free()
+
 	var players: Array[PlayerFighter] = UtilitiesManager.convert_to_players(_squad)
 	BattleManager.create_players(players)
 
