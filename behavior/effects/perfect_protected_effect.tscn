@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3pgql2u8ncq8"]
 
-[ext_resource type="Script" uid="uid://db7qm5dx4jh31" path="res://script/perfect_protected_effect.gd" id="1_vkq3d"]
+[ext_resource type="Script" path="res://script/perfect_protected_effect.gd" id="1_vkq3d"]
 
 [node name="Perfect Protected Effect" type="Node"]
 script = ExtResource("1_vkq3d")

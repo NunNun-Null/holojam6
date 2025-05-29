@@ -55,13 +55,12 @@ func move() -> void:
 				eff.is_debuff = is_debuffs[i]
 				eff.set_host(get_parent().get_parent())
 				if (((enemy is PlayerFighter and get_parent().get_parent() is not PlayerFighter) or (enemy is EnemyFighter and get_parent().get_parent() is not EnemyFighter)) and enemy.is_defended()):
-					print("opposing sides")
 					eff.set_target(enemy.get_defended())
 				else:
-					print("same sides")
 					eff.set_target(enemy)
-				eff.get_target().effects.add_child(eff)
 				eff.effect()
+				eff.get_target().effects.add_child(eff)
+				
 
 
 				var content: String = eff.get_target().get_given_name() + " is effected with " + eff.given_effect_name
@@ -102,20 +101,24 @@ func move() -> void:
 			else:
 				print("same sides")
 				eff.set_target(get_target())
+			eff.effect()
+			eff.get_target().effects.add_child(eff)
 			if (eff.given_effect_name == "defended"):
 				for node in get_target().effects.get_children():
 					if (node is Effect):
 						if (node.given_effect_name == "defended"):
 							DialogueManager.add_battle_dialogue(node.get_target().get_given_name() + "'s defended effect ended")
 							node.reverse_effect()
-			eff.effect()
-			get_target().effects.add_child(eff)
-			var content: String = get_target().get_given_name() + " is effected with " + eff.given_effect_name
-			if (eff.is_debuff):
-				content += " debuff for " + str(eff.duration) + " turns"
-			if (!eff.is_debuff):
-				content += " buff for " + str(eff.duration) + " turns"
-			DialogueManager.add_battle_dialogue(content)
+			if (eff.given_effect_name == "stun" and eff.get_target().immune_to_stun):
+				eff.reverse_effect()
+				DialogueManager.add_battle_dialogue(eff.get_target().get_given_name() + " resisted stun")
+			else:
+				var content: String = get_target().get_given_name() + " is effected with " + eff.given_effect_name
+				if (eff.is_debuff):
+					content += " debuff for " + str(eff.duration) + " turns"
+				if (!eff.is_debuff):
+					content += " buff for " + str(eff.duration) + " turns"
+				DialogueManager.add_battle_dialogue(content)
 
 		if (damage > 0):
 			get_target().take_damage(damage+added_damage,armor_pierce)

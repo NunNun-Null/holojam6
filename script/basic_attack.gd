@@ -32,6 +32,9 @@ func move() -> void:
 				if (enemy.get_dead()):
 					continue
 			set_target(enemy)
+			if (get_target().is_defended()):
+				DialogueManager.add_battle_dialogue(get_target().get_given_name() + " is defended by " + get_target().get_defended().get_given_name())
+				set_target(get_target().get_defended())
 			print(accuracy+added_accuracy)
 			if (!accuracy_test(accuracy+added_accuracy)):
 				DialogueManager.add_battle_dialogue(name + " missed on " + get_target().get_given_name())
@@ -41,6 +44,9 @@ func move() -> void:
 			
 			get_target().take_damage(damage+added_damage,armor_pierce)
 	else:
+		if (get_target().is_defended()):
+			DialogueManager.add_battle_dialogue(get_target().get_given_name() + " is defended by " + get_target().get_defended().get_given_name())
+			set_target(get_target().get_defended())
 		print(accuracy+added_accuracy)
 		if (!accuracy_test(accuracy+added_accuracy)):
 			DialogueManager.add_battle_dialogue(name + " missed")

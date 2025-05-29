@@ -35,6 +35,8 @@ func start_turn() -> void:
 	
 	if (exists):
 		var attack: Move = moves.get_child(0)
+		if (is_defender()):
+			attack = moves.get_child(1)
 		attack.move()
 		return
 	else:

@@ -17,9 +17,9 @@ normal_scale = 0.5
 
 [node name="Corrupted Heart" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
 script = ExtResource("1_xbyv2")
-speed = 2
-health = 60
-max_health = 60
+speed = 4
+health = 80
+max_health = 80
 defense = 2
 given_name = "Corrupted Heart"
 selected_box = NodePath("Selected")
@@ -38,7 +38,7 @@ spawn = Array[PackedScene]([ExtResource("4_l2njo"), ExtResource("5_j1k61"), ExtR
 random = true
 
 [node name="Beating Heart" parent="Moves" instance=ExtResource("5_objp5")]
-damage = 4
+damage = 7
 accuracy = 85
 armor_pierce = 1
 intended_for_allies = true

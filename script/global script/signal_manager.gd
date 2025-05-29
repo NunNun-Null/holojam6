@@ -12,6 +12,8 @@ signal on_entered_battle(node: Node3D) #Signal when before scene switches to bat
 
 signal on_player_defeated(Fighter) #Signal on a player squad member dead
 
+signal on_player_lost() #Signal when a player loses the battle
+
 signal on_player_turn(fighter) #Signal when it's a player member's turn
 
 signal on_enemy_turn(fighter) #Signal when it's an enemy turn

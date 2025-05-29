@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0uqf2dwcvna"]
+[gd_scene load_steps=7 format=3 uid="uid://d0uqf2dwcvna"]
 
 [ext_resource type="Script" path="res://script/squad_member.gd" id="1_qsoi3"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_onll2"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_wcwtr"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_ydlly"]
 [ext_resource type="PackedScene" uid="uid://be81bekaqu70s" path="res://behavior/effects/defend_effect.tscn" id="4_onll2"]
+[ext_resource type="PackedScene" uid="uid://d3pgql2u8ncq8" path="res://behavior/effects/perfect_protected_effect.tscn" id="5_8k66v"]
 
 [node name="Elizabeth" type="Node3D" node_paths=PackedStringArray("moves", "effects")]
 script = ExtResource("1_qsoi3")
@@ -12,7 +13,7 @@ speed = 1
 health = 40
 max_health = 40
 defense = 3
-special_point = 20
+special_point = 15
 given_name = "Elizabeth"
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
@@ -43,16 +44,16 @@ sp_cost = 8
 for_everyone = true
 
 [node name="Thorn Cleave" parent="Moves" instance=ExtResource("3_onll2")]
-damage = 16
+damage = 12
 accuracy = 25
 armor_pierce = 8
-description = "Base Damage: 14
+description = "Base Damage: 12
 Base Accuracy: 25
-Base Armor Pierce: 1
-SP Cost: 10
+Base Armor Pierce: 8
+SP Cost: 8
 
 Cleaves right through an enemy. Probably best to get a good mark on the enemy first (idk just sayin')"
-sp_cost = 10
+sp_cost = 8
 
 [node name="Defend" parent="Moves" instance=ExtResource("3_wcwtr")]
 effects = Array[PackedScene]([ExtResource("4_onll2")])
@@ -64,6 +65,17 @@ description = "SP Cost: 6
 Redirects all attacks from the target to Elizabeth"
 intended_for_allies = true
 sp_cost = 6
+
+[node name="Fragment of Love" parent="Moves" instance=ExtResource("3_wcwtr")]
+effects = Array[PackedScene]([ExtResource("5_8k66v")])
+strengths = Array[int]([1])
+durations = Array[int]([3])
+is_debuffs = Array[bool]([false])
+max_accuracy = true
+description = "
+Mentally fortify everyone against attacks on the inner mind "
+intended_for_allies = true
+for_everyone = true
 
 [node name="Pass Turn" parent="Moves" instance=ExtResource("3_ydlly")]
 hp = 0

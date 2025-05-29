@@ -1,29 +1,82 @@
-[gd_scene load_steps=4 format=3 uid="uid://byy43hna1w4r"]
+[gd_scene load_steps=14 format=3 uid="uid://byy43hna1w4r"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_a46kv"]
+[ext_resource type="Script" path="res://script/elizabeth_rose_bloodflame.gd" id="1_rmk8e"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_btfay"]
+[ext_resource type="PackedScene" uid="uid://c1xmlkv38r807" path="res://behavior/moves/special_attack.tscn" id="3_tnq8f"]
+[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="4_swgav"]
+[ext_resource type="PackedScene" uid="uid://baq33lnuo20dk" path="res://behavior/moves/special_dialogue.tscn" id="5_2pbvx"]
+[ext_resource type="PackedScene" uid="uid://bo6weob2e111f" path="res://behavior/moves/spawn_enemy.tscn" id="6_g2s31"]
+[ext_resource type="PackedScene" uid="uid://cvh57pkko1dma" path="res://entities/enemies/perfect_red_memory.tscn" id="7_54v0b"]
+[ext_resource type="PackedScene" uid="uid://dm5pr85r7e2s2" path="res://entities/enemies/perfect_red_memory_support.tscn" id="8_rjb72"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="9_prp6k"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="10_mfuto"]
+[ext_resource type="PackedScene" uid="uid://thn0th4c5nsl" path="res://behavior/effects/attack_effect.tscn" id="10_xfm8p"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="11_1vwn7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
-script = ExtResource("1_a46kv")
-speed = 1
-health = 20
-max_health = 20
+[node name="Elizabeth Rose Bloodflame" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_rmk8e")
+speed = 2
+health = 200
+max_health = 200
 defense = 3
-given_name = "Dummy"
+given_name = "Elizabeth Rose Bloodflame"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
+immune_to_stun = true
 
-[node name="Sample Model" parent="." instance=ExtResource("2_btfay")]
+[node name="Phase 1" parent="." instance=ExtResource("2_btfay")]
+
+[node name="Phase 2" parent="." instance=ExtResource("2_btfay")]
+visible = false
 
 [node name="Moves" type="Node" parent="."]
 
+[node name="Annouce Undyling Loyalty" parent="Moves" instance=ExtResource("5_2pbvx")]
+text = "The Team's mental resolve is tested"
+
+[node name="Undying Loyalty" parent="Moves" instance=ExtResource("3_tnq8f")]
+
+[node name="Through Flesh and Bone" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("4_swgav")]
+damage = 9
+accuracy = 90
+armor_pierce = 3
+_strategies = [NodePath("../../Strategy/Random Target")]
+
+[node name="Call to Arms" parent="Moves" instance=ExtResource("6_g2s31")]
+spawn = Array[PackedScene]([ExtResource("7_54v0b"), ExtResource("8_rjb72")])
+
+[node name="Let my voice be your strength" parent="Moves" instance=ExtResource("9_prp6k")]
+effects = Array[PackedScene]([ExtResource("10_xfm8p"), ExtResource("11_1vwn7")])
+strengths = Array[int]([2, 30])
+durations = Array[int]([3, 3])
+is_debuffs = Array[bool]([false, false])
+max_accuracy = true
+for_everyone = true
+
+[node name="Harbinger of Order" parent="Moves" instance=ExtResource("9_prp6k")]
+effects = Array[PackedScene]([ExtResource("11_1vwn7")])
+strengths = Array[int]([20])
+durations = Array[int]([2])
+is_debuffs = Array[bool]([true])
+damage = 6
+accuracy = 90
+armor_pierce = 1
+intended_for_allies = true
+for_everyone = true
+
+[node name="Switch to phase 2" parent="Moves" instance=ExtResource("5_2pbvx")]
+text = "Elizabeth Rose Bloodflame Transformed"
+
 [node name="Strategy" type="Node" parent="."]
+
+[node name="Random Target" parent="Strategy" instance=ExtResource("10_mfuto")]
+switch_to_enemies = true
 
 [node name="Current Effects" type="Node" parent="."]
 

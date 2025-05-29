@@ -25,7 +25,7 @@ viewport_path = NodePath("Characters/SubViewport")
 viewport_path = NodePath("Interface/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8elxy"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+viewport_path = NodePath("Visual Order/SubViewport")
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_8vt7n")
@@ -78,7 +78,7 @@ transparent_bg = true
 [node name="Player Fighter Stats" parent="Characters/SubViewport" instance=ExtResource("2_tjbvg")]
 
 [node name="Interface" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03353, 5.70971, -6.45844)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11321, 5.70971, -6.45844)
 texture = SubResource("ViewportTexture_ka70e")
 
 [node name="SubViewport" type="SubViewport" parent="Interface"]
@@ -87,11 +87,12 @@ size = Vector2i(1400, 550)
 
 [node name="Ingame Interface" parent="Interface/SubViewport" instance=ExtResource("4_sp4u6")]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8314, 6.6166, -7.14064)
+[node name="Visual Order" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4155, 6.79025, -7.14064)
 texture = SubResource("ViewportTexture_8elxy")
 
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="Visual Order"]
 transparent_bg = true
+size = Vector2i(500, 400)
 
-[node name="Visual Order" parent="Sprite3D/SubViewport" instance=ExtResource("5_sp4u6")]
+[node name="Visual Order" parent="Visual Order/SubViewport" instance=ExtResource("5_sp4u6")]

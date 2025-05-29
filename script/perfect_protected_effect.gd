@@ -10,6 +10,7 @@ func effect() -> void:
 				eff.duration = self.duration
 				queue_free()
 				return
+	print("addeded")
 	get_target().make_perfect_protected()
 
 func reverse_effect() -> void:

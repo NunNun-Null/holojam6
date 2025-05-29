@@ -25,13 +25,26 @@ var _is_marked: bool = false
 
 var perfect_protected: bool = false
 
+@export var immune_to_stun: bool = false
+
 var _damage_multiplier: int = 0
+
 
 func make_perfect_protected() -> void:
 	perfect_protected = true
 
 func reset_perfect_protected() -> void:
 	perfect_protected = false
+
+func test_perfect_protected() -> void:
+	if (perfect_protected):
+		DialogueManager.add_battle_dialogue(get_given_name() + "'s resolve resisted")
+		SignalManager.on_dialogue_pushed.emit()
+		return
+	else:
+		DialogueManager.add_battle_dialogue(get_given_name() + " succumbed to the attack")
+		SignalManager.on_dialogue_pushed.emit()
+		remove_health(9999)
 
 func get_perfect_protected() -> bool:
 	return perfect_protected
@@ -43,7 +56,7 @@ func reset_defender() -> void:
 	_defender = null
 
 func is_defender() -> bool:
-	if (_defender):
+	if (is_instance_valid(_defender)):
 		return true
 	return false
 
@@ -76,7 +89,7 @@ func reset_defended() -> void:
 	_defended = null
 
 func is_defended() -> bool:
-	if (_defended):
+	if (is_instance_valid(_defended)):
 		return true
 	return false
 
@@ -192,7 +205,6 @@ func add_effect(effect: Effect) -> void:
 
 func take_damage(amount: int, pierce: int = 0) -> void:
 	if (is_defended()):
-		DialogueManager.add_battle_dialogue(get_given_name() + " is defended by " + get_defended().get_given_name())
 		print(get_given_name() + " is defended by " + get_defended().get_given_name())
 		_defended.take_damage(amount,pierce)
 		return

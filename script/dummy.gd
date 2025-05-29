@@ -2,7 +2,6 @@ extends EnemyFighter
 
 var valid_moves: Array[Move]
 
-
 @export var speed: int = 0
 @export var health: int = 1
 @export var max_health: int = 1

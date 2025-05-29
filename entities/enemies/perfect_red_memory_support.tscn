@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm5pr85r7e2s2"]
+[gd_scene load_steps=11 format=3 uid="uid://dm5pr85r7e2s2"]
 
-[ext_resource type="Script" uid="uid://brdrkhq4mekdq" path="res://script/perfect_red_memory.gd" id="1_bdu88"]
+[ext_resource type="Script" path="res://script/perfect_red_memory.gd" id="1_bdu88"]
 [ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_qj807"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_4mw8n"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_ip33d"]
 [ext_resource type="PackedScene" uid="uid://bkfr38fwbuph1" path="res://behavior/effects/stun_effect.tscn" id="5_nqfl1"]
+[ext_resource type="PackedScene" uid="uid://dqgy0k84kxwj6" path="res://behavior/effects/mark_effect.tscn" id="6_vhfpu"]
+[ext_resource type="PackedScene" uid="uid://dj7oslkb708ni" path="res://behavior/effects/speed_effect.tscn" id="7_4lccx"]
+[ext_resource type="PackedScene" uid="uid://b583vhbx4bnav" path="res://behavior/effects/defense_effect.tscn" id="8_uqc0u"]
+[ext_resource type="PackedScene" uid="uid://bmrh7ip0koiqo" path="res://behavior/strategies/random.tscn" id="9_d5lej"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
@@ -38,22 +42,30 @@ is_debuffs = Array[bool]([true])
 damage = 12
 
 [node name="Judicial Sentence" parent="Moves" instance=ExtResource("4_ip33d")]
-effects = Array[PackedScene]([ExtResource("5_nqfl1")])
+effects = Array[PackedScene]([ExtResource("6_vhfpu")])
 strengths = Array[int]([1])
-durations = Array[int]([1])
+durations = Array[int]([3])
 is_debuffs = Array[bool]([true])
-damage = 12
 
 [node name="Rally" parent="Moves" instance=ExtResource("4_ip33d")]
-effects = Array[PackedScene]([ExtResource("5_nqfl1")])
-strengths = Array[int]([1])
-durations = Array[int]([1])
-is_debuffs = Array[bool]([true])
-damage = 12
+effects = Array[PackedScene]([ExtResource("7_4lccx")])
+strengths = Array[int]([2])
+durations = Array[int]([3])
+is_debuffs = Array[bool]([false])
+max_accuracy = true
+for_everyone = true
 
-[node name="Corruptable Mind" parent="Moves" instance=ExtResource("4_ip33d")]
+[node name="Corruptable Mind" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("4_ip33d")]
+effects = Array[PackedScene]([ExtResource("8_uqc0u"), ExtResource("7_4lccx")])
+strengths = Array[int]([2, 2])
+durations = Array[int]([3, 3])
+is_debuffs = Array[bool]([true, true])
+_strategies = [NodePath("../../Strategy/Random Target")]
+intended_for_allies = true
 
 [node name="Strategy" type="Node" parent="."]
+
+[node name="Random Target" parent="Strategy" instance=ExtResource("9_d5lej")]
 
 [node name="Current Effects" type="Node" parent="."]
 

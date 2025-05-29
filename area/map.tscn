@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://blm2fiu74omsb"]
+[gd_scene load_steps=35 format=3 uid="uid://blm2fiu74omsb"]
 
 [ext_resource type="Script" path="res://script/bedroom.gd" id="1_1fner"]
 [ext_resource type="Script" path="res://script/map.gd" id="1_2onle"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dyokdoskbsaoj" path="res://entities/enemies/pink_tainted_memory.tscn" id="16_711rc"]
 [ext_resource type="PackedScene" uid="uid://dt25spajncyvv" path="res://entities/enemies/corrupted_heart.tscn" id="17_c47fm"]
 [ext_resource type="PackedScene" uid="uid://c203i5173a1tl" path="res://objects/save_point.tscn" id="17_o2b50"]
+[ext_resource type="PackedScene" uid="uid://byy43hna1w4r" path="res://entities/enemies/elizabeth_rose_bloodflame.tscn" id="18_q7ga6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -508,7 +509,7 @@ size = Vector2i(535, 150)
 visible = false
 
 [node name="Test Battle" parent="." instance=ExtResource("8_forqk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17, 0.67, -0.459999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.109, 0.67, -0.459999)
 enemies = Array[PackedScene]([ExtResource("13_bvjyj"), ExtResource("14_pp4t8"), ExtResource("15_qmfyp"), ExtResource("16_711rc")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Test Battle"]
@@ -519,6 +520,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.338, 0.67, -0.0899999)
 enemies = Array[PackedScene]([ExtResource("17_c47fm")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Midgame Boss"]
+shape = SubResource("BoxShape3D_uj77h")
+
+[node name="Final Boss" parent="." instance=ExtResource("8_forqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.781, 0.667, 0.345)
+enemies = Array[PackedScene]([ExtResource("18_q7ga6")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Final Boss"]
 shape = SubResource("BoxShape3D_uj77h")
 
 [node name="Save Point" parent="." instance=ExtResource("17_o2b50")]

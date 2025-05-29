@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdpcdhx1uuaah"]
+[gd_scene load_steps=8 format=3 uid="uid://cdpcdhx1uuaah"]
 
 [ext_resource type="Script" path="res://script/orb_of_life.gd" id="1_ugo0r"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_7dwmy"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_w53gl"]
 [ext_resource type="PackedScene" uid="uid://be81bekaqu70s" path="res://behavior/effects/defend_effect.tscn" id="4_uq54n"]
 [ext_resource type="PackedScene" uid="uid://bu5gypqqgklnl" path="res://behavior/strategies/specific_target.tscn" id="5_157rb"]
+[ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="5_f6ke7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
@@ -32,6 +33,10 @@ durations = Array[int]([5])
 is_debuffs = Array[bool]([false])
 max_accuracy = true
 _strategies = [NodePath("../../Strategy/Specific Target")]
+
+[node name="Blood Flow" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("5_f6ke7")]
+hp = 3
+_strategies = [null]
 
 [node name="Strategy" type="Node" parent="."]
 

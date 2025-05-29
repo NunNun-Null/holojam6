@@ -26,6 +26,7 @@ func start_up() -> void:
 func reset_team_status() -> void:
 	for player in BattleManager._players:
 		player._health = player._max_health
+		player.set_dead(false)
 		player.special = player.starting_special
 		player.reset_effects()
 		

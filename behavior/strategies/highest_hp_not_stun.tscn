@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://e5gfmxopihf2"]
 
-[ext_resource type="Script" uid="uid://cohyx2vvs0oky" path="res://script/highest_hp_not_stun.gd" id="1_x7jtf"]
+[ext_resource type="Script" path="res://script/highest_hp_not_stun.gd" id="1_x7jtf"]
 
 [node name="Highest HP Not Stun" type="Node"]
 script = ExtResource("1_x7jtf")

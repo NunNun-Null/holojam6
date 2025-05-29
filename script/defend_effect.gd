@@ -11,6 +11,7 @@ func effect() -> void:
 
 func reverse_effect() -> void:
 	get_target().reset_defended()
-	host.reset_defender()
+	if (is_instance_valid(host)):
+		host.reset_defender()
 	queue_free()
 	

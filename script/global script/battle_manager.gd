@@ -1,6 +1,5 @@
 extends Node3D
 
-var _battle: Node3D
 var _players: Array
 var _enemies: Array
 
@@ -12,11 +11,10 @@ func get_current_round() -> int:
 	return current_round
 	
 func _ready() -> void:
+	
 	SignalManager.on_move_completed.connect(end_turn)
 	SignalManager.on_victory.connect(remove_all_fighter_effects)
 
-func get_battle_map() -> Node3D:
-	return _battle
 
 func add_fighter(fighter) -> void:
 	_enemies.append(fighter)
@@ -100,11 +98,29 @@ func remove_all_fighter_effects() -> void:
 		for node in ally.effects.get_children():
 			node.reverse_effect()
 
+func lose_condition() -> bool:
+	var down: int = 0
+	for player in BattleManager._players:
+		if (player.get_dead()):
+			down+=1
+	if(down >= 4):
+		return true
+	return false
+
+func remove_enemies() -> void:
+	for enemy in _enemies:
+		enemy.queue_free()
+	_enemies.clear()
+	
 func start_turn() -> void:
 	turn+=1
-	if (_players.is_empty()):
+	if (lose_condition()):
 		print("LOSE")
 		_round.clear()
+		SignalManager.on_player_lost.emit()
+		remove_enemies()
+		current_round = 1
+		turn = 1
 		call_deferred("switch_to_map")
 		
 		return
@@ -113,6 +129,8 @@ func start_turn() -> void:
 		print("WIN")
 		_round.clear()
 		SignalManager.on_victory.emit()
+		current_round = 1
+		turn = 1
 		call_deferred("switch_to_map")
 		return
 	

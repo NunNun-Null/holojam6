@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://baq33lnuo20dk"]
+
+[ext_resource type="Script" path="res://script/special_dialogue.gd" id="1_qcx05"]
+
+[node name="Special Dialogue" type="Node"]
+script = ExtResource("1_qcx05")

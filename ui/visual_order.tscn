@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8wa1u1bm6alk"]
 
-[ext_resource type="Script" uid="uid://bc5j7p6cx7mmc" path="res://script/visual_order.gd" id="1_e1k5v"]
+[ext_resource type="Script" path="res://script/visual_order.gd" id="1_e1k5v"]
 
 [node name="Visual Order" type="Control"]
 layout_mode = 3
@@ -13,8 +13,8 @@ script = ExtResource("1_e1k5v")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 353.0
-offset_bottom = 677.0
+offset_right = 500.0
+offset_bottom = 400.0
 
 [node name="Text" type="TextEdit" parent="PanelContainer"]
 layout_mode = 2
