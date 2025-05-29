@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://co5ld71wi8i2r"]
 
-[ext_resource type="Script" uid="uid://bigpjwca68w6y" path="res://script/player.gd" id="1_symyc"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_symyc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_symyc"]
 

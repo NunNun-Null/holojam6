@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b557ap6u1wdck"]
 
-[ext_resource type="Script" uid="uid://bmro6d2cui86w" path="res://script/orange_green_tainted_memory.gd" id="1_u5ihy"]
+[ext_resource type="Script" path="res://script/orange_green_tainted_memory.gd" id="1_u5ihy"]
 [ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_0c636"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_buh50"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_u5ihy"]
@@ -42,6 +42,7 @@ durations = Array[int]([2, 3])
 is_debuffs = Array[bool]([true, true])
 damage = 5
 accuracy = 50
+intended_for_allies = true
 for_everyone = true
 
 [node name="Defend Their Pearl" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_u5ihy")]

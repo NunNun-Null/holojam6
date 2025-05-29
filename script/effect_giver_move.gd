@@ -22,7 +22,7 @@ func move() -> void:
 	if (!self_move and !for_everyone):
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on " + get_target().get_given_name())
 	elif (!self_move and for_everyone):
-		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on all enemies")
+		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on all targets")
 	else:
 		DialogueManager.add_battle_dialogue("> " + BattleManager.get_top_fighter().get_given_name() + " used " + name + " on themselves")
 	
@@ -42,26 +42,29 @@ func move() -> void:
 				DialogueManager.add_battle_dialogue(name + " missed for " + get_target().get_given_name())
 				SignalManager.on_dialogue_pushed.emit()
 				continue
-
-
 			if (effects.size() != strengths.size() or effects.size() != durations.size() or effects.size() != is_debuffs.size()):
 				push_error(name + " has unmatched status effects. fix it")
 				continue
 			for i in range(effects.size()):
-				var eff = effects.get(i).instantiate()
+				var eff = effects[i].instantiate()
 				if (eff is not Effect):
 					push_error(eff.name + " is not an Effect")
 					continue
-				eff.strength = strengths.get(i)
-				eff.duration = durations.get(i)
-				eff.is_debuff = is_debuffs.get(i)
+				eff.strength = strengths[i]
+				eff.duration = durations[i]
+				eff.is_debuff = is_debuffs[i]
 				eff.set_host(get_parent().get_parent())
-				eff.set_target(enemy)
-				get_target().effects.add_child(eff)
+				if (((enemy is PlayerFighter and get_parent().get_parent() is not PlayerFighter) or (enemy is EnemyFighter and get_parent().get_parent() is not EnemyFighter)) and enemy.is_defended()):
+					print("opposing sides")
+					eff.set_target(enemy.get_defended())
+				else:
+					print("same sides")
+					eff.set_target(enemy)
+				eff.get_target().effects.add_child(eff)
 				eff.effect()
 
 
-				var content: String = get_target().get_given_name() + " is effected with " + eff.given_effect_name
+				var content: String = eff.get_target().get_given_name() + " is effected with " + eff.given_effect_name
 
 				if (eff.is_debuff):
 					content += " debuff for " + str(eff.duration) + " turns"
@@ -85,15 +88,20 @@ func move() -> void:
 			push_error(name + " has unmatched status effects. fix it")
 			return
 		for i in range(effects.size()):
-			var eff = effects.get(i).instantiate()
+			var eff = effects[i].instantiate()
 			if (eff is not Effect):
 				push_error(eff.name + " is not an Effect")
 				return
-			eff.strength = strengths.get(i)
-			eff.duration = durations.get(i)
-			eff.is_debuff = is_debuffs.get(i)
+			eff.strength = strengths[i]
+			eff.duration = durations[i]
+			eff.is_debuff = is_debuffs[i]
 			eff.set_host(get_parent().get_parent())
-			eff.set_target(get_target())
+			if (((get_target() is PlayerFighter and get_parent().get_parent() is not PlayerFighter) or (get_target() is EnemyFighter and get_parent().get_parent() is not EnemyFighter)) and get_target().is_defended()):
+				print("opposing sides")
+				eff.set_target(get_target().get_defended())
+			else:
+				print("same sides")
+				eff.set_target(get_target())
 			if (eff.given_effect_name == "defended"):
 				for node in get_target().effects.get_children():
 					if (node is Effect):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dlxoxknngtqtb"]
 
-[ext_resource type="Script" uid="uid://csmh7o83jfhcc" path="res://script/squad_member.gd" id="1_rg58c"]
+[ext_resource type="Script" path="res://script/squad_member.gd" id="1_rg58c"]
 [ext_resource type="PackedScene" uid="uid://d3ppybldixkjb" path="res://behavior/moves/immediate_boost.tscn" id="3_hti84"]
 [ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_tk7oo"]
 [ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="4_mqpp7"]

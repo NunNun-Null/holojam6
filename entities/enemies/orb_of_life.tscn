@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdpcdhx1uuaah"]
+
+[ext_resource type="Script" path="res://script/orb_of_life.gd" id="1_ugo0r"]
+[ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_7dwmy"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="3_w53gl"]
+[ext_resource type="PackedScene" uid="uid://be81bekaqu70s" path="res://behavior/effects/defend_effect.tscn" id="4_uq54n"]
+[ext_resource type="PackedScene" uid="uid://bu5gypqqgklnl" path="res://behavior/strategies/specific_target.tscn" id="5_157rb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
+blend_mode = 3
+albedo_color = Color(1, 0.207843, 0.223529, 1)
+normal_scale = 0.5
+
+[node name="Orb of Lfie" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_ugo0r")
+speed = 12
+health = 15
+max_health = 15
+given_name = "Orb of Life"
+selected_box = NodePath("Selected")
+moves = NodePath("Moves")
+effects = NodePath("Current Effects")
+
+[node name="Sample Model" parent="." instance=ExtResource("2_7dwmy")]
+
+[node name="Moves" type="Node" parent="."]
+
+[node name="Defend" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_w53gl")]
+effects = Array[PackedScene]([ExtResource("4_uq54n")])
+strengths = Array[int]([1])
+durations = Array[int]([5])
+is_debuffs = Array[bool]([false])
+max_accuracy = true
+_strategies = [NodePath("../../Strategy/Specific Target")]
+
+[node name="Strategy" type="Node" parent="."]
+
+[node name="Specific Target" parent="Strategy" instance=ExtResource("5_157rb")]
+given_target_name = "Corrupted Heart"
+
+[node name="Current Effects" type="Node" parent="."]
+
+[node name="Selected" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245, 0)
+visible = false
+size = Vector3(1, 1.49, 1)
+material = SubResource("StandardMaterial3D_dubhn")

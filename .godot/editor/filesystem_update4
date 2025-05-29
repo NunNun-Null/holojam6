@@ -1,4 +1,40 @@
+res://entities/enemies/orange_green_tainted_memory.tscn
 res://area/map.tscn
-res://entities/player/player_team/elizabeth.tscn
-res://entities/enemies/dummy.tscn
+res://script/marked_target.gd
+res://script/global script/battle_manager.gd
+res://entities/enemies/corrupted_heart.tscn
+res://script/the_pit.gd
 res://ui/menu.tscn
+res://script/menu.gd
+res://ui/settings.tscn
+res://script/settings.gd
+res://entities/player/player.tscn
+res://script/ingame_interface.gd
+res://script/player.gd
+res://script/corrupted_heart.gd
+res://script/core_emotion.gd
+res://behavior/moves/spawn_enemy.tscn
+res://script/spawn_enemy.gd
+res://entities/enemies/dummy.tscn
+res://area/battle.tscn
+res://script/battle.gd
+res://script/global script/signal_manager.gd
+res://script/dummy.gd
+res://entities/enemies/orb_of_life.tscn
+res://script/orb_of_life.gd
+res://behavior/strategies/specific_target.tscn
+res://script/specific_target.gd
+res://behavior/effects/defense_effect.tscn
+res://behavior/moves/effect_giver_move.tscn
+res://script/effect_giver_move.gd
+res://script/player_fighter_stats.gd
+res://entities/player/player_team/cecilia.tscn
+res://script/global script/player_manager.gd
+res://script/global script/utilities_manager.gd
+res://script/save_point.gd
+res://script/player_fighter.gd
+res://entities/player_fighter.tscn
+res://entities/fighter.gd
+res://entities/player/player_team/raora.tscn
+res://behavior/moves/attack_move.tscn
+res://script/attack_move.gd

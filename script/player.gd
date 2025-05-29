@@ -12,6 +12,8 @@ func _init() -> void:
 	SignalManager.on_dialogue_finished.connect(enable_walk)
 
 func _ready() -> void:
+	if (!PlayerManager.has_init):
+		PlayerManager.start_up()
 	set_collision_layer_value(1,false)
 	await get_tree().create_timer(1).timeout
 	set_collision_layer_value(1,true)
@@ -23,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func input() -> Vector2:
-	var dir: Vector2 = Input.get_vector("move_right","move_left","move_back","move_forward")
+	var dir: Vector2 = Input.get_vector("move_right","move_left","move_down","move_up")
 	return dir
 
 func movement(input_dir: Vector2, delta: float) -> void:

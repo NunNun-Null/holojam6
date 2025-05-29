@@ -12,7 +12,7 @@ func _ready() -> void:
 			dead_player(fighter)
 
 
-func dead_player(fighter: PlayerFighter) -> void:
+func dead_player(fighter) -> void:
 	var node: Control = find_child(fighter.name.to_lower())
 	if (!node):
 		push_error(fighter.get_given_name() + " isn't a valid player????")
@@ -20,15 +20,15 @@ func dead_player(fighter: PlayerFighter) -> void:
 	node.self_modulate = Color8(41,41,41,41)
 	node.get_child(0).self_modulate = Color8(41,41,41,41)
 
-func make_select(fighter: PlayerFighter) -> void:
+func make_select(fighter) -> void:
 	var node: ColorRect = find_child(fighter.name.to_lower()+"_select")
 	node.visible = true
 
-func make_unselect(fighter: PlayerFighter) -> void:
+func make_unselect(fighter) -> void:
 	var node: ColorRect = find_child(fighter.name.to_lower()+"_select")
 	node.visible = false
 
-func update_stat(fighter: PlayerFighter) -> void:
+func update_stat(fighter) -> void:
 	var node: Control = find_child(fighter.name.to_lower()) #This not shown
 	if (!node):
 		push_error(fighter.get_given_name() + " isn't a valid player????")

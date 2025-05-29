@@ -12,7 +12,7 @@ var selected_target: Fighter
 
 var current: PlayerFighter
 
-var player_list: Array[PlayerFighter]
+var player_list: Array
 
 var can_continue: bool = false
 
@@ -57,7 +57,7 @@ func change_to_dialogue() -> void:
 	is_choosing_target = false
 	is_battle_dialogue = true
 
-func init_player(player: PlayerFighter) -> void:
+func init_player(player) -> void:
 	current = player 
 	print("establishing for " + current.get_given_name())
 	change_to_move_selector()
@@ -68,7 +68,7 @@ func init_player(player: PlayerFighter) -> void:
 	for index in range(player.valid_moves.size()):
 		label = Label.new()
 		label.name = str(index)
-		label.text = player.valid_moves.get(index).name
+		label.text = player.valid_moves[index].name
 		label.add_theme_font_size_override("font_size",40)
 		$"Combat Interface/HBoxContainer/VBoxContainer/".add_child(label)
 	
@@ -77,9 +77,9 @@ func init_player(player: PlayerFighter) -> void:
 		return
 	selected_move_index = 0
 
-	selected_move = current.valid_moves.get(selected_move_index)
-	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(selected_move_index+1).text = "> " + current.valid_moves.get(selected_move_index).name
-	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves.get(selected_move_index).name + "\n" + current.valid_moves.get(selected_move_index).get_desc()
+	selected_move = current.valid_moves[selected_move_index]
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(selected_move_index+1).text = "> " + current.valid_moves[selected_move_index].name
+	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves[selected_move_index].name + "\n" + current.valid_moves[selected_move_index].get_desc()
 
 func init_targets() -> void:
 	var label: Label
@@ -136,9 +136,9 @@ func init_targets() -> void:
 			selected_target.set_selected(true)
 			$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + BattleManager.get_enemy_fighter(selected_target_index).get_given_name()
 		else:
-			selected_target = player_list.get(selected_target_index)
+			selected_target = player_list[selected_target_index]
 			SignalManager.on_player_select.emit(selected_target)
-			$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + player_list.get(selected_target_index).get_given_name()
+			$"Choose Target/HBoxContainer/VBoxContainer/".get_child(selected_target_index+1).text = "> " + player_list[selected_target_index].get_given_name()
 		
 		update_desc(selected_target)
 	else:
@@ -159,13 +159,13 @@ func init_targets() -> void:
 
 func _process(_delta: float) -> void:
 	if (is_choosing_move):
-		if (Input.is_action_just_pressed("choose_up") and selected_move_index > 0):
+		if (Input.is_action_just_pressed("move_up") and selected_move_index > 0):
 			print("going up")
 			selected_move_index -= 1
 			highlighted_move(selected_move_index,1)
 
 
-		elif (Input.is_action_just_pressed("choose_down") and selected_move_index < current.valid_moves.size()-1):
+		elif (Input.is_action_just_pressed("move_down") and selected_move_index < current.valid_moves.size()-1):
 			print("going down")
 			selected_move_index += 1
 			highlighted_move(selected_move_index,-1)
@@ -197,13 +197,13 @@ func _process(_delta: float) -> void:
 					continue
 				node.queue_free()
 		
-		if (Input.is_action_just_pressed("choose_up") and selected_target_index > 0 and !selected_move.for_everyone):
+		if (Input.is_action_just_pressed("move_up") and selected_target_index > 0 and !selected_move.for_everyone):
 			print("going up")
 			selected_target_index -= 1
 			highlighted_target(selected_target_index,1)
 
 
-		elif (Input.is_action_just_pressed("choose_down") and selected_target_index < $"Choose Target/HBoxContainer/VBoxContainer/".get_child_count()-2 and !selected_move.for_everyone):
+		elif (Input.is_action_just_pressed("move_down") and selected_target_index < $"Choose Target/HBoxContainer/VBoxContainer/".get_child_count()-2 and !selected_move.for_everyone):
 			print("going down")
 			selected_target_index += 1
 			highlighted_target(selected_target_index,-1)
@@ -266,11 +266,11 @@ func highlighted_target(index: int, offset: int) -> void:
 		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + BattleManager.get_enemy_fighter(index).get_given_name()
 
 	else:
-		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = player_list.get(index+offset).get_given_name()
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = player_list[index+offset].get_given_name()
 		SignalManager.on_player_unselect.emit(selected_target)
-		selected_target = player_list.get(index)
+		selected_target = player_list[index]
 		SignalManager.on_player_select.emit(selected_target)
-		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + player_list.get(index).get_given_name()
+		$"Choose Target/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + player_list[index].get_given_name()
 	
 	update_desc(selected_target)
 
@@ -295,11 +295,11 @@ func update_desc(fighter: Fighter) -> void:
 	
 
 func highlighted_move(index: int, offset: int) -> void:
-	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = current.valid_moves.get(index+offset).name
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+offset+1).text = current.valid_moves[index+offset].name
 
-	selected_move = current.valid_moves.get(index)
-	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + current.valid_moves.get(index).name
-	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves.get(index).name + "\n" + current.valid_moves.get(index).get_desc()
+	selected_move = current.valid_moves[index]
+	$"Combat Interface/HBoxContainer/VBoxContainer/".get_child(index+1).text = "> " + current.valid_moves[index].name
+	$"Combat Interface/HBoxContainer/Description".text = current.valid_moves[index].name + "\n" + current.valid_moves[index].get_desc()
 
 func move() -> void:
 	selected_move.set_target(selected_target)

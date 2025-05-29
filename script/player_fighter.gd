@@ -4,6 +4,8 @@ class_name PlayerFighter
 var special: int = 0
 var is_dead: bool = false
 
+var starting_special: int = 0
+
 func set_dead(value: bool) -> void:
 	is_dead = value
 
@@ -16,6 +18,7 @@ func get_special() -> int:
 
 func set_special(amount: int) -> void:
 	special = amount
+	starting_special = special
 	SignalManager.on_player_stat_updated.emit(self)
 
 func add_special(amount: int,value:bool=false) -> void:
@@ -38,7 +41,7 @@ func take_damage(amount: int, pierce: int = 0) -> void:
 	SignalManager.on_player_stat_updated.emit(self)
 	
 func dead() -> void:
-	for eff in effects:
+	for eff in effects.get_children():
 		eff.reverse_effect()
 	DialogueManager.add_battle_dialogue(get_given_name() + " is down")
 	print(get_given_name() + " is down")

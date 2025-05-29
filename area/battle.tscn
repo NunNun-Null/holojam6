@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cxv4il6kym6er"]
 
-[ext_resource type="Script" uid="uid://bpfvbsptijktm" path="res://script/battle.gd" id="1_8vt7n"]
+[ext_resource type="Script" path="res://script/battle.gd" id="1_8vt7n"]
 [ext_resource type="PackedScene" uid="uid://bdgtufr0hq2xf" path="res://asset/model/default.gltf" id="2_ka70e"]
 [ext_resource type="PackedScene" uid="uid://cco8kr0b17jea" path="res://ui/player_fighter_stats.tscn" id="2_tjbvg"]
 [ext_resource type="PackedScene" uid="uid://blqy8ufehtn2s" path="res://ui/ingame_interface.tscn" id="4_sp4u6"]

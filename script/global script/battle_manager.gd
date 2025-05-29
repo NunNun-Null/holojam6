@@ -1,12 +1,10 @@
 extends Node3D
 
-var BATTLE = preload("res://area/battle.tscn")
-
 var _battle: Node3D
-var _players: Array[PlayerFighter]
-var _enemies: Array[EnemyFighter]
+var _players: Array
+var _enemies: Array
 
-var _round: Array[Fighter]
+var _round: Array
 
 var current_round: int = 1
 var turn: int = 1
@@ -20,14 +18,19 @@ func _ready() -> void:
 func get_battle_map() -> Node3D:
 	return _battle
 
-func create_enemies(list: Array[EnemyFighter]) -> void:
+func add_fighter(fighter) -> void:
+	_enemies.append(fighter)
+	SignalManager.on_enemy_added.emit()
+	
+func create_enemies(list: Array) -> void:
 	_enemies.clear()
 	_enemies.append_array(list)
 
-func create_players(list: Array[PlayerFighter]) -> void:
+func create_players(list: Array) -> void:
+	_players.clear()
 	_players.append_array(list)
 
-func remove_player_fighter(fighter: PlayerFighter):
+func remove_player_fighter(fighter):
 	var index: int
 	index = _round.find(fighter)
 	_round.remove_at(index)
@@ -50,14 +53,14 @@ func establish_order() -> void:
 	SignalManager.on_order_updated.emit(_round)
 
 
-func get_enemy_fighter(index: int) -> EnemyFighter:
-	return _enemies.get(index)
+func get_enemy_fighter(index: int):
+	return _enemies[index]
 
 func get_enemies_size() -> int:
 	return _enemies.size()
 
-func get_player_fighter(index: int) -> PlayerFighter:
-	return _players.get(index)
+func get_player_fighter(index: int):
+	return _players[index]
 
 func get_players_size() -> int:
 	return _players.size()
@@ -72,8 +75,8 @@ func start_battle() -> void:
 	start_turn()
 	SignalManager.on_order_updated.emit(_round)
 
-func get_top_fighter() -> Fighter:
-	return _round.get(_round.size()-1)
+func get_top_fighter():
+	return _round[_round.size()-1]
 
 func pop_fighter() -> void:
 	_round.remove_at(_round.size()-1)
@@ -82,7 +85,7 @@ func pop_fighter() -> void:
 		current_round+=1
 		SignalManager.on_new_round.emit()
 
-func remove_enemy_fighter(fighter: EnemyFighter):
+func remove_enemy_fighter(fighter):
 	var index: int
 	index = _enemies.find(fighter)
 	_enemies.remove_at(index)
@@ -95,8 +98,7 @@ func remove_enemy_fighter(fighter: EnemyFighter):
 func remove_all_fighter_effects() -> void:
 	for ally in _players:
 		for node in ally.effects.get_children():
-			if (node is Effect):
-				node.reverse_effect()
+			node.reverse_effect()
 
 func start_turn() -> void:
 	turn+=1
@@ -114,7 +116,7 @@ func start_turn() -> void:
 		call_deferred("switch_to_map")
 		return
 	
-	var fighter: Fighter = get_top_fighter()
+	var fighter = get_top_fighter()
 	print("current turn: " + fighter.get_given_name())
 	if (!fighter):
 		end_turn()
@@ -126,7 +128,7 @@ func start_turn() -> void:
 		end_turn()
 		return
 	
-	if (fighter is PlayerFighter):
+	if (fighter.has_method("get_dead")):
 		if (fighter.get_dead()):
 			end_turn()
 			return

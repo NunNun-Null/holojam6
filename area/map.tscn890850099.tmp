@@ -1,0 +1,496 @@
+[gd_scene load_steps=35 format=3 uid="uid://blm2fiu74omsb"]
+
+[ext_resource type="Script" uid="uid://drabpk2cm80ka" path="res://script/bedroom.gd" id="1_1fner"]
+[ext_resource type="Script" uid="uid://dlrqfyq1thyl6" path="res://script/map.gd" id="1_2onle"]
+[ext_resource type="PackedScene" uid="uid://co5ld71wi8i2r" path="res://entities/player/player.tscn" id="1_yy0tc"]
+[ext_resource type="PackedScene" uid="uid://dj52hcitqw3on" path="res://component/teleport_component.tscn" id="2_2v2a0"]
+[ext_resource type="Script" uid="uid://vw30jb8u5xqp" path="res://script/hallway.gd" id="3_mjj2x"]
+[ext_resource type="PackedScene" uid="uid://cdb1sbtmq802" path="res://objects/teleport_location.tscn" id="3_wn0ld"]
+[ext_resource type="Script" uid="uid://d34vjow0dvtke" path="res://script/dreams.gd" id="5_wn0ld"]
+[ext_resource type="PackedScene" uid="uid://bmoedl7bjdj0a" path="res://component/dialogue_interactable.tscn" id="6_oj6s4"]
+[ext_resource type="Script" uid="uid://cq002x5i80hnj" path="res://script/thorn.gd" id="6_pq3op"]
+[ext_resource type="PackedScene" uid="uid://bb01cioxfmsk3" path="res://objects/start_battle.tscn" id="8_forqk"]
+[ext_resource type="Script" uid="uid://oasb386acjfo" path="res://script/core_emotion.gd" id="8_uj77h"]
+[ext_resource type="PackedScene" uid="uid://bo7avmssp3a4o" path="res://ui/map_dialogue.tscn" id="10_trnge"]
+[ext_resource type="PackedScene" uid="uid://b557ap6u1wdck" path="res://entities/enemies/orange_green_tainted_memory.tscn" id="13_lyj3h"]
+[ext_resource type="PackedScene" uid="uid://dyokdoskbsaoj" path="res://entities/enemies/pink_tainted_memory.tscn" id="14_7upnb"]
+[ext_resource type="PackedScene" uid="uid://do0wt6v5mdluj" path="res://entities/enemies/red_tainted_memory.tscn" id="14_vwu25"]
+[ext_resource type="PackedScene" uid="uid://ql401mwihanc" path="res://entities/enemies/blue_tainted_memory.tscn" id="15_o2b50"]
+[ext_resource type="PackedScene" uid="uid://c203i5173a1tl" path="res://objects/save_point.tscn" id="17_o2b50"]
+[ext_resource type="PackedScene" uid="uid://cvh57pkko1dma" path="res://entities/enemies/perfect_red_memory.tscn" id="17_y6r8g"]
+[ext_resource type="PackedScene" uid="uid://dm5pr85r7e2s2" path="res://entities/enemies/perfect_red_memory_support.tscn" id="18_ygvrv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68cvg"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_8dsky"]
+sky_material = SubResource("ProceduralSkyMaterial_68cvg")
+
+[sub_resource type="Environment" id="Environment_dlyd2"]
+background_mode = 2
+sky = SubResource("Sky_8dsky")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wn0ld"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vwu25"]
+size = Vector3(2.65, 1, 1.39)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trnge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_forqk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjj2x"]
+size = Vector3(1, 1, 4.96)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pq3op"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mp1sc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oj6s4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2onle"]
+size = Vector3(1, 1, 4.82)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oj6s4"]
+viewport_path = NodePath("Player/Camera/Sprite3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj77h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyj3h"]
+
+[node name="Map" type="Node3D"]
+script = ExtResource("1_2onle")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dlyd2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sample Room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193908, 0, -6.34859)
+script = ExtResource("5_wn0ld")
+
+[node name="floor" type="CSGBox3D" parent="Sample Room"]
+use_collision = true
+size = Vector3(5, 0.05, 5)
+
+[node name="walls" type="Node3D" parent="Sample Room"]
+
+[node name="wall_back" type="CSGBox3D" parent="Sample Room/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 0, 0.583779, -2.474)
+use_collision = true
+size = Vector3(5, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Sample Room/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.583, 2.466)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Sample Room/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.47301, 0.583, -0.00344276)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Sample Room/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Sample Room"]
+
+[node name="door" type="CSGBox3D" parent="Sample Room/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32065, 0.525, 0)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="location point" parent="Sample Room" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66347, 0.025, 0)
+
+[node name="Bedroom" type="Node3D" parent="."]
+script = ExtResource("1_1fner")
+
+[node name="floor" type="CSGBox3D" parent="Bedroom"]
+use_collision = true
+size = Vector3(5, 0.05, 5)
+
+[node name="walls" type="Node3D" parent="Bedroom"]
+
+[node name="wall_back" type="CSGBox3D" parent="Bedroom/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 0, 0.583779, -2.474)
+use_collision = true
+size = Vector3(5, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Bedroom/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.583, 2.466)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Bedroom/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.47301, 0.583, -0.00344276)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Bedroom/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Bedroom"]
+
+[node name="hallway" type="CSGBox3D" parent="Bedroom/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32065, 0.525, 0)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Bedroom/doors/hallway" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Hallway")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Hallway/bedroom_to_hallway")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bedroom/doors/hallway/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.410578, 0, 0)
+shape = SubResource("BoxShape3D_wn0ld")
+
+[node name="exit" type="CSGBox3D" parent="Bedroom/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34121, 0.525, 0)
+size = Vector3(0.175781, 1, 1)
+
+[node name="hallway_to_bedroom" parent="Bedroom" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66347, 0.025, 0)
+
+[node name="objects" type="Node3D" parent="Bedroom"]
+
+[node name="bed" type="CSGBox3D" parent="Bedroom/objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54, 0.16, 1.61)
+use_collision = true
+size = Vector3(2.08, 0.27, 1)
+
+[node name="Dialogue Interactable" parent="Bedroom/objects/bed" instance=ExtResource("6_oj6s4")]
+content = Array[String](["[b] You: [/b]", "This is my bed", "It's super cool", "#", "it sucks alright", "I mean it's boat goes binted fr", "#", "[wave amp=25 freq=4] Cool Effect [/wave]"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bedroom/objects/bed/Dialogue Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0749999, 0, -0.0550001)
+shape = SubResource("BoxShape3D_vwu25")
+
+[node name="pillow" type="CSGBox3D" parent="Bedroom/objects/bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.865, 0.186, 0.0300001)
+size = Vector3(0.35, 0.1, 0.7)
+
+[node name="Hallway" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25222, -2.38419e-07, 0.000154972)
+script = ExtResource("3_mjj2x")
+required_battle = "Test Battle"
+
+[node name="floor" type="CSGBox3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+use_collision = true
+size = Vector3(20, 0.05, 5)
+
+[node name="walls" type="Node3D" parent="Hallway"]
+
+[node name="wall_back" type="CSGBox3D" parent="Hallway/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 7.5, 0.583659, -2.474)
+use_collision = true
+size = Vector3(20, 1.116, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Hallway/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.583, 2.466)
+use_collision = true
+size = Vector3(20, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Hallway/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Hallway"]
+
+[node name="bedroom" type="CSGBox3D" parent="Hallway/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34121, 0.525, 0)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Hallway/doors/bedroom" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.844727, 0, 0)
+destination = NodePath("../../../../Bedroom")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Bedroom/hallway_to_bedroom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/doors/bedroom/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426939, 0, 0)
+shape = SubResource("BoxShape3D_trnge")
+
+[node name="dream" type="CSGBox3D" parent="Hallway/doors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.99066, 0.525, 2.3244)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Hallway/doors/dream" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Dream")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Dream/hallway_to_dream")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/doors/dream/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41, 0, 0)
+shape = SubResource("BoxShape3D_forqk")
+
+[node name="memory_lane 2" type="CSGBox3D" parent="Hallway/doors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.4528, 0.525, 2.3244)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Core Emotion" type="CSGBox3D" parent="Hallway/doors"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17.3993, 0.525, -0.00744963)
+use_collision = true
+size = Vector3(0.175781, 1, 4.8855)
+
+[node name="Teleport Component" parent="Hallway/doors/Core Emotion" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.844727, 0, 0)
+can_teleport = false
+destination = NodePath("../../../../Core Emotion")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Core Emotion/hallway_to_core_emotion")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/doors/Core Emotion/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426939, 0, 0.0500003)
+shape = SubResource("BoxShape3D_mjj2x")
+
+[node name="bedroom_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.76801, 0.025, 0)
+
+[node name="dream_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51736, 0.0250002, 1.67496)
+
+[node name="core_emotion_to_hallway" parent="Hallway" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9074, 0.0250002, 0.37496)
+
+[node name="Dream" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6707, 0, 6.19923)
+script = ExtResource("5_wn0ld")
+
+[node name="floor" type="CSGBox3D" parent="Dream"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.165, 0, 10.195)
+use_collision = true
+size = Vector3(11.33, 0.05, 4.71)
+
+[node name="floor_2" type="CSGBox3D" parent="Dream"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.675)
+use_collision = true
+size = Vector3(5, 0.05, 10.33)
+
+[node name="walls" type="Node3D" parent="Dream"]
+
+[node name="wall_back" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 0, 0.583779, -2.474)
+use_collision = true
+size = Vector3(5, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.165, 0.583, 12.53)
+use_collision = true
+size = Vector3(11.33, 1.116, 0.05)
+
+[node name="wall_side" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.64, 0.583, 7.86)
+use_collision = true
+size = Vector3(6.38, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.47301, 0.583, 2.68156)
+use_collision = true
+size = Vector3(10.37, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 5.025)
+use_collision = true
+size = Vector3(15.05, 1.116, 0.05)
+
+[node name="wall_side_2" type="CSGBox3D" parent="Dream/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.806, 0.583, 10.2)
+use_collision = true
+size = Vector3(4.72, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Dream"]
+
+[node name="hallway" type="CSGBox3D" parent="Dream/doors"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.297479, 0.525, -2.3497)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Dream/doors/hallway" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Hallway")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Hallway/dream_to_hallway")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dream/doors/hallway/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413138, 0, 0)
+shape = SubResource("BoxShape3D_pq3op")
+
+[node name="thorn" type="CSGBox3D" parent="Dream/doors"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.66586, 0.525, 10.1952)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Dream/doors/thorn" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Thorn")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Thorn/dream_to_thorn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dream/doors/thorn/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
+shape = SubResource("BoxShape3D_mp1sc")
+
+[node name="hallway_to_dream" parent="Dream" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0988836, 0.025, -1.84412)
+
+[node name="thorn_to_dream" parent="Dream" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.14268, 0.025, 10.1952)
+
+[node name="Thorn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5399, 0, 16.3944)
+script = ExtResource("6_pq3op")
+
+[node name="floor" type="CSGBox3D" parent="Thorn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27, 0, 0)
+use_collision = true
+size = Vector3(13.54, 0.05, 5)
+
+[node name="pedestal" type="CSGBox3D" parent="Thorn"]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.18, 9.255, 0.22, 0)
+use_collision = true
+size = Vector3(2.71, 0.51, 5)
+
+[node name="walls" type="Node3D" parent="Thorn"]
+
+[node name="wall_back" type="CSGBox3D" parent="Thorn/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 4.26503, 0.583779, -2.474)
+use_collision = true
+size = Vector3(13.52, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Thorn/walls"]
+transform = Transform3D(1, -5.75263e-05, 0.00013634, 5.75738e-05, 1, -0.000257165, -0.00013632, 0.000257176, 1, 4.265, 0.583107, 2.46575)
+use_collision = true
+size = Vector3(13.53, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Thorn/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.003, 0.583, -0.00344276)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Thorn/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Thorn"]
+
+[node name="door" type="CSGBox3D" parent="Thorn/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31335, 0.525, 0)
+use_collision = true
+size = Vector3(0.175781, 1, 1)
+
+[node name="Teleport Component" parent="Thorn/doors/door" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Dream")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Dream/thorn_to_dream")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Thorn/doors/door/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
+shape = SubResource("BoxShape3D_oj6s4")
+
+[node name="dream_to_thorn" parent="Thorn" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
+
+[node name="Core Emotion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5099, 0, -0.0555992)
+script = ExtResource("8_uj77h")
+
+[node name="floor" type="CSGBox3D" parent="Core Emotion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27, 0, 0)
+use_collision = true
+size = Vector3(13.54, 0.05, 5)
+
+[node name="walls" type="Node3D" parent="Core Emotion"]
+
+[node name="wall_back" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(1.00118, 0, 0, 0, 1.00118, 0, 0, 0, 1.00118, 4.26503, 0.583779, -2.474)
+use_collision = true
+size = Vector3(13.52, 1.11624, 0.05)
+
+[node name="wall_front" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(1, -5.75263e-05, 0.00013634, 5.75738e-05, 1, -0.000257165, -0.00013632, 0.000257176, 1, 4.265, 0.583107, 2.46575)
+use_collision = true
+size = Vector3(13.53, 1.116, 0.05)
+
+[node name="wall_left" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.003, 0.583, -0.00344276)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="wall_right" type="CSGBox3D" parent="Core Emotion/walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.474, 0.583, 0)
+use_collision = true
+size = Vector3(5, 1.116, 0.05)
+
+[node name="doors" type="Node3D" parent="Core Emotion"]
+
+[node name="door" type="CSGBox3D" parent="Core Emotion/doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31335, 0.525, 0.02)
+use_collision = true
+size = Vector3(0.175781, 1, 4.84)
+
+[node name="Teleport Component" parent="Core Emotion/doors/door" node_paths=PackedStringArray("destination", "origin", "location_point") instance=ExtResource("2_2v2a0")]
+destination = NodePath("../../../../Hallway")
+origin = NodePath("../../..")
+location_point = NodePath("../../../../Hallway/core_emotion_to_hallway")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Core Emotion/doors/door/Teleport Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0.0100001)
+shape = SubResource("BoxShape3D_2onle")
+
+[node name="hallway_to_core_emotion" parent="Core Emotion" instance=ExtResource("3_wn0ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68653, 0.025, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_yy0tc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -1.14)
+
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -0.02, 2.77402, 0.34129)
+fov = 90.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000999868, -0.369106, -0.789121)
+pixel_size = 0.005
+texture = SubResource("ViewportTexture_oj6s4")
+
+[node name="SubViewport" type="SubViewport" parent="Player/Camera/Sprite3D"]
+transparent_bg = true
+size = Vector2i(535, 150)
+
+[node name="map_dialogue" parent="Player/Camera/Sprite3D/SubViewport" instance=ExtResource("10_trnge")]
+visible = false
+
+[node name="Test Battle" parent="." instance=ExtResource("8_forqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17, 0.67, -0.459999)
+enemies = Array[PackedScene]([ExtResource("13_lyj3h"), ExtResource("15_o2b50"), ExtResource("14_vwu25"), ExtResource("14_7upnb")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Test Battle"]
+shape = SubResource("BoxShape3D_uj77h")
+
+[node name="Midgame Boss" parent="." instance=ExtResource("8_forqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.71, 0.67, -0.0899999)
+enemies = Array[PackedScene]([ExtResource("17_y6r8g"), ExtResource("17_y6r8g"), ExtResource("18_ygvrv"), ExtResource("18_ygvrv")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Midgame Boss"]
+shape = SubResource("BoxShape3D_uj77h")
+
+[node name="Save Point" parent="." instance=ExtResource("17_o2b50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.47, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Save Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.57, 0)
+shape = SubResource("BoxShape3D_lyj3h")

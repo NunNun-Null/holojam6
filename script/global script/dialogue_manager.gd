@@ -26,13 +26,13 @@ func pop_dialogue_portion() -> Array[String]:
 		return []
 	print("current_list: " + str(dialogue_list))
 	for i in range(dialogue_list.size()):
-		print("top list: "+dialogue_list.get(dialogue_list.size()-1)) 
-		if (dialogue_list.get(dialogue_list.size()-1) == "#"):
+		print("top list: "+dialogue_list[dialogue_list.size()-1])
+		if (dialogue_list[dialogue_list.size()-1].match("#")):
 			dialogue_list.pop_back()
 			print("found: #. returning")
 			print("\n")
 			return array
-		print("adding " + dialogue_list.get(dialogue_list.size()-1))
+		print("adding " + dialogue_list[(dialogue_list.size()-1)])
 		array.append(dialogue_list.pop_back())
 	print("\n")
 	return array

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dq2uyafvb5qk2"]
+[gd_scene load_steps=2 format=3 uid="uid://dq2uyafvb5qk2"]
+
+[ext_resource type="Script" path="res://script/menu.gd" id="1_bwjgb"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -7,3 +9,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bwjgb")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 567.0
+offset_bottom = 644.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[b][font_size=40]Elizabeth's Dilemma[/font_size][/b]
+
+> Start
+Settings
+
+
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(572, 327)

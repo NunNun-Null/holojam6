@@ -1,22 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt25spajncyvv"]
+[gd_scene load_steps=11 format=3 uid="uid://dt25spajncyvv"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_l2rq1"]
+[ext_resource type="Script" path="res://script/corrupted_heart.gd" id="1_xbyv2"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="2_xgkun"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="3_em2ye"]
-[ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="4_tf26x"]
+[ext_resource type="PackedScene" uid="uid://bo6weob2e111f" path="res://behavior/moves/spawn_enemy.tscn" id="3_jkma7"]
+[ext_resource type="PackedScene" uid="uid://ql401mwihanc" path="res://entities/enemies/blue_tainted_memory.tscn" id="4_l2njo"]
+[ext_resource type="PackedScene" uid="uid://cdpcdhx1uuaah" path="res://entities/enemies/orb_of_life.tscn" id="4_l3j3t"]
+[ext_resource type="PackedScene" uid="uid://dyokdoskbsaoj" path="res://entities/enemies/pink_tainted_memory.tscn" id="5_j1k61"]
+[ext_resource type="PackedScene" uid="uid://cdgmkvnfs70ht" path="res://behavior/moves/effect_giver_move.tscn" id="5_objp5"]
+[ext_resource type="PackedScene" uid="uid://do0wt6v5mdluj" path="res://entities/enemies/red_tainted_memory.tscn" id="6_dyeut"]
+[ext_resource type="PackedScene" uid="uid://bdd0xd5lxj7hc" path="res://behavior/effects/accuracy_effect.tscn" id="10_jft52"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
 albedo_color = Color(1, 0.207843, 0.223529, 1)
 normal_scale = 0.5
 
-[node name="Dummy" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
-script = ExtResource("1_l2rq1")
-speed = 1
-health = 20
-max_health = 20
-defense = 3
-given_name = "Dummy"
+[node name="Corrupted Heart" type="Node3D" node_paths=PackedStringArray("selected_box", "moves", "effects")]
+script = ExtResource("1_xbyv2")
+speed = 2
+health = 60
+max_health = 60
+defense = 2
+given_name = "Corrupted Heart"
 selected_box = NodePath("Selected")
 moves = NodePath("Moves")
 effects = NodePath("Current Effects")
@@ -25,13 +30,31 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("3_em2ye")]
+[node name="Pulsating Life" parent="Moves" instance=ExtResource("3_jkma7")]
+spawn = Array[PackedScene]([ExtResource("4_l3j3t")])
+
+[node name="Call for Help" parent="Moves" instance=ExtResource("3_jkma7")]
+spawn = Array[PackedScene]([ExtResource("4_l2njo"), ExtResource("5_j1k61"), ExtResource("6_dyeut")])
+random = true
+
+[node name="Beating Heart" parent="Moves" instance=ExtResource("5_objp5")]
+damage = 4
+accuracy = 85
+armor_pierce = 1
+intended_for_allies = true
+for_everyone = true
+
+[node name="Apprehension" parent="Moves" instance=ExtResource("5_objp5")]
+effects = Array[PackedScene]([ExtResource("10_jft52")])
+strengths = Array[int]([20])
+durations = Array[int]([2])
+is_debuffs = Array[bool]([true])
 damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+armor_pierce = 1
+intended_for_allies = true
+for_everyone = true
 
 [node name="Strategy" type="Node" parent="."]
-
-[node name="Lowest Health" parent="Strategy" instance=ExtResource("4_tf26x")]
 
 [node name="Current Effects" type="Node" parent="."]
 

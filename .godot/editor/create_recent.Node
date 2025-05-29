@@ -1,0 +1,7 @@
+Node
+RichTextLabel
+PanelContainer
+Camera2D
+Panel
+CollisionShape3D
+Button

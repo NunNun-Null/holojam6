@@ -21,7 +21,7 @@ func get_self_only() -> bool:
 	return self_move
 
 func get_strategy(index: int) -> Strategy:
-	return _strategies.get(index)
+	return _strategies[index]
 
 func has_strategy() -> bool:
 	return !_strategies.is_empty()
@@ -49,8 +49,8 @@ func move() -> void:
 func accuracy_test(amount: int) -> bool:
 	if (get_target().get_mark()):
 		return true
-	randomize()
 	var rand: int = randi_range(1,100)
+	print(rand)
 	if (amount >= rand):
 		return true
 	return false

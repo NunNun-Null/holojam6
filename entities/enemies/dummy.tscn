@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8btlrylypjkg"]
+[gd_scene load_steps=7 format=3 uid="uid://b8btlrylypjkg"]
 
-[ext_resource type="Script" uid="uid://egbbphu2r30a" path="res://script/dummy.gd" id="1_dubhn"]
+[ext_resource type="Script" path="res://script/dummy.gd" id="1_dubhn"]
 [ext_resource type="PackedScene" uid="uid://dknf5ixaa4uxw" path="res://asset/model/dummy.gltf" id="1_evlql"]
-[ext_resource type="PackedScene" uid="uid://b60ov6i4rf5qm" path="res://behavior/moves/basic_attack.tscn" id="2_dubhn"]
 [ext_resource type="PackedScene" uid="uid://g2ty4c7g14ef" path="res://behavior/strategies/lowest_health.tscn" id="3_05x41"]
+[ext_resource type="PackedScene" uid="uid://bo6weob2e111f" path="res://behavior/moves/spawn_enemy.tscn" id="3_kvl3s"]
+[ext_resource type="PackedScene" uid="uid://do0wt6v5mdluj" path="res://entities/enemies/red_tainted_memory.tscn" id="4_23k47"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dubhn"]
 blend_mode = 3
@@ -25,9 +26,8 @@ effects = NodePath("Current Effects")
 
 [node name="Moves" type="Node" parent="."]
 
-[node name="Glock" parent="Moves" node_paths=PackedStringArray("_strategies") instance=ExtResource("2_dubhn")]
-damage = 3
-_strategies = [NodePath("../../Strategy/Lowest Health")]
+[node name="Spawn Enemy" parent="Moves" instance=ExtResource("3_kvl3s")]
+spawn = Array[PackedScene]([ExtResource("4_23k47")])
 
 [node name="Strategy" type="Node" parent="."]
 

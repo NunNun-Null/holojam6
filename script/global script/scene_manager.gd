@@ -8,7 +8,7 @@ func _ready() -> void:
 	SignalManager.on_entered_battle.connect(add_battle)
 	SignalManager.on_room_change.connect(change_room)
 
-func change_room(origin: Room, destination: Room, location: Node3D) -> void:
+func change_room(origin, destination, location: Node3D) -> void:
 	origin.visible = false
 	destination.visible = true
 	destination.reset_room()
@@ -19,7 +19,7 @@ func add_battle(node: Node3D) -> void:
 	var battle: bool = battle_progression.has(node)
 	if (battle):
 		return
-	battle_progression.assign({node.name:true})
+	battle_progression.merge({node.name:true})
 
 
 func has_completed_battle(node: Node3D) -> bool:

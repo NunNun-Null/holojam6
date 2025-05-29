@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsyurijaxjwti"]
+
+[ext_resource type="Script" path="res://script/settings.gd" id="1_oj6jd"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oj6jd")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1142.0
+offset_bottom = 648.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[font_size=40]Volume Settinsg[/font_size]
+
+> Volume: 100%
+
+[font_size=40]Keybinds[/font_size]
+
+Move Up/Navigate Up: W
+Move Down/Navigate Down: S
+Move Left: A
+Move Right: D
+Interact: E
+Go Back: Backspace
+Go to Menu: Tab"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(568, 322)
